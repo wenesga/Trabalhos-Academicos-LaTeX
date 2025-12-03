@@ -1,0 +1,489 @@
+% ==============================================================================
+% ARQUIVO MESTRE - MODELO ABNT (MEMOIR)
+% Autor: Wenes Gomes Aquino
+% Status: FINAL BLINDADO (Cabeçalhos 10pt, Títulos Centralizados, Comentários Estilosos)
+% ==============================================================================
+
+\documentclass[12pt,a4paper,oneside,oldfontcommands]{memoir}
+
+% ==============================================================================
+% 1. PACOTES FUNDAMENTAIS (FONTES E IDIOMA)
+% ==============================================================================
+\usepackage[T1]{fontenc}        % Codificação de fonte interna
+\usepackage{fontspec}           % Suporte a fontes OpenType (LuaLaTeX)
+\setmainfont{XCharter}          % Fonte principal do documento
+\usepackage[brazilian]{babel}   % Idioma e hifenização PT-BR
+
+% ==============================================================================
+% 2. PACOTES DE UTILIDADE GERAL
+% ==============================================================================
+\usepackage{lipsum}       % Geração de texto falso (Lorem Ipsum)
+\usepackage{setspace}     % Controle de espaçamento entre linhas
+\usepackage{indentfirst}  % Indenta o primeiro parágrafo de cada seção
+\usepackage{xcolor}       % Controle de cores
+\usepackage{ragged2e}     % Alinhamento justificado melhorado
+\usepackage{etoolbox}     % Ferramentas de programação (patches)
+\usepackage{graphicx}
+% ==============================================================================
+% 3. LINKS, PDF E METADADOS (HYPERREF)
+% ==============================================================================
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue!70!black,    % Cor dos links internos
+    citecolor=blue!70!black,    % Cor das citações
+    urlcolor=blue!70!black,     % Cor das URLs
+    filecolor=blue!70!black     % Cor dos links de arquivo
+]{hyperref}
+
+\hypersetup{
+    pdftitle={Trabalhos Acadêmicos},
+    pdfauthor={Wenes Aquino},
+    pdfcreator={LaTeX com Memoir},
+    pdfcreationdate={\today}
+}
+
+% ==============================================================================
+% 4. BIBLIOGRAFIA (BIBLATEX - ABNT)
+% ==============================================================================
+\usepackage[
+    backend=biber,
+    style=abnt,
+    language=brazil
+]{biblatex}
+
+\addbibresource{Referencias.bib}
+\AtBeginBibliography{\justifying}
+\urlstyle{same}
+\AtBeginBibliography{\setlength{\itemsep}{1\baselineskip}}
+
+% --- Configuração do Título das Referências (Centralizado) ---
+\defbibheading{referencias_abnt}{%
+  \chapter*{\centering Referências}
+  \markboth{Referências}{Referências}
+  \addcontentsline{toc}{chapter}{\protect\numberline{}Referências}
+}
+
+% ==============================================================================
+% 5. GEOMETRIA E MARGENS
+% ==============================================================================
+% Margens: Superior/Esquerda = 3cm | Inferior/Direita = 2cm
+\setlrmarginsandblock{3cm}{2cm}{*} 
+\setulmarginsandblock{3cm}{2cm}{*} 
+\checkandfixthelayout
+\linespread{1.5}                % Espaçamento entre linhas 1.5
+\setlength{\parindent}{1.25cm}  % Recuo do parágrafo
+
+% ==============================================================================
+% 6. CONFIGURAÇÃO DO SUMÁRIO
+% ==============================================================================
+\settocdepth{subsection}    % Mostra até subseção no sumário
+\setsecnumdepth{subsection} % Numera até subseção no texto
+
+% --- Título do Sumário Centralizado e em Caixa Alta ---
+\renewcommand{\printtoctitle}[1]{{\centering\Large\bfseries\MakeUppercase{#1}\par}}
+
+% --- Remove pontos (...) das Partes, mantém nos Capítulos ---
+\renewcommand{\cftpartdotsep}{\cftnodots} 
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+
+% --- Alinhamento vertical uniforme (evita buracos) ---
+\setlength{\cftbeforepartskip}{1em} 
+\setlength{\cftbeforechapterskip}{0pt}
+\setlength{\cftbeforesectionskip}{0pt}
+\setlength{\cftbeforesubsectionskip}{0pt}
+
+% --- Recuo fixo de 2cm para alinhar a numeração ---
+\cftsetindents{part}{0pt}{2cm}
+\cftsetindents{chapter}{0pt}{2cm}
+\cftsetindents{section}{0pt}{2cm}
+\cftsetindents{subsection}{0pt}{2cm}
+\cftsetindents{figure}{0pt}{2cm}
+\cftsetindents{table}{0pt}{2cm}
+
+% ==============================================================================
+% 7. ESTILO DOS TÍTULOS DE CAPÍTULO (CORPO DO TEXTO)
+% ==============================================================================
+\chapterstyle{hangnum} 
+\setlength{\beforechapskip}{-1.4cm} % Remove espaço branco no topo
+\setlength{\afterchapskip}{1.5cm}   % Espaço após o título
+
+% --- Configura a numeração e o recuo do título ---
+\renewcommand*{\printchapternum}{\chapnumfont \thechapter}
+\renewcommand*{\afterchapternum}{\hspace{0.75cm}} 
+
+% ==============================================================================
+% 8. ESTILO DE CABEÇALHO E RODAPÉ (FONTE 10pt)
+% ==============================================================================
+
+% --- Estilo "meuestilo" (Páginas com texto corrido) ---
+\makepagestyle{meuestilo}
+% \footnotesize define o tamanho 10pt para texto e número da página
+\makeevenhead{meuestilo}{\footnotesize\textit{\thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeoddhead {meuestilo}{\footnotesize\textit{\thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeheadrule{meuestilo}{\textwidth}{0.3pt}
+\pagestyle{meuestilo}
+
+% --- Estilo "plain" (Primeira página de cada capítulo) ---
+\makepsmarks{plain}{\createmark{chapter}{left}{nonumber}{}{}}
+\makeoddhead{plain}{}{}{\footnotesize\thepage}  % Número 10pt
+\makeevenhead{plain}{}{}{\footnotesize\thepage} % Número 10pt
+\makeheadrule{plain}{\textwidth}{0pt}
+
+% --- Garante que a página de "Parte" não tenha numeração ---
+\aliaspagestyle{part}{empty}
+
+% --- Captura o nome do capítulo para o cabeçalho ---
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\makeatother
+
+% ==============================================================================
+% 9. COMANDOS PERSONALIZADOS (CAPÍTULOS ESPECIAIS)
+% ==============================================================================
+
+% ==============================================================================
+% --- Capítulo Não Numerado (Introdução) ---
+% Centralizado e aparece no Sumário
+% ==============================================================================
+\newcommand{\capituloNaoNumerado}[1]{%
+  \chapter*{\centering #1}
+  \markboth{#1}{#1}
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
+}
+
+% ==============================================================================
+% --- Página Divisória de Seção (Apêndice/Anexo) ---
+% ==============================================================================
+\newcommand{\paginaDivisoria}[1]{%
+  \clearpage
+  \thispagestyle{empty}
+  \phantomsection % Cria âncora para o link funcionar corretamente
+  \vspace*{8cm}
+  \begin{center}
+     \textbf{\Huge #1}
+  \end{center}
+  \addcontentsline{toc}{part}{\protect\numberline{}\large\textbf{#1}}
+  \clearpage
+}
+
+% ==============================================================================
+% 10. CONFIGURAÇÃO DE APÊNDICES
+% ==============================================================================
+\let\oldappendix\appendix
+\renewcommand{\appendix}{%
+  \addtocontents{toc}{\protect\addvspace{0.2cm}} % Respiro no sumário
+  \oldappendix
+  
+  % Remove configurações globais de centralização para não afetar o texto
+  \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}} 
+  \renewcommand{\printchapternum}{}
+  \renewcommand{\afterchapternum}{}
+  
+  % Centraliza APENAS o título (Nome + Letra + Título)
+  \renewcommand{\printchaptertitle}[1]{%
+     {\centering\chaptitlefont APÊNDICE \thechapter\ -- ##1 \par}%
+  }
+  
+  % Retorna o texto para justificado logo após o título
+  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip \justifying}
+
+  % Cabeçalho do Apêndice (Fonte 10pt)
+  \makeevenhead{meuestilo}{\footnotesize\textit{APÊNDICE \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+  \makeoddhead {meuestilo}{\footnotesize\textit{APÊNDICE \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+}
+
+% ==============================================================================
+% 11. CONFIGURAÇÃO DE ANEXOS
+% ==============================================================================
+\newcommand{\iniciarAnexos}{%
+  \clearpage
+  \addtocontents{toc}{\protect\addvspace{0.2cm}} % Respiro no sumário
+  \par
+  \setcounter{chapter}{0}
+  \renewcommand{\thechapter}{\Alph{chapter}}
+  \renewcommand{\chaptername}{Anexo}
+  \renewcommand{\appendixname}{Anexo}
+  
+  % Configuração visual do título (Centralizado)
+  \renewcommand{\chapterheadstart}{\vspace*{\beforechapskip}}
+  \renewcommand{\printchapternum}{}
+  \renewcommand{\afterchapternum}{}
+  \renewcommand{\printchaptertitle}[1]{%
+     {\centering\chaptitlefont ANEXO \thechapter\ -- ##1 \par}%
+  }
+  \renewcommand{\afterchaptertitle}{\par\nobreak\vskip \afterchapskip \justifying}
+
+  % Cabeçalho do Anexo (Fonte 10pt)
+  \makeevenhead{meuestilo}{\footnotesize\textit{ANEXO \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+  \makeoddhead {meuestilo}{\footnotesize\textit{ANEXO \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
+}
+
+
+
+
+
+
+
+
+
+
+
+% ============================================
+% 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO (CORRIGIDO PELO PRINT)
+% ============================================
+\makeatletter
+
+% --- Variáveis ---
+\providecommand{\imprimirinstituicao}{}
+\newcommand{\instituicao}[1]{\renewcommand{\imprimirinstituicao}{#1}}
+\providecommand{\imprimirpreambulo}{}
+\newcommand{\preambulo}[1]{\renewcommand{\imprimirpreambulo}{#1}}
+\providecommand{\imprimirlocal}{}
+\newcommand{\local}[1]{\renewcommand{\imprimirlocal}{#1}}
+
+\newcommand{\titulo}[1]{\title{#1}}\newcommand{\imprimirtitulo}{\thetitle}
+\newcommand{\autor}[1]{\author{#1}}\newcommand{\imprimirautor}{\theauthor}
+\newcommand{\data}[1]{\date{#1}}\newcommand{\imprimirdata}{\thedate}
+
+% --- Responsáveis ---
+\providecommand{\imprimirorientadorRotulo}{} \providecommand{\imprimirorientador}{}
+\newcommand{\orientador}[2][Orientador:]{%
+  \renewcommand{\imprimirorientadorRotulo}{#1}\renewcommand{\imprimirorientador}{#2}}
+
+\providecommand{\imprimircoorientadorRotulo}{} \providecommand{\imprimircoorientador}{}
+\newcommand{\coorientador}[2][Coorientador:]{%
+  \renewcommand{\imprimircoorientadorRotulo}{#1}\renewcommand{\imprimircoorientador}{#2}}
+
+\providecommand{\imprimirsupervisorRotulo}{} \providecommand{\imprimirsupervisor}{}
+\newcommand{\supervisor}[2][Prof. Supervisor:]{%
+  \renewcommand{\imprimirsupervisorRotulo}{#1}\renewcommand{\imprimirsupervisor}{#2}}
+
+\providecommand{\imprimirtutoronlineRotulo}{} \providecommand{\imprimirtutoronline}{}
+\newcommand{\tutoronline}[2][Tutor Online:]{%
+  \renewcommand{\imprimirtutoronlineRotulo}{#1}\renewcommand{\imprimirtutoronline}{#2}}
+
+\providecommand{\imprimirtutordopoloRotulo}{} \providecommand{\imprimirtutordopolo}{}
+\newcommand{\tutordopolo}[2][Tutor do Polo:]{%
+  \renewcommand{\imprimirtutordopoloRotulo}{#1}\renewcommand{\imprimirtutordopolo}{#2}}
+
+\providecommand{\imprimirprofessorRotulo}{} \providecommand{\imprimirprofessor}{}
+\newcommand{\professor}[2][Professor:]{%
+  \renewcommand{\imprimirprofessorRotulo}{#1}\renewcommand{\imprimirprofessor}{#2}}
+
+% --- Layout da Capa ---
+\newcommand{\imprimircapa}{%
+  \begin{titlingpage}
+    \centering
+    \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\[0.15cm]
+    {\scshape\large\imprimirinstituicao\par}
+    \vspace{4cm}
+    {\bfseries\LARGE\imprimirtitulo\par}
+    \vfill
+    {\bfseries\large\imprimirautor\par}
+    \vfill
+    {\large\imprimirlocal\par}
+    {\large\imprimirdata}
+    \vspace*{1em}
+  \end{titlingpage}
+}
+
+% --- Layout da Folha de Rosto (CORRIGIDO: Instituição e Centralização) ---
+\newcommand{\folhaderostocontent}{
+  \begin{center}
+    {\bfseries\large\imprimirautor\par}
+    \vspace*{\fill}\vspace*{\fill}
+    {\bfseries\Large\imprimirtitulo\par}
+    \vspace*{\fill}
+    
+    % Preâmbulo (Recuado à direita)
+    \ifcsvoid{imprimirpreambulo}{}{%
+      \hspace{.45\textwidth}
+      \begin{minipage}{.5\textwidth}
+        \SingleSpacing
+        \small\imprimirpreambulo
+      \end{minipage}%
+      \vspace*{\fill}
+    }
+
+    % CORREÇÃO: Instituição na Folha de Rosto (Abaixo do preâmbulo)
+    \vspace{1cm}
+    \ifcsvoid{imprimirinstituicao}{}{%
+       \imprimirinstituicao\par
+    }
+    \vspace{1cm}
+
+    % CORREÇÃO: Professores Centralizados (Como no seu print)
+    \SingleSpacing
+    \ifcsvoid{imprimirorientador}{}{{\large\imprimirorientadorRotulo~\imprimirorientador\par}}
+    \ifcsvoid{imprimircoorientador}{}{{\large\imprimircoorientadorRotulo~\imprimircoorientador\par}}
+    \ifcsvoid{imprimirprofessor}{}{{\large\imprimirprofessorRotulo~\imprimirprofessor\par}}
+    \ifcsvoid{imprimirsupervisor}{}{{\large\imprimirsupervisorRotulo~\imprimirsupervisor\par}}
+    \ifcsvoid{imprimirtutoronline}{}{{\large\imprimirtutoronlineRotulo~\imprimirtutoronline\par}}
+    \ifcsvoid{imprimirtutordopolo}{}{{\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}}
+    
+    \vfill
+    {\large\imprimirlocal\par}
+    {\large\imprimirdata}
+  \end{center}
+}
+
+\newcommand{\imprimirfolhaderosto}{%
+  \clearpage
+  \thispagestyle{empty}
+  \folhaderostocontent
+  \clearpage
+}
+\makeatother
+
+
+
+
+
+% --- DADOS (IGUAL AO SEU PRINT) ---
+\titulo{Relatório de Estágio Supervisionado II\\ Tecnologia na Prática Escolar: Explorando Cultura Digital de Forma Consciente}
+\autor{Wenes Gomes Aquino}
+\local{Palmas}
+\data{2025}
+\instituicao{
+  Universidade Federal do Tocantins -- UFT\\
+  Campus Universitário de Palmas\\
+  Curso de Licenciatura em Computação
+}
+\preambulo{Trabalho de Conclusão de Estágio Supervisionado II, apresentado ao Curso de Licenciatura em Computação da Universidade Federal do Tocantins, Campus de Palmas-TO, como requisito parcial à obtenção do título de Licenciado em Computação.}
+
+% --- DEFINA OS NOMES (Centralizados na página) ---
+%\orientador{} 
+%\coorientador{}
+%\tutoronline{}
+\professor{Me. Tiago da S. Almeida}
+\supervisor{Gleice dos S. Freitas}
+\tutordopolo{Deusmar Oliveira de Borba}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ==============================================================================
+% INÍCIO DO DOCUMENTO
+% ==============================================================================
+\begin{document}
+\nocite{*} 
+
+
+
+% -----------------------------------------------
+% ----------FOLHA DE ROSTO E CONTRACAPA----------
+% -----------------------------------------------
+\imprimircapa         % Está é Folha de Rosto
+% -----------------------------------------------
+\imprimirfolhaderosto % Esta é Contracapa
+% -----------------------------------------------
+
+
+% --- AGRADECIMENTOS (Sem Sumário, Centralizado) ---
+\chapter*{\centering Agradecimentos}
+\thispagestyle{empty}
+\lipsum[101-102]
+
+
+% ==============================================================================
+% ELEMENTOS PRÉ-TEXTUAIS
+% ==============================================================================
+% --- RESUMO (Sem Sumário, Centralizado) ---
+\chapter*{\centering Resumo}
+\thispagestyle{empty}
+\noindent Como afirma \cite{linux2024} \lipsum[1]
+
+
+
+% --- SUMÁRIO ---
+\clearpage
+\tableofcontents* \thispagestyle{empty}
+
+% --- LIMPEZA E INÍCIO DE CABEÇALHOS ---
+\clearpage
+\makeevenfoot{meuestilo}{}{}{} 
+\makeoddfoot{meuestilo}{}{}{}  
+\makeevenfoot{plain}{}{}{}
+\makeoddfoot{plain}{}{}{}
+\pagestyle{meuestilo}
+
+% ==============================================================================
+% ELEMENTOS TEXTUAIS
+% ==============================================================================
+
+% --- INTRODUÇÃO ---
+\capituloNaoNumerado{Introdução}
+\lipsum[1-2]
+
+% --- PARTE I: PREPARAÇÃO ---
+\part{Preparação}
+
+% --- CAPÍTULO: JUSTIFICATIVA ---
+\chapter{Justificativa}
+\section{Coleta de Dados}
+\lipsum[5-6]
+
+\section{Coleta de Dados}
+\lipsum[5-6]
+
+\section{Coleta de Dados}
+\lipsum[5-6]
+
+% --- CAPÍTULO: METODOLOGIA ---
+\chapter{Metodologia}
+\lipsum[101]
+
+% --- PARTE II: RESULTADOS ---
+\part{Resultados}
+
+% --- CAPÍTULO: ANÁLISE ---
+\chapter{Análise}
+\lipsum[7]
+
+% --- CAPÍTULO: RESULTADOS ---
+\chapter{Resultados}
+\lipsum[101]
+
+% --- CAPÍTULO: DISCUSSÃO ---
+\chapter{Discussão}
+\lipsum[7]
+
+% ==============================================================================
+% ELEMENTOS PÓS-TEXTUAIS
+% ==============================================================================
+
+% --- REFERÊNCIAS BIBLIOGRÁFICAS ---
+\printbibliography[heading=referencias_abnt]
+
+% ==============================================================================
+% APÊNDICES (TEXTOS DO AUTOR)
+% ==============================================================================
+\appendix
+\paginaDivisoria{APÊNDICES}
+
+\chapter{Roteiro de Entrevistas}
+\section{Coleta de Dados}
+\lipsum[6-20]
+
+% ==============================================================================
+% ANEXOS (DOCUMENTOS DE TERCEIROS)
+% ==============================================================================
+\iniciarAnexos
+\paginaDivisoria{ANEXOS}
+
+\chapter{Mapa da Cidade}
+\section{Coleta de Dados}
+\lipsum[12-28]
+
+\end{document} 
