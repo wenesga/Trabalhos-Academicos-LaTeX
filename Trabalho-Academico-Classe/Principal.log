@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (MiKTeX 25.4) (format=lualatex 2025.11.13)  5 DEC 2025 14:46
+This is LuaHBTeX, Version 1.22.0 (MiKTeX 25.4) (format=lualatex 2025.11.13)  5 DEC 2025 20:53
  restricted system commands enabled.
 **Principal.tex
 (./Principal.tex
@@ -1480,26 +1480,26 @@ Package babel Info: 'brazilian' activates 'portuges' shorthands.
 )
 \openout1 = Principal.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 ("C:/Program Files/MiKTeX/tex/context/base/mkii/supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1522,7 +1522,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 ("C:/Program Files/MiKTeX/tex/latex/00miktex/epstopdf-sys.cfg"
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 25.
+Package hyperref Info: Link coloring ON on input line 30.
 
 (./Principal.out) (./Principal.out)
 \@outlinefile=\write6
@@ -1583,12 +1583,12 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Principal.bbl' found.
 
 (./Principal.bbl)
-Package biblatex Info: Reference section=0 on input line 25.
-Package biblatex Info: Reference segment=0 on input line 25.
+Package biblatex Info: Reference section=0 on input line 30.
+Package biblatex Info: Reference segment=0 on input line 30.
 <Arquivos/LogoUFT.pdf, id=162, 174.05226pt x 192.12679pt>
 File: Arquivos/LogoUFT.pdf Graphic file (type pdf)
 <use Arquivos/LogoUFT.pdf>
-Package luatex.def Info: Arquivos/LogoUFT.pdf  used on input line 33.
+Package luatex.def Info: Arquivos/LogoUFT.pdf  used on input line 38.
 (luatex.def)             Requested size: 77.34917pt x 85.38327pt.
 
 
@@ -1596,35 +1596,35 @@ Package luatex.def Info: Arquivos/LogoUFT.pdf  used on input line 33.
 
 {C:/Users/Wenes/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}<./Arquivos/Log
 oUFT.pdf>]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-5.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+0.
  ("C:/Program Files/MiKTeX/tex/latex/lm/ot1lmr.fd"
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-5.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+0.
 
 ("C:/Program Files/MiKTeX/tex/latex/lm/omllmm.fd"
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-35.
+40.
 
 ("C:/Program Files/MiKTeX/tex/latex/lm/omslmsy.fd"
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-35.
+40.
 
 ("C:/Program Files/MiKTeX/tex/latex/lm/omxlmex.fd"
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 35.
+(Font)              <12> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 35.
+(Font)              <8> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 35.
+(Font)              <6> on input line 40.
 
 
 
@@ -1635,7 +1635,7 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.1'
 ]
 
 LaTeX Font Warning: Font shape `TU/lmr/bx/sc' undefined
-(Font)              using `TU/lmr/bx/n' instead on input line 60.
+(Font)              using `TU/lmr/bx/n' instead on input line 65.
 
 ("C:/Program Files/MiKTeX/tex/generic/hyph-utf8/loadhyph/loadhyph-la.tex"
 UTF-8 Latin hyphenation patterns
@@ -1693,7 +1693,7 @@ Cap\'{\i }tulo 1.
 ]
 
 Package babel Info: 'brazilian' activates 'portuges' shorthands.
-(babel)             Reported on input line 197.
+(babel)             Reported on input line 202.
 [12]
 Cap\'{\i }tulo 2.
 
@@ -1789,14 +1789,14 @@ Package logreq Info: Writing requests to 'Principal.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 39212 strings out of 476290
+ 39214 strings out of 476290
  125061,1977958 words of node,token memory allocated
  1820 words of node memory still in use:
    20 hlist, 1 vlist, 9 rule, 4 glue, 3 kern, 1 glyph, 68 attribute, 207 glue_sp
 ec, 59 attribute_list, 3 write, 16 pdf_literal, 4 pdf_action, 16 pdf_colorstack 
 nodes
-   avail lists: 1:7,2:1113,3:553,4:96,5:194,6:66,7:4334,8:31,9:434,10:18,11:463
- 60385 multiletter control sequences out of 65536+600000
+   avail lists: 1:6,2:1113,3:553,4:96,5:194,6:66,7:4334,8:31,9:434,10:18,11:463
+ 60387 multiletter control sequences out of 65536+600000
  51 fonts using 4219239 bytes
  117i,12n,114p,1201b,3955s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/program files/miktex/fonts/opentype/public/lm/lmroman10-italic.otf><C:/Progr
@@ -1805,7 +1805,7 @@ miktex/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/miktex/f
 onts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex/fonts/ope
 ntype/public/lm/lmroman12-bold.otf><c:/program files/miktex/fonts/opentype/publi
 c/lm/lmromancaps10-regular.otf>
-Output written on Principal.pdf (25 pages, 167849 bytes).
+Output written on Principal.pdf (25 pages, 167581 bytes).
 
 PDF statistics: 397 PDF objects out of 1000 (max. 8388607)
  81 named destinations out of 1000 (max. 131072)

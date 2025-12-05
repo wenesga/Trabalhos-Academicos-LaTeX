@@ -39,13 +39,37 @@
     citecolor=black!100,
     urlcolor=black!100
 ]{hyperref}
-
+% ===========================
 \hypersetup{
     pdftitle={Trabalhos Acadêmicos},
     pdfauthor={Wenes Aquino},
     pdfcreator={LaTeX},
     pdfcreationdate={\today}
 }
+% ===========================
+
+
+% ===========================
+% WENES - UFT (Marca TeX)
+% ===========================
+\newcommand{\WenesTex}{%
+    Wenes%
+    \raisebox{0ex}{T}\kern-0.168em%
+    \raisebox{-0.5ex}{E}\kern-0.124em%
+    \raisebox{0ex}{X}
+}
+% ===========================
+\newcommand{\abnTexUFT}{%
+    abn%
+    \raisebox{0ex}{T}\kern-0.168em%
+    \raisebox{-0.5ex}{E}\kern-0.124em%
+    \raisebox{0ex}{X}%
+    \raisebox{0.4ex}{-}%
+    \raisebox{0.05ex}{U}\kern-0em
+    \raisebox{0.05ex}{F}\kern-0em
+    \raisebox{0.05ex}{T}
+}
+% ===========================
 
 % ============================================
 % 3. BIBLIOGRAFIA
@@ -189,6 +213,7 @@
   \addcontentsline{toc}{part}{\protect\numberline{}\large\textbf{#1}}
   \clearpage
 }
+% ============================================
 
 % ============================================
 % 9. APÊNDICES E ANEXOS
@@ -214,12 +239,12 @@
   \makeevenhead{meuestilo}{\footnotesize\textit{ANEXO \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
   \makeoddhead {meuestilo}{\footnotesize\textit{ANEXO \thechapter.}\quad\textit{\leftmark}}{}{\footnotesize\thepage}
 }
+% ============================================
 
 % ============================================
 % 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
 % ============================================
 \makeatletter
-
 % --- Variáveis ---
 \providecommand{\imprimirinstituicao}{}
 \newcommand{\instituicao}[1]{\renewcommand{\imprimirinstituicao}{#1}}
@@ -278,7 +303,7 @@
     \end{titlingpage}
 }
 
-% --- Layout da Folha de Rosto (CORRIGIDO: Instituição e Centralização) ---
+% --- Layout da Folha de Rosto ---
 \newcommand{\folhaderostocontent}{
     \begin{center}
         {\bfseries\large\imprimirautor\par}
@@ -293,11 +318,9 @@
             \small\imprimirpreambulo
             \end{minipage}%
         }%
-        \vspace*{\fill}
-        \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}
-        \vspace*{\fill}
-        \ifcsvoid{imprimirorientador}{}{{\large\imprimirorientadorRotulo~\imprimirorientador\par}}
-        
+        \vfill
+        \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}%
+        \vfill
         \ifcsvoid{imprimirorientador}{}{%
             {\large\imprimirorientadorRotulo~\imprimirorientador\par}%
         }
@@ -335,6 +358,9 @@
   \clearpage
 }
 \makeatother
+% ============================================
+
+
 
 % ============================================
 % 11. CAPÍTULOS EM MAIÚSCULAS NO SUMÁRIO
@@ -353,3 +379,4 @@
     {\oldcontentsline{#1}{#2}{#3}{#4}}
 }
 \makeatother
+% ============================================
