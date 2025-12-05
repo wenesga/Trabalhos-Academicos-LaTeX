@@ -280,41 +280,53 @@
 
 % --- Layout da Folha de Rosto (CORRIGIDO: Instituição e Centralização) ---
 \newcommand{\folhaderostocontent}{
-  \begin{center}
-    {\bfseries\large\imprimirautor\par}
-    \vspace*{\fill}\vspace*{\fill}
-    {\bfseries\Large\imprimirtitulo\par}
-    
-    \vspace*{\fill}
-    
-    % Preâmbulo (Recuado à direita)
-    \ifcsvoid{imprimirpreambulo}{}{%
-        \hspace{0.45\textwidth}
-        \begin{minipage}{0.5\textwidth}
-        \SingleSpacing
-        \small\imprimirpreambulo
-        \end{minipage}%
-    }
-    
-    \vspace*{\fill}
-    \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}
-    \vspace*{\fill}
-
-    \ifcsvoid{imprimirorientador}{}{{\large\imprimirorientadorRotulo~\imprimirorientador\par}}
-    \ifcsvoid{imprimircoorientador}{}{{\large\imprimircoorientadorRotulo~\imprimircoorientador\par}}
-    \ifcsvoid{imprimirprofessor}{}{{\large\imprimirprofessorRotulo~\imprimirprofessor\par}}
-    \ifcsvoid{imprimirsupervisor}{}{{\large\imprimirsupervisorRotulo~\imprimirsupervisor\par}}
-    \ifcsvoid{imprimirtutoronline}{}{{\large\imprimirtutoronlineRotulo~\imprimirtutoronline\par}}
-    \ifcsvoid{imprimirtutordopolo}{}{{\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}}
-    
     \begin{center}
-        \SingleSpacing
-        \large
-        \imprimirlocal\\
-        \imprimirdata
+        {\bfseries\large\imprimirautor\par}
+        \vspace*{\fill}\vspace*{\fill}
+        {\bfseries\Large\imprimirtitulo\par}
+        \vspace*{\fill}%
+        % Preâmbulo (Recuado à direita)
+        \ifcsvoid{imprimirpreambulo}{}{%
+            \hspace{0.45\textwidth}
+            \begin{minipage}{0.5\textwidth}
+            \SingleSpacing
+            \small\imprimirpreambulo
+            \end{minipage}%
+        }%
+        \vspace*{\fill}
+        \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}
+        \vspace*{\fill}
+        \ifcsvoid{imprimirorientador}{}{{\large\imprimirorientadorRotulo~\imprimirorientador\par}}
+        
+        \ifcsvoid{imprimirorientador}{}{%
+            {\large\imprimirorientadorRotulo~\imprimirorientador\par}%
+        }
+        \ifcsvoid{imprimircoorientador}{}{%
+            {\large\imprimircoorientadorRotulo~\imprimircoorientador\par}%
+        }
+        \ifcsvoid{imprimirprofessor}{}{%
+            {\large\imprimirprofessorRotulo~\imprimirprofessor\par}%
+        }
+        \ifcsvoid{imprimirsupervisor}{}{%
+            {\large\imprimirsupervisorRotulo~\imprimirsupervisor\par}%
+        }
+        \ifcsvoid{imprimirtutoronline}{}{%
+            {\large\imprimirtutoronlineRotulo~\imprimirtutoronline\par}%
+        }
+        \ifcsvoid{imprimirtutordopolo}{}{%
+            {\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}%
+        }
+        \vspace*{\fill}
+        \begin{center}
+            \SingleSpacing
+            \large
+            \imprimirlocal\\
+            \imprimirdata
+        \end{center}
     \end{center}
-  \end{center}
 }
+
+
 
 \newcommand{\imprimirfolhaderosto}{%
   \clearpage

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (MiKTeX 25.4) (format=lualatex 2025.11.13)  5 DEC 2025 06:29
+This is LuaHBTeX, Version 1.22.0 (MiKTeX 25.4) (format=lualatex 2025.11.13)  5 DEC 2025 10:47
  restricted system commands enabled.
 **Principal.tex
 (./Principal.tex
@@ -1805,7 +1805,7 @@ miktex/fonts/opentype/public/lm/lmroman10-regular.otf><c:/program files/miktex/f
 onts/opentype/public/lm/lmroman12-regular.otf><c:/program files/miktex/fonts/ope
 ntype/public/lm/lmroman12-bold.otf><c:/program files/miktex/fonts/opentype/publi
 c/lm/lmromancaps10-regular.otf>
-Output written on Principal.pdf (25 pages, 167913 bytes).
+Output written on Principal.pdf (25 pages, 167907 bytes).
 
 PDF statistics: 397 PDF objects out of 1000 (max. 8388607)
  81 named destinations out of 1000 (max. 131072)
