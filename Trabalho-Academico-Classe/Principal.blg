@@ -1,15 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'Principal.blg'
-[145] biber-MSWIN64:342> INFO - === 
-[198] Biber.pm:421> INFO - Reading 'Principal.bcf'
-[358] Biber.pm:999> INFO - Using all citekeys in bib section 0
-[375] Biber.pm:4487> INFO - Processing section 0
-[388] Biber.pm:4678> INFO - Looking for bibtex file 'Arquivos/Referencias.bib' for section 0
-[458] bibtex.pm:1713> INFO - LaTeX decoding ...
-[475] bibtex.pm:1519> INFO - Found BibTeX data source 'Arquivos/Referencias.bib'
-[569] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[569] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[569] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'pt-BR'
-[569] Biber.pm:4313> INFO - No sort tailoring available for locale 'pt-BR'
-[585] bbl.pm:676> INFO - Writing 'Principal.bbl' with encoding 'UTF-8'
-[591] bbl.pm:779> INFO - Output to Principal.bbl
+[238] biber-MSWIN64:342> INFO - === 
+[361] Biber.pm:421> INFO - Reading 'Principal.bcf'
+[528] Biber.pm:999> INFO - Using all citekeys in bib section 0
+[548] Biber.pm:4487> INFO - Processing section 0
+[572] Biber.pm:4678> INFO - Looking for bibtex file 'Arquivos/Referencias.bib' for section 0
+[686] bibtex.pm:1713> INFO - LaTeX decoding ...
+[710] bibtex.pm:1519> INFO - Found BibTeX data source 'Arquivos/Referencias.bib'
+[842] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[843] UCollate.pm:68> INFO - Overriding locale 'pt-BR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[843] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'pt-BR'
+[843] Biber.pm:4313> INFO - No sort tailoring available for locale 'pt-BR'
+[901] bbl.pm:676> INFO - Writing 'Principal.bbl' with encoding 'UTF-8'
+[907] bbl.pm:779> INFO - Output to Principal.bbl

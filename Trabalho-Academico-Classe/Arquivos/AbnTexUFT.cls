@@ -1,6 +1,6 @@
 % ============================================
 % Classe: AbnTexUFT.cls
-% Autor: Wenes Gomes Aquino
+% Autor: Wenes Aquino
 % Baseada no seu preâmbulo
 % ============================================
 
@@ -42,7 +42,7 @@
 
 \hypersetup{
     pdftitle={Trabalhos Acadêmicos},
-    pdfauthor={Wenes Gomes Aquino},
+    pdfauthor={Wenes Aquino},
     pdfcreator={LaTeX},
     pdfcreationdate={\today}
 }
@@ -269,9 +269,12 @@
             \vfill
             {\bfseries\large\imprimirautor\par}
             \vfill
-            {\large\imprimirlocal\\}
-            {\large\imprimirdata}
-            \vspace*{1em}
+            \begin{center}
+                \SingleSpacing
+                \large
+                \imprimirlocal\\
+                \imprimirdata
+            \end{center}
     \end{titlingpage}
 }
 
@@ -304,9 +307,12 @@
     \ifcsvoid{imprimirtutoronline}{}{{\large\imprimirtutoronlineRotulo~\imprimirtutoronline\par}}
     \ifcsvoid{imprimirtutordopolo}{}{{\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}}
     
-    \vfill
-    {\large\imprimirlocal\\}
-    {\large\imprimirdata}
+    \begin{center}
+        \SingleSpacing
+        \large
+        \imprimirlocal\\
+        \imprimirdata
+    \end{center}
   \end{center}
 }
 
