@@ -71,6 +71,7 @@
 }
 % ===========================
 
+
 % ============================================
 % 3. BIBLIOGRAFIA
 % ============================================
@@ -284,40 +285,35 @@
 
 % --- Layout da Capa ---
 \newcommand{\imprimircapa}{%
-    \begin{titlingpage}
-        \centering
-            \vspace*{-2cm}
-            \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\[0.15cm]
-            {\scshape\large\imprimirinstituicao\par}
-            \vspace{3cm}%
-            {\bfseries\LARGE\imprimirtitulo\par}
-            \vfill
-            {\bfseries\large\imprimirautor\par}
-            \vfill
-            \begin{center}
-                \SingleSpacing
-                \large
-                \imprimirlocal\\
-                \imprimirdata
-            \end{center}
+    \begin{titlingpage}%
+        \begin{center}
+        \vspace*{-2cm}
+        \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\
+        {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicao\par}%
+        \vfill\vspace*{-2em}
+        {\bfseries\large\imprimirautor\par}
+        \vfill
+        {\bfseries\LARGE\imprimirtitulo\par}
+        \vfill\vfill\vfill\vfill
+        \bfseries\large\imprimirlocal\\
+        \imprimirdata
+        \end{center}
     \end{titlingpage}
 }
 
 % --- Layout da Folha de Rosto ---
-\newcommand{\folhaderostocontent}{
+\newcommand{\folhaderostocontent}{%
     \begin{center}
         {\bfseries\large\imprimirautor\par}
-        \vspace*{\fill}\vspace*{\fill}
+        \vfill\vfill
         {\bfseries\Large\imprimirtitulo\par}
-        \vspace*{\fill}%
-        % Preâmbulo (Recuado à direita)
+        \vfill
         \ifcsvoid{imprimirpreambulo}{}{%
             \hspace{0.45\textwidth}
-            \begin{minipage}{0.5\textwidth}
+            \begin{minipage}{0.5\textwidth}%
             \SingleSpacing
-            \small\imprimirpreambulo
-            \end{minipage}%
-        }%
+            \imprimirpreambulo
+            \end{minipage}}%
         \vfill
         \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}%
         \vfill
@@ -339,13 +335,9 @@
         \ifcsvoid{imprimirtutordopolo}{}{%
             {\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}%
         }
-        \vspace*{\fill}
-        \begin{center}
-            \SingleSpacing
-            \large
-            \imprimirlocal\\
-            \imprimirdata
-        \end{center}
+        \vfill
+        \large\imprimirlocal\\
+        \imprimirdata
     \end{center}
 }
 
