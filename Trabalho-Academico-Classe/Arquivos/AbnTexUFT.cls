@@ -5,7 +5,7 @@
 % ============================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{AbnTexUFT}[2025/12/02 Classe personalizada UFT]
+\ProvidesClass{abntexUFT}[2025/12/02 Classe personalizada UFT]
 
 \LoadClass[12pt,a4paper,oneside,oldfontcommands]{memoir}
 
@@ -293,6 +293,7 @@
         \vfill\vspace*{-2em}
         {\bfseries\large\imprimirautor\par}
         \vfill
+        %\includegraphics[width=0.5\textwidth]{Arquivos/UABComputacao.pdf} \\
         {\bfseries\LARGE\imprimirtitulo\par}
         \vfill\vfill\vfill\vfill
         \bfseries\large\imprimirlocal\\
