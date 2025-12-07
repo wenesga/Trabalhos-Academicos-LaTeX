@@ -283,17 +283,17 @@
 \newcommand{\imprimircapa}{%
     \begin{titlingpage}%
         \begin{center}
-        \vspace*{-2cm}
-        \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\
-        {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicao\par}%
-        \vfill\vspace*{-2em}
-        {\bfseries\large\imprimirautor\par}
-        \vfill
-        %\includegraphics[width=0.5\textwidth]{Arquivos/UABComputacao.pdf} \\
-        {\bfseries\scshape\LARGE\imprimirtitulo\par}
-        \vfill\vfill\vfill\vfill
-        \large\imprimirlocal\\
-        \imprimirdata
+            \vspace*{-2cm}
+            \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\
+            {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicao\par}%
+            \vfill\vspace*{-2em}
+            {\bfseries\large\imprimirautor\par}
+            \vfill
+            %\includegraphics[width=0.5\textwidth]{Arquivos/UABComputacao.pdf} \\
+            {\bfseries\scshape\LARGE\imprimirtitulo\par}
+            \vfill\vfill\vfill\vfill
+            \large\imprimirlocal\\
+            \imprimirdata
         \end{center}
     \end{titlingpage}
 }
