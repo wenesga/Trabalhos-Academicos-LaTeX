@@ -12,12 +12,8 @@
 % ============================================
 % 1. PACOTES FUNDAMENTAIS
 % ============================================
-\RequirePackage[T1]{fontenc}
-\RequirePackage{fontspec}
-\RequirePackage{lmodern}
-%\setmainfont{XCharter}
-%\setmainfont{Times New Roman}
 \RequirePackage[brazilian]{babel}
+\RequirePackage[T1]{fontenc}
 \RequirePackage{lipsum}
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
@@ -294,9 +290,9 @@
         {\bfseries\large\imprimirautor\par}
         \vfill
         %\includegraphics[width=0.5\textwidth]{Arquivos/UABComputacao.pdf} \\
-        {\bfseries\LARGE\imprimirtitulo\par}
+        {\bfseries\scshape\LARGE\imprimirtitulo\par}
         \vfill\vfill\vfill\vfill
-        \bfseries\large\imprimirlocal\\
+        \large\imprimirlocal\\
         \imprimirdata
         \end{center}
     \end{titlingpage}
@@ -307,7 +303,7 @@
     \begin{center}
         {\bfseries\large\imprimirautor\par}
         \vfill\vfill
-        {\bfseries\Large\imprimirtitulo\par}
+        {\bfseries\scshape\Large\imprimirtitulo\par}
         \vfill
         \ifcsvoid{imprimirpreambulo}{}{%
             \hspace{0.45\textwidth}
