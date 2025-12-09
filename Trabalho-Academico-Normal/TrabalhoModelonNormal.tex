@@ -11,7 +11,7 @@
 % ==============================================================================
 \usepackage[T1]{fontenc}        % Codificação de fonte interna
 \usepackage{fontspec}           % Suporte a fontes OpenType (LuaLaTeX)
-\setmainfont{XCharter}          % Fonte principal do documento
+%\setmainfont{XCharter}          % Fonte principal do documento
 \usepackage[brazilian]{babel}   % Idioma e hifenização PT-BR
 
 % ==============================================================================
@@ -157,7 +157,7 @@
 \newcommand{\paginaDivisoria}[1]{%
   \clearpage
   \thispagestyle{empty}
-  \phantomsection % Cria âncora para o link funcionar corretamente
+  \phantomsection % Cria âncora para o link 
   \vspace*{8cm}
   \begin{center}
      \textbf{\Huge #1}

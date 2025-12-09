@@ -63,7 +63,7 @@
 
 % --- Título das Referências Centralizado ---
 \defbibheading{referencias_abnt}{%
-  % Injeta 10pt de espaço extra no sumário antes de escrever "Referências"
+  % Injeta 30pt de espaço extra no sumário antes de escrever "Referências"
   \addtocontents{toc}{\protect\addvspace{30pt}} 
   
   \chapter*{\hfill Referências \hfill}
@@ -599,19 +599,18 @@
 % --- Sumário (SEM NÚMERO NENHUM) ---
 % ============================================
 \clearpage
-% 1. Desliga cabeçalhos e rodapés gerais
-\pagestyle{empty} 
-
-% 2. Força a primeira página do sumário (que é um capítulo) a ser vazia também
-\aliaspagestyle{chapter}{empty} 
-
+\pagestyle{empty} % Desliga cabeçalhos e rodapés
+\aliaspagestyle{chapter}{empty} % Força a primeira página ser vazia também
 \tableofcontents* \cleardoublepage
-
-% Volta a primeira página dos capítulos a ter número (plain)
-\aliaspagestyle{chapter}{plain} 
-% Volta o estilo geral (meuestilo)
-\pagestyle{meuestilo} 
+\aliaspagestyle{chapter}{plain} % Volta a primeira página dos capítulos a ter número (plain)
+\pagestyle{meuestilo} % Volta o estilo geral (meuestilo)
 % ============================================
+
+
+
+
+
+
 
 
 
