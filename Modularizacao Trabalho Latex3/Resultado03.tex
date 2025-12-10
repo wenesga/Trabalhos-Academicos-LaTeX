@@ -1,0 +1,250 @@
+%===========================================
+% TEMPLATE LaTeX ABNT - CLASSE MEMOIR
+% Compilável e modular, sem gambiarras
+%===========================================
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage{tikz}
+
+\setmainfont{CMU Serif}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\OnehalfSpacing
+\setlength{\parindent}{1.25cm}
+
+%===========================================
+% ESTILO DE CAPÍTULO NUMERADO (Com TikZ)
+%===========================================
+\makechapterstyle{CapitulosNumerado}{
+    \setlength{\beforechapskip}{0.46cm}
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\chapternamenum}{}
+    \renewcommand{\afterchapternum}{\par\nobreak\vskip 1.3cm}
+    \renewcommand{\printchapternum}{%
+        \noindent
+        \begin{tikzpicture}[remember picture, overlay]
+            \def\numsize{61}
+            \def\barwidth{0.8pt}
+            \def\leftoffset{2.3cm}
+
+            \node[inner sep=-1pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west, font=\Large\rmfamily] (chaptext)
+                 at (0pt, -4pt) {\chaptername};
+
+            \coordinate (StartPoint) at (0.5*\barwidth, 13pt);
+            \draw[line width=\barwidth] (StartPoint) -- (StartPoint |- num.north) -- (num.north west);
+            \coordinate (RightWall) at (\linewidth, 0);
+            \draw[line width=\barwidth] (num.north east) -- (RightWall |- num.north) -- (RightWall |- num.south) -- (num.south east);
+        \end{tikzpicture}%
+    }
+    \renewcommand{\printchaptertitle}[1]{%
+        \raggedright\huge\bfseries ##1
+    }
+}
+
+%===========================================
+% ESTILO DE CAPÍTULO NÃO NUMERADO (Centralizado com linha)
+%===========================================
+\makechapterstyle{estiloNaoNumerado}{
+    \setlength{\beforechapskip}{0pt}
+    \setlength{\afterchapskip}{2cm}
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\chapternamenum}{}
+    \renewcommand{\printchapternum}{}
+    \renewcommand{\printchaptertitle}[1]{%
+        \begin{center}
+            \huge\bfseries\MakeUppercase{##1}\\[0.5cm]
+            \rule{\textwidth}{0.3pt}
+        \end{center}
+    }
+}
+
+%===========================================
+% COMANDO MODULAR: Capítulo Centralizado
+%===========================================
+\newcommand{\capituloCentralizado}[1]{%
+    \chapterstyle{estiloNaoNumerado}%
+    \chapter*{#1}%
+    \addcontentsline{toc}{chapter}{\MakeUppercase{#1}}%
+    \chapterstyle{CapitulosNumerado}%
+}
+
+%===========================================
+% COMANDO PARA TÍTULOS DIVISÓRIOS (sem número de página no TOC)
+%===========================================
+\newcommand{\tituloDivisorio}[1]{%
+    \chapterstyle{estiloNaoNumerado}%
+    \chapter*{#1}%
+    \addtocontents{toc}{\protect\vspace{0.5cm}}%
+    \addtocontents{toc}{\protect\mbox{}\protect\hfill\textbf{\MakeUppercase{#1}}\protect\hfill\protect\mbox{}\par}%
+    \addtocontents{toc}{\protect\vspace{0.3cm}}%
+    \chapterstyle{CapitulosNumerado}%
+}
+
+%===========================================
+% MACROS PARA FOLHAS INICIAIS
+%===========================================
+\newcommand{\folha}{
+    \thispagestyle{empty}
+    \vspace*{8cm}
+    \begin{center}
+        {\bfseries\scshape\Huge Folha de Rosto \par}
+    \end{center}
+    \clearpage
+}
+
+\newcommand{\contra}{
+    \thispagestyle{empty}
+    \vspace*{8cm}
+    \begin{center}
+        {\bfseries\scshape\Huge Contra Capa \par}
+    \end{center}
+    \clearpage
+}
+
+%===========================================
+% CONFIGURAÇÃO DE CABEÇALHOS
+%===========================================
+\makepagestyle{meuestilo}
+\makeevenhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeoddhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeheadrule{meuestilo}{\textwidth}{0.3pt}
+
+% Redefinir marcas para incluir prefixos
+\renewcommand{\chaptermark}[1]{%
+    \markboth{\thechapter.\quad#1}{}%
+}
+
+% Primeira página de capítulo: apenas número no canto superior direito
+\aliaspagestyle{chapter}{plain}
+\makeoddhead{plain}{}{}{\footnotesize\thepage}
+\makeevenhead{plain}{}{}{\footnotesize\thepage}
+
+%===========================================
+% CONFIGURAÇÃO DO SUMÁRIO
+%===========================================
+\renewcommand{\printtoctitle}[1]{%
+    \begin{center}
+        \huge\bfseries\MakeUppercase{#1}\\[0.5cm]
+        \rule{\textwidth}{0.3pt}
+    \end{center}
+}
+\renewcommand{\aftertoctitle}{\par\nobreak\vskip 2cm}
+\setlength{\cftbeforechapterskip}{0.5cm}
+\renewcommand{\cftchapterfont}{\bfseries\MakeUppercase}
+\renewcommand{\cftchapterpagefont}{\bfseries}
+\setlength{\cftchapterindent}{0cm}
+\setlength{\cftsectionindent}{2cm}
+
+%===========================================
+% INÍCIO DO DOCUMENTO
+%===========================================
+\begin{document}
+
+% Numeração arábica desde o início (contagem invisível)
+\pagenumbering{arabic}
+\pagestyle{empty}
+
+\folha
+\contra
+
+%===========================================
+% ELEMENTOS PRÉ-TEXTUAIS
+%===========================================
+\capituloCentralizado{Agradecimento}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+\capituloCentralizado{Resumo}
+Este é o resumo do trabalho.
+
+\capituloCentralizado{Lista de Figuras}
+Conteúdo da lista de figuras.
+
+\capituloCentralizado{Lista de Tabelas}
+Conteúdo da lista de tabelas.
+
+\capituloCentralizado{Lista de Abreviaturas e Siglas}
+Conteúdo das abreviaturas.
+
+\capituloCentralizado{Lista de Símbolos}
+Conteúdo dos símbolos.
+
+%===========================================
+% SUMÁRIO
+%===========================================
+\tableofcontents
+\clearpage
+
+%===========================================
+% PARTE TEXTUAL
+%===========================================
+\chapterstyle{CapitulosNumerado}
+\pagestyle{meuestilo}
+
+\capituloCentralizado{Introdução}
+Este é o conteúdo da introdução do trabalho.
+
+\part{Preparação do Relatório}
+\chapter{Desenvolvimento}
+Conteúdo do desenvolvimento.
+
+\section{Primeira Seção}
+Texto da primeira seção.
+
+\section{Segunda Seção}
+Texto da segunda seção.
+
+\part{Resultado do Relatório}
+\chapter{Conclusão}
+Conteúdo da conclusão.
+
+%===========================================
+% ELEMENTOS PÓS-TEXTUAIS
+%===========================================
+\capituloCentralizado{Referências}
+AUTOR, A. \textit{Título do livro}. Editora, 2024.
+
+%===========================================
+% APÊNDICES
+%===========================================
+\tituloDivisorio{Apêndices}
+
+\appendix
+\renewcommand{\chaptermark}[1]{%
+    \markboth{APÊNDICE~\thechapter\quad--\quad#1}{}%
+}
+
+\chapter{Título do Apêndice A}
+Conteúdo do apêndice A.
+
+\section{Subseção A.1}
+Conteúdo da subseção.
+
+\chapter{Título do Apêndice B}
+Conteúdo do apêndice B.
+
+%===========================================
+% ANEXOS
+%===========================================
+\tituloDivisorio{Anexos}
+
+% Reset do contador para anexos
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\Alph{chapter}}
+\renewcommand{\chaptername}{Anexo}
+\renewcommand{\chaptermark}[1]{%
+    \markboth{ANEXO~\thechapter\quad--\quad#1}{}%
+}
+
+\chapter{Título do Anexo A}
+Conteúdo do anexo A (numeração reiniciada).
+
+\chapter{Título do Anexo B}
+Conteúdo do anexo B.
+
+\end{document}

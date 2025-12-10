@@ -1,0 +1,252 @@
+%===========================================
+% ESTE ARQUIVO É UMA INSTRUÇÃO/PROMPT DETALHADO PARA INTELIGÊNCIA ARTIFICIAL.
+% Ele serve como um guia modular de formatação ABNT/Acadêmica em LaTeX.
+% As configurações específicas de cada seção (numeração, estilo de capítulo,
+% estrutura pré-textual, textual e pós-textual) serão definidas e comentadas
+% ao longo do corpo do documento para implementação da IA.
+%===========================================
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage{tikz} % NECESSÁRIO PARA O ESTILO DE CAPÍTULO PERSONALIZADO
+%===========================================
+
+\setmainfont{CMU Serif}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\OnehalfSpacing % Espaçamento entre linhas de 1,5
+\setlength{\parindent}{1.25cm} % Recuo do paragrafo
+%===========================================
+
+
+%===========================================
+% INSTRUÇÃO IA: CONFIGURAÇÃO DE ESTILO DE CAPÍTULO MODULAR (O SWITCH)
+%
+% OBJETIVO: Criar dois estilos de capítulo baseados na classe MEMOIR...
+%
+% IMPLEMENTAÇÃO:
+% 1. Estilo Numerado Principal (\makechapterstyle{CapitulosNumerado}): Aplicado aos capítulos numerados.
+% 2. Estilo Não Numerado Simplificado (\makechapterstyle{estiloNaoNumerado}): Usado para capítulos \chapter*.
+% 3. Comando Modular (\capituloCentralizado): Macro que alterna estilos.
+%
+% 4. Modo Padrão (CRÍTICO): Se o comando \chapterstyle{CapitulosNumerado} não for chamado,
+%    o documento DEVE usar o estilo de capítulo padrão do memoir (plain/default)
+%    e o estilo de página (`\pagestyle`) padrão, garantindo que o título do capítulo
+%    fique alinhado à esquerda, com o número do capítulo ao lado, sem o cabeçalho complexo,
+%    conforme a imagem "4 Resultados" e ABNT.
+%    A IA deve usar \chapterstyle{default} ou garantir que nenhum estilo de página
+%    customizado seja carregado automaticamente antes do \mainmatter.
+%
+% CRÍTICO: Garantir que o estilo simplificado (\chapter*) seja implementado de
+% forma a obedecer a centralização e não causar conflitos com o cabeçalho.
+%===========================================
+
+
+
+\makechapterstyle{CapitulosNumerado}{
+    \setlength{\beforechapskip}{0.46cm}
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\chapternamenum}{}
+    \renewcommand{\afterchapternum}{\par\nobreak\vskip 1.3cm}
+    \renewcommand{\printchapternum}{%
+        \noindent
+        \begin{tikzpicture}[remember picture, overlay]
+            \def\numsize{61}
+            \def\barwidth{0.8pt}
+            \def\leftoffset{2.3cm}
+
+            \node[inner sep=-1pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west, font=\Large\rmfamily] (chaptext)
+                 at (0pt, -4pt) {\chaptername};
+
+            \coordinate (StartPoint) at (0.5*\barwidth, 13pt);
+            \draw[line width=\barwidth] (StartPoint) -- (StartPoint |- num.north) -- (num.north west);
+            \coordinate (RightWall) at (\linewidth, 0);
+            \draw[line width=\barwidth] (num.north east) -- (RightWall |- num.north) -- (RightWall |- num.south) -- (num.south east);
+        \end{tikzpicture}%
+    }
+    \renewcommand{\printchaptertitle}[1]{%
+        \raggedright\huge\bfseries ##1
+    }
+}
+
+% A IA DEVE INSERIR AQUI A DEFINIÇÃO DE \makechapterstyle{estiloNaoNumerado} (simplificado e centralizado com a reta).
+
+
+
+
+\newcommand{\folha}{
+    \thispagestyle{empty}
+    \vspace*{8cm}
+    \begin{center}
+        {\bfseries\scshape\Huge Folha de Rosto \par}
+    \end{center}
+    \clearpage
+}
+%===========================================
+\newcommand{\contra}{
+    \thispagestyle{empty}
+    \vspace*{8cm}
+    \begin{center}
+        {\bfseries\scshape\Huge Contra Capa \par}
+    \end{center}
+    \clearpage
+}
+%===========================================
+
+%\chapterstyle{CapitulosNumerado} % Vai ser chamado somente depois que todo o resto estiver configurado e testado (O último comando a ser executado).
+
+\begin{document}
+
+% INSTRUÇÃO IA: Configuração Inicial de Numeração
+% 1. A numeração DEVE ser SEMPRE arábica (1, 2, 3...). NUNCA usar algarismos romanos (\roman).
+% 2. O comando \frontmatter deve ser inserido aqui. Ele ativa a contagem,
+%    mas a IA deve garantir que a numeração permaneça ARÁBICA e seja suprimida
+%    visualmente (usando \pagestyle{empty} ou configuração equivalente)
+%    nas páginas pré-textuais.
+%\frontmatter % A IA deve implementar este comando e garantir que o estilo de numeração seja arábico (e invisível).
+
+\folha
+\contra
+
+%===========================================
+% INSTRUÇÃO IA: ELEMENTOS PRÉ-TEXTUAIS (INÍCIO)
+%
+% CARACTERÍSTICAS:
+% 1. Títulos: Devem ser Não Numerados e CENTRALIZADOS.
+% 2. Numeração: Invisível (contada pelo \frontmatter).
+%
+% A IA deve criar um comando (\capituloCentralizado) que substitua os \chapter*
+% e garanta que o título seja centralizado sem afetar a modularidade
+% do \chapterstyle, aplicando-se também aos comandos de Listas e Sumário.
+% O \chapterstyle não deve ser quebrado pela centralização.
+%===========================================
+
+\chapter*{Agradecimento} % A IA deve transformar isso em \capituloCentralizado{Agradecimento}
+\chapter*{Resumo}
+\chapter*{Lista de Figuras}
+\chapter*{Lista de Tabelas}
+\chapter*{Lista de Abreviaturas e Siglas}
+\chapter*{Lista de Símbolos}
+
+
+
+
+%===========================================
+% INSTRUÇÃO IA: CONFIGURAÇÃO DO SUMÁRIO (CLASSE MEMOIR)
+%
+% OBJETIVO: Garantir que o Sumário (tableofcontents) siga a formatação ABNT,
+% utilizando APENAS comandos da classe MEMOIR.
+%
+% IMPLEMENTAÇÃO:
+% 1. Centralização do Título: O título "SUMÁRIO" DEVE ser centralizado.
+% 2. Supressão do Título no Índice: A entrada para "SUMÁRIO" DEVE ser suprimida da lista.
+% 3. Títulos em Caixa Alta (CRÍTICO): Os títulos de nível 1 (\chapter) DEVEM
+%    aparecer em LETRAS MAIÚSCULAS no Sumário. A IA deve usar \cftchapterfont
+%    e \MakeUppercase para aplicar essa formatação, sem exigir que o autor digite
+%    o título em caixa alta no corpo.
+% 4. Espaçamento Horizontal (2 cm): O espaçamento entre a numeração e o título
+%    DEVE ser de aproximadamente 2 cm (\cft...numwidth e \cft...indent).
+% 5. Alinhamento: Garantir o alinhamento vertical dos números de página.
+% 6. Hierarquia: Profundidade controlada por \maxtocdepth.
+% 7. Títulos: Elementos não numerados (INTRODUÇÃO) devem ser corretamente formatados.
+%
+% CRÍTICO: Foco exclusivo em comandos memoir e manutenção da modularidade.
+
+\tableofcontents % A IA deve aplicar as configurações acima a este comando.
+%===========================================
+
+
+
+
+%===========================================
+% INSTRUÇÃO IA: CONFIGURAÇÃO DE CABEÇALHOS (RUNNING HEADS) E PÁGINAS DE CAPÍTULO
+%
+% OBJETIVO: Criar um estilo de página ABNT modular para a parte textual (capítulos).
+%
+% IMPLEMENTAÇÃO:
+% 1. Configuração do Estilo de Página (\makepagestyle):
+%    - A IA deve criar um novo estilo de página (ex: \pagestyle{abntcabecalho}).
+%    - Fonte: O conteúdo do cabeçalho (número/título do capítulo) deve ter um
+%      tamanho de fonte reduzido (ex: \footnotesize, tamanho 10pt ou 11pt).
+% 2. Estilo de Cabeçalho (Páginas Normais - \makeevenhead/\makeoddhead):
+%    - Canto Esquerdo/Central: Deve conter o Número do Capítulo e o Título do Capítulo,
+%      SEM a palavra "CAPÍTULO". A IA deve usar \thechapter e \rightmark ou
+%      \leftmark após redefinição para excluir a palavra "CAPÍTULO".
+%    - Reta: Deve haver uma linha horizontal (\rule) abaixo deste conteúdo.
+%    - Canto Direito: Deve conter o Número da Página (\thepage).
+% 3. Páginas de Abertura de Capítulo (\makechapterstyle):
+%    - O estilo de página para a *primeira* página de cada \chapter (ex: \thispagestyle{...})
+%      DEVE ser diferente: Apenas o Número da Página (no canto superior direito).
+%      NÃO DEVE aparecer a reta, número ou título do capítulo.
+% 4. Aplicação: O estilo de página deve ser ativado com \pagestyle{abntcabecalho}
+%    dentro de \mainmatter.
+%===========================================
+\chapter*{Introdução}
+
+
+
+
+%===========================================
+% INSTRUÇÃO IA: CONFIGURAÇÃO DE PÁGINAS \part (DIVISÓRIAS)
+%
+% OBJETIVO: Garantir que as páginas \part sirvam como páginas divisórias:
+% 1. Conteúdo: Apenas o título (ex: "Preparação do Relatório") no centro da página.
+% 2. Numeração: A página \part DEVE ser contada, mas NUNCA ter numeração visível.
+%    A IA deve assegurar que o estilo de página (`\thispagestyle{empty}` ou padrão
+%    de part no memoir) funcione corretamente.
+% 3. Contagem de Capítulos (CRÍTICO): A numeração dos capítulos (\chapter) DEVE
+%    continuar sequencialmente (ex: 1, 2, 3...), SEM SER REINICIADA após a página \part.
+%===========================================
+\part{Preparação do Relatório}
+\chapter{Desenvolvimento}
+\part{Resultado do Relatório}
+\chapter{Conclusão}
+
+
+
+
+%===========================================
+% INSTRUÇÃO IA: ELEMENTOS PÓS-TEXTUAIS (CRÍTICO)
+%
+% OBJETIVO: Implementar Referências, Apêndices e Anexos conforme ABNT,
+% garantindo que AMBOS os blocos (Apêndice e Anexo) iniciem a numeração
+% alfabética em 'A' (A.1, A.2, ...).
+%
+% IMPLEMENTAÇÃO:
+% 1. Transição Pós-Textual: O comando \backmatter deve ser inserido antes das Referências.
+% 2. Referências: Deve ser um \chapter* (não numerado, centralizado, usando \capituloCentralizado).
+%
+% 3. Configuração de Apêndices:
+%    - Início: Usar \appendix para iniciar a numeração A, B, C...
+%    - Títulos: Garantir centralização, listagem correta no Sumário, e supressão da numeração de página no título APÊNDICES.
+%
+% 4. Configuração de Anexos (CRÍTICO):
+%    - Transição: A IA DEVE INSERIR AQUI UM COMANDO PARA RESETAR O CONTADOR ALFABÉTICO DE CAPÍTULOS DE VOLTA PARA 'A' (ex: \setcounter{chapter}{0} + redefinição de \thechapter, se necessário, dependendo de como \appendix foi implementado).
+%    - Títulos: O \chapter deve ser redefinido para usar a nomenclatura "ANEXO" em vez de "APÊNDICE" e, em seguida, as regras de centralização, listagem no Sumário, e supressão de numeração devem ser aplicadas.
+%
+% CRÍTICO: Garantir que o comando \chapter utilizado após o reset gere ANEXO A, ANEXO B, etc., e que os títulos sejam centralizados.
+%===========================================
+%\backmatter
+
+\chapter*{Referência}
+
+%\appendix
+
+% A IA deve criar um comando que use \chapter* + \addcontentsline{toc} sem número de página
+\chapter*{Apêndices}
+\chapter{Título do Apêndice A} % Deve gerar APÊNDICE A
+\chapter{Título do Apêndice B} % Deve gerar APÊNDICE B
+
+% A IA deve inserir o comando de RESET do contador AQUI e redefinir a nomenclatura para ANEXO.
+
+% A IA deve criar um comando que use \chapter* + \addcontentsline{toc} sem número de página
+\chapter*{Anexos}
+\chapter{Título do Anexo C} % Deve gerar ANEXO A
+\chapter{Título do Anexo D} % Deve gerar ANEXO B
+
+\end{document}

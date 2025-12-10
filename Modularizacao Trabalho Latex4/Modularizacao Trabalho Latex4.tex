@@ -1,0 +1,611 @@
+%===========================================
+% ARQUIVO DE TESTE / TEMPLATE MODULAR MEMOIR
+%===========================================
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{hyperref}
+\usepackage{amssymb}  % Estrela bonita
+\usepackage{amsmath}  % Matemática
+\usepackage{lipsum}
+
+\setmainfont{CMU Serif}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\OnehalfSpacing
+\setlength{\parindent}{1.25cm}
+
+
+
+
+\makechapterstyle{SumarioStyle}{
+  \setlength{\beforechapskip}{-73pt}  % ajuste fino da altura
+  \setlength{\afterchapskip}{1\onelineskip}
+
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapternamenum}{}
+  \renewcommand{\printchapternum}{}
+
+  \renewcommand{\printchaptertitle}[1]{%
+    \vspace*{2\onelineskip}
+    \begin{center}
+      \Huge\bfseries ##1\par
+    \end{center}%
+  }
+}
+
+
+
+
+
+\newcommand{\Sumario}{
+   \clearpage
+   \pagestyle{empty}
+   \aliaspagestyle{chapter}{empty}
+
+   \chapterstyle{SumarioStyle}  % só para o sumário
+
+   \tableofcontents*
+
+   \cleardoublepage
+   \aliaspagestyle{chapter}{plain}
+   \chapterstyle{CapitulosNumerado}  % volta ao normal
+}
+
+
+
+
+
+
+
+
+
+
+
+%===========================================
+% ESTILOS DE CAPÍTULO (MODULARES)
+%===========================================
+\makechapterstyle{CapitulosNumerado}{%
+    \setlength{\beforechapskip}{0.46cm} % Descer estilo de capítulo
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\chapternamenum}{}
+    \renewcommand{\afterchapternum}{}
+    \setlength{\midchapskip}{1.3cm} 
+    \renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
+    \renewcommand{\printchapternum}{%
+        \noindent
+        \begin{tikzpicture}[remember picture, overlay]
+            \def\numsize{61} % Tamanho do número          
+            \def\barwidth{0.8pt} % Espessura da linha      
+            \def\leftoffset{2.3cm} % Reta horizontal esquerda
+            
+            \node[inner sep=0pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+             
+            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            
+            \node[inner sep=0pt, anchor=south west, font=\large\rmfamily] (chaptext)
+                 at (0pt, -4pt) {\chaptername};
+            
+            % --- ALTURA FIXA PARA O RETÂNGULO ---
+            \def\boxheight{41pt}   % ajuste aqui até ficar perfeito
+            
+            % --- PONTO ESQUERDO DO L ---
+            \coordinate (Lbase) at (0.5*\barwidth,15pt);         % base fixa
+            \coordinate (Ltop)  at (0.5*\barwidth,\boxheight);   % topo fixo
+            
+            % --- DESENHA O L FIXO ---
+            % --- AJUSTE: distância horizontal entre o L e o número ---
+            \def\Lgap{0.2cm} % ajuste aqui até ficar visualmente perfeito
+            
+            % --- DESENHO DO L FIXO ---
+            \draw[line width=\barwidth]
+                (Lbase) -- (Ltop)
+                -- ++(\leftoffset - 0.5*\barwidth - \Lgap,0);
+
+            % --- PONTOS DO RETÂNGULO FIXO ---
+            \coordinate (NumRightBase) at ($(num.south east)+(0.2cm,0)$);
+            \coordinate (NumRightTop)  at ($(NumRightBase)+(0,\boxheight)$);
+            
+            \coordinate (RightTop)     at (\linewidth,\boxheight);
+            \coordinate (RightBase)    at (\linewidth,0);
+            
+            % --- CAIXA FIXA ---
+            \draw[line width=\barwidth]
+                (NumRightTop) -- (RightTop)
+                              -- (RightBase)
+                              -- (NumRightBase);
+        \end{tikzpicture}%
+    }
+    \renewcommand{\printchaptertitle}[1]{%
+        \raggedright\huge\bfseries ##1
+    }
+}
+
+
+\usetikzlibrary{decorations.text}
+\newcommand{\PerfectBuildSeal}{%
+\begin{tikzpicture}[scale=1.3]
+    % Círculo externo
+    \draw[line width=1pt] (0,0) circle (2cm);
+    % Círculo interno
+    \draw[line width=0.8pt] (0,0) circle (1.6cm);
+    % Texto superior curvo
+    \draw[
+        decoration={
+            text along path,
+            text={|\small\bfseries|WENES AQUINO},
+            text align=center
+        },
+        decorate
+    ] (180:1.69cm) arc (180:0:1.69cm);
+    % Texto inferior curvo
+    \draw[
+        decoration={
+            text along path,
+            text={|\small\bfseries|CONSTRUÇÃO PERFEITA},
+            text align=center
+        },
+        decorate
+    ] (180:1.90cm) arc (180:360:1.90cm); 
+    % Estrela central
+    \node at (0,0.8) {\large$\bigstar\bigstar\bigstar\bigstar\bigstar$};
+    % Texto do meio
+    \node at (0,0.3) {\bfseries\small ZERO};
+    \node at (0,-0.1) {\bfseries\small WARNINGS};
+    \node at (0,-0.6) {\tiny Copyright © 2026 - Wenes};
+\end{tikzpicture}
+}
+
+%===========================================
+
+\makechapterstyle{estiloNaoNumerado}{%
+  \setlength{\beforechapskip}{-73pt}%
+  \setlength{\afterchapskip}{2\onelineskip}%
+  \renewcommand{\printchaptername}{}%
+  \renewcommand{\chapternamenum}{}%
+  \renewcommand{\printchapternum}{}%
+  \renewcommand{\printchaptertitle}[1]{%
+    \vspace*{2\onelineskip}%
+    \begin{center}
+      \Huge\bfseries ##1\par
+      \vspace{-1.5\onelineskip}%
+      \rule{\textwidth}{0.4pt}%
+    \end{center}%
+  }%
+}
+%===========================================
+
+
+
+
+%===========================================
+\def\defaultchapterstyle{CapitulosNumerado}
+
+\makeatletter
+\newcommand{\capituloCentralizado}{%
+  \@ifstar{\capituloCentralizado@star}{\capituloCentralizado@nostar}}
+  
+% VERSÃO NORMAL – entra no sumário e segue o comportamento atual
+\newcommand{\capituloCentralizado@nostar}[1]{%
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{#1}%
+  \markboth{#1}{}%
+  \addcontentsline{toc}{chapter}{#1}%  % entra no sumário
+  \chapterstyle{CapitulosNumerado}%
+}
+
+% VERSÃO COM * – sem número de página e FORA do sumário
+\newcommand{\capituloCentralizado@star}[1]{%
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{#1}%
+  \thispagestyle{empty}%              % sem número de página
+  \markboth{#1}{}%
+  \chapterstyle{CapitulosNumerado}%
+}
+\makeatother
+
+%===========================================
+
+
+
+
+
+
+
+%===========================================
+
+% LISTA DE FIGURAS (pré-textual, sem número de página, fora do sumário)
+\newcommand{\listaDeFiguras}{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \listoffigures*% usa o estilo acima e NÃO entra no sumário
+  \thispagestyle{empty}% tira o número da página desta folha
+  \chapterstyle{CapitulosNumerado}%
+}
+%===========================================
+
+% LISTA DE TABELAS (mesma ideia)
+\newcommand{\listaDeTabelas}{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \listoftables*%
+  \thispagestyle{empty}%
+  \chapterstyle{CapitulosNumerado}%
+}
+%===========================================
+
+
+
+%===========================================
+\newcommand{\preTexto}[1]{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{#1}%
+  \thispagestyle{empty}%
+  \chapterstyle{CapitulosNumerado}%
+}
+
+% Lista de abreviaturas e siglas
+\newcommand{\listadesiglasname}{Lista de abreviaturas e siglas}
+\newenvironment{siglas}{%
+  \preTexto{\listadesiglasname}
+  \begin{symbols}
+}{%
+  \end{symbols}
+  \cleardoublepage
+}
+
+% Lista de simbolos
+\newcommand{\listadesimbolosname}{Lista de símbolos}
+\newenvironment{simbolos}{%
+  \preTexto{\listadesimbolosname}
+  \begin{symbols}
+}{%
+  \end{symbols}
+  \cleardoublepage
+}
+%===========================================
+
+
+
+% Exibir nome (Figuras, Tabelas) na lista 
+\renewcommand{\cftfigurename}{Figura\space}
+\renewcommand{\cfttablename}{Tabela\space}
+% Exibir "-" na lista
+\renewcommand{\cftfigureaftersnum}{\space\space--}
+\renewcommand{\cfttableaftersnum}{\space\space--}
+
+\cftsetindents{figure}{0em}{3em}
+\cftsetindents{table}{0em}{3em}
+
+
+
+
+
+
+
+
+%===========================================
+% FOLHA / CONTRA
+%===========================================
+\newcommand{\folha}{%
+    \thispagestyle{empty}%
+    \vspace*{10em}%
+    \begin{center}
+        \PerfectBuildSeal
+    \end{center}
+    \begin{center}
+    {\bfseries\scshape\Huge Folha de Rosto \par}
+    \end{center}%
+    \clearpage
+}
+
+\newcommand{\contra}{%
+  \thispagestyle{empty}%
+  \vspace*{8cm}%
+  \begin{center}
+    {\bfseries\scshape\Huge Contra Capa \par}
+  \end{center}%
+  \clearpage
+}
+
+%===========================================
+% CABEÇALHOS E NUMERAÇÃO
+%===========================================
+\makepagestyle{meuestilo}
+\makeevenhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeoddhead {meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
+\makeheadrule{meuestilo}{\textwidth}{0.3pt}
+
+\makepagestyle{plain}
+\makeoddhead{plain}{}{}{\footnotesize\thepage}
+\makeevenhead{plain}{}{}{\footnotesize\thepage}
+\makeheadrule{plain}{\textwidth}{0pt}
+
+\makeatletter
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\thechapter.\ #1}{}%
+}
+\makeatother
+
+%===========================================
+% FRONT / MAIN / BACK MATTER
+%===========================================
+\makeatletter
+\renewcommand{\frontmatter}{%
+  \cleardoublepage
+  \pagenumbering{arabic}%
+  \pagestyle{empty}%
+  \chapterstyle{estiloNaoNumerado}%
+}
+\renewcommand{\mainmatter}{%
+  \cleardoublepage
+  \pagestyle{meuestilo}%
+  \chapterstyle{\defaultchapterstyle}%
+}
+\renewcommand{\backmatter}{%
+  \cleardoublepage
+  \pagestyle{meuestilo}%
+  \chapterstyle{\defaultchapterstyle}%
+}
+\makeatother
+
+
+
+
+\newcommand{\paginaDivisoria}[1]{%
+  \clearpage
+  \thispagestyle{empty}
+  \phantomsection % Cria âncora para o link 
+  \vspace*{8cm}
+  \begin{center}
+     \textbf{\Huge #1}
+  \end{center}
+  \addcontentsline{toc}{part}{\protect\numberline{}\large\textbf{#1}}
+  \clearpage
+}
+
+
+
+
+\newcommand{\inicioApendices}{%
+  \appendix
+  \setcounter{chapter}{0}%
+  \renewcommand{\chaptername}{Apêndice}%
+  \renewcommand{\appendixname}{APÊNDICE}%
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \makeatletter
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{APÊNDICE~\thechapter.\ ##1}{}%
+  }%
+  \makeatother
+}
+
+\newcommand{\inicioAnexos}{%
+  \cleardoublepage
+  \setcounter{chapter}{0}%
+  \renewcommand{\chaptername}{Anexo}%
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \makeatletter
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{ANEXO~\thechapter.\ ##1}{}%
+  }%
+  \makeatother
+}
+
+
+
+\cftsetindents{chapter}{0pt}{2cm}
+\cftsetindents{section}{0pt}{2cm}
+\cftsetindents{subsection}{0pt}{2cm}
+
+%===========================================
+% DOCUMENTO
+%===========================================
+\begin{document}
+\frontmatter
+
+\folha
+\contra
+
+\capituloCentralizado*{Agradecimentos}
+\lipsum[1]
+
+\capituloCentralizado*{Resumo}
+\lipsum[1]
+
+\listaDeFiguras
+\listaDeTabelas
+
+
+\begin{siglas}
+  \item[CPU] Unidade Central de Processamento
+  \item[RAM] Memória de Acesso Aleatório
+  \item[SSD] Unidade de Estado Sólido (Solid State Drive)
+  \item[OS] Sistema Operacional (Operating System)
+  \item[HTTP] Protocolo de Transferência de Hipertexto
+  \item[SQL] Linguagem de Consulta Estruturada (Structured Query Language)
+  \item[API] Interface de Programação de Aplicações (Application Programming Interface)
+  \item[ISP] Provedor de Serviços de Internet (Internet Service Provider)
+\end{siglas}
+
+\begin{simbolos}
+\item[$\alpha$] Alfa (Ângulo, Coeficiente de Temperatura)
+\item[$\beta$] Beta (Ângulo, Ganho de Corrente do Transistor)
+\item[$\sum$] Somatório (Usado em Séries Matemáticas e Estatística)
+\item[$\int$] Integral (Usado em Cálculo para Áreas ou Acúmulo)
+\item[$\nabla$] Nabla (Usado em Cálculo Vetorial, como Gradiente)
+\item[$\Omega$] Ohm (Unidade de Resistência Elétrica; Símbolo para Computação Quântica)
+\item[$\approx$] Aproximadamente Igual a (Usado para Estimativas)
+\item[$\implies$] Implica (Usado em Lógica Matemática)
+\end{simbolos}
+
+
+
+
+\Sumario
+
+\mainmatter
+
+\capituloCentralizado{Introdução}
+\lipsum[1]
+
+\part{Preparação do Relatório}
+\chapter{Desenvolvimento}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[thick, fill=blue!20] (2.5, 1.5) circle (1.2);
+        \draw[ultra thick, ->, >=stealth, red!70!black] (2.5, 2.7) -- (2.5, 3.8);
+        \node at (2.5,1.5) {Processo};
+        \node at (2.5,4.1) {Saída};
+    \end{tikzpicture}
+    \caption{Fluxo circular simples.}
+    \label{fig:fluxo-simples}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=5pt, very thick, fill=green!15] (0, 0) rectangle (2, 2);
+        \node at (1, 1) {Entrada};
+        \draw[rounded corners=5pt, very thick, fill=orange!15] (3, 0) rectangle (5, 2);
+        \node at (4, 1) {Resultado};
+        \draw[->, very thick, black!70] (2, 1) -- (3, 1);
+        \node at (2.5, 1.3) {Função};
+    \end{tikzpicture}
+    \caption{Diagrama de blocos interligados.}
+    \label{fig:blocos-interligados}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \draw[->, thick] (0,0) -- (5,0) node[right] {Eixo $x$};
+        \draw[->, thick] (0,0) -- (0,4) node[above] {Eixo $y$};
+        \fill (0,0) circle (2pt) node[below left] {O};
+        \draw[ultra thick, blue!70] (0,0) parabola (4,3);
+        \fill[red] (2, 0.75) circle (3pt) node[above right] {$(x_1, y_1)$};
+    \end{tikzpicture}
+    \caption{Gráfico de coordenadas cartesianas.}
+    \label{fig:grafico-cartesianas}
+\end{figure}
+
+
+
+
+\section{Desenvolvimento}
+\lipsum[1-5]
+\part{Resultado do Relatório}
+\chapter{Conclusão}
+\begin{table}[ht]
+    \centering
+    \caption{Tabela estilosa 5×5}
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{table}[ht]
+    \centering
+    \caption{Comparativo de Tecnologias de Rede}
+    \label{tab:comp-redes}
+    \begin{tabular}{lcc}
+        \toprule
+        Tecnologia & Alcance Típico & Velocidade Máxima (Teórica) \\
+        \midrule
+        Ethernet (Gigabit) & Curto & 1 Gbps \\
+        Wi-Fi 6 (802.11ax) & Médio & 9.6 Gbps \\
+        Fibra Óptica & Longo & > 100 Gbps \\
+        Bluetooth & Muito Curto & 3 Mbps \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Componentes FV com Quebra de Linha e Largura Fixa}
+    \label{tab:comp-fv-fixo}
+    \begin{tabular}{|p{3cm}|p{3cm}|c|c|}
+        \toprule
+        \textbf{Componente} & \textbf{Função} & \textbf{Tipo} & \textbf{Medida} \\
+        \midrule
+        Painel PV & Geração & CC (DC) & Wp \\
+        \midrule
+        Inversor & Conversão & Entrada & VA \\
+        \midrule
+        Controlador & Bateria & CC (DC) & A \\
+        \midrule
+        Bateria  & Armazenamento & CC (DC) & Ah \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+    \centering
+    \caption{Classificação Básica de Conjuntos Numéricos}
+    \label{tab:conjuntos-mat}
+    \begin{tabular}{cl}
+        \toprule
+        Símbolo & Descrição do Conjunto \\
+        \midrule
+        $\mathbb{N}$ & Naturais (Contagem: 1, 2, 3, ...) \\
+        $\mathbb{Z}$ & Inteiros (Naturais + Negativos + Zero) \\
+        $\mathbb{Q}$ & Racionais (Números que podem ser escritos como fração) \\
+        $\mathbb{R}$ & Reais (Todos os números racionais e irracionais) \\
+        $\mathbb{C}$ & Complexos (Reais + Imaginários) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\section{Conclusão}
+\lipsum[1-5]
+\backmatter
+
+\capituloCentralizado{Referências}
+\paginaDivisoria{APÊNDICES}
+\inicioApendices
+
+\chapter{Título do Apêndice A}
+\section{Conclusão}
+\lipsum[1]
+
+\chapter{Título do Apêndice B}
+\section{Conclusão}
+\lipsum[1]
+
+
+\paginaDivisoria{ANEXOS}
+\inicioAnexos
+
+\chapter{Título do Anexo A}
+\section{Conclusão}
+\lipsum[1]
+
+\chapter{Título do Anexo B}
+\section{Conclusão}
+\lipsum[1]
+
+\end{document}

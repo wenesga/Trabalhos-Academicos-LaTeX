@@ -13,28 +13,18 @@
 % 1. PACOTES FUNDAMENTAIS
 % ============================================
 \RequirePackage[brazilian]{babel}
-\RequirePackage[T1]{fontenc}
-\RequirePackage{lipsum}
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
-\RequirePackage[HTML]{xcolor}
-\definecolor{verde}{HTML}{008181}
 \RequirePackage{ragged2e}
-\RequirePackage{etoolbox}
 \RequirePackage{tikz}
-\usetikzlibrary{calc,positioning,arrows.meta,shapes,decorations.pathreplacing,shadows.blur}
+\usetikzlibrary{calc}
 \RequirePackage{titlesec}
-\RequirePackage{csquotes}
+\RequirePackage{lipsum}
 
 % ============================================
 % 2. LINKS E METADADOS
 % ============================================
-\RequirePackage[
-    colorlinks=true,
-    linkcolor=black!100,
-    citecolor=black!100,
-    urlcolor=black!100
-]{hyperref}
+\RequirePackage{hyperref}
 % ===========================
 \hypersetup{
     pdftitle={Trabalhos Acadêmicos},
@@ -289,7 +279,7 @@
             \vfill\vspace*{-2em}
             {\bfseries\large\imprimirautor\par}
             \vfill
-            %\includegraphics[width=0.5\textwidth]{Arquivos/UABComputacao.pdf} \\
+            \includegraphics[width=0.5\textwidth]{Arquivos/LogoUABC.pdf} \\
             {\bfseries\scshape\LARGE\imprimirtitulo\par}
             \vfill\vfill\vfill\vfill
             \large\imprimirlocal\\

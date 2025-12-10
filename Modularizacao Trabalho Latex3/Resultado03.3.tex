@@ -1,0 +1,251 @@
+%===========================================
+% Template LaTeX modular usando exclusivamente memoir
+% Compilável com XeLaTeX
+%===========================================
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage{tikz} % NECESSÁRIO PARA O ESTILO DE CAPÍTULO PERSONALIZADO
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+%===========================================
+
+% fontes e margens
+\setmainfont{CMU Serif}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+\onehalfspacing % Espaçamento entre linhas de 1,5
+\setlength{\parindent}{1.25cm} % Recuo do paragrafo
+
+%===========================================
+% Estilo de capitulo numerado (fornecido, levemente ajustado)
+\makechapterstyle{CapitulosNumerado}{%
+    \setlength{\beforechapskip}{0.46cm}%
+    \renewcommand{\printchaptername}{}%
+    \renewcommand{\chapternamenum}{}%
+    \renewcommand{\afterchapternum}{\par\nobreak\vskip 1.3cm}%
+    \renewcommand{\printchapternum}{%
+        \noindent
+        \begin{tikzpicture}[remember picture, overlay]
+            \def\numsize{61}
+            \def\barwidth{0.8pt}
+            \def\leftoffset{2.3cm}
+
+            \node[inner sep=-1pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
+             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
+            \node[inner sep=0pt, anchor=south west, font=\Large\rmfamily] (chaptext)
+                 at (0pt, -4pt) {\chaptername};
+
+            \coordinate (StartPoint) at (0.5*\barwidth, 13pt);
+            \draw[line width=\barwidth] (StartPoint) -- (StartPoint |- num.north) -- (num.north west);
+            \coordinate (RightWall) at (\linewidth, 0);
+            \draw[line width=\barwidth] (num.north east) -- (RightWall |- num.north) -- (RightWall |- num.south) -- (num.south east);
+        \end{tikzpicture}%
+    }
+    \renewcommand{\printchaptertitle}[1]{%
+        \raggedright\huge\bfseries ##1
+    }
+}
+
+% Estilo de capitulo não numerado: centralizado com linha horizontal (ABNT-like)
+\makechapterstyle{estiloNaoNumerado}{%
+    \setlength{\beforechapskip}{0pt}%
+    \setlength{\afterchapskip}{0.5cm}%
+    \renewcommand{\printchaptername}{}%
+    \renewcommand{\chapternamenum}{}%
+    \renewcommand{\printchapternum}{}%
+    \renewcommand{\printchaptertitle}[1]{%
+        \vspace*{1em}
+        \begin{center}
+            {\Large\bfseries ##1\par}
+            \vspace{0.6em}
+            \rule{0.6\textwidth}{0.6pt}
+        \end{center}
+        \vspace{1em}
+    }
+}
+
+% Comando modular para capítulos centralizados (capítulos pré-textuais e títulos sem número)
+% Uso: \capituloCentralizado{Título}
+\newcommand{\capituloCentralizado}[1]{%
+    % salva estilo atual
+    \begingroup
+      \chapterstyle{estiloNaoNumerado}%
+      \chapter*{#1}% capítulo sem número
+      % coloca no sumário com nível chapter
+      \addcontentsline{toc}{chapter}{#1}%
+      % garante marcação de cabeçalho (para \leftmark) e página inicial simples
+      \markboth{#1}{}
+      \thispagestyle{plain}% primeira página do capítulo com apenas número
+    \endgroup
+    % retorna ao estilo padrão do documento (espera-se CapitulosNumerado)
+    \chapterstyle{CapitulosNumerado}%
+}
+
+%===========================================
+% Pagestyle "meuestilo" com marca completa (capítulo/Apêndice/Anexo)
+\makepagestyle{meuestilo}
+\makeevenhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{
+    \footnotesize\thepage}
+\makeoddhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{
+    \footnotesize\thepage}
+\makeheadrule{meuestilo}{\textwidth}{0.3pt}
+
+% Definir como o texto de \leftmark será gerado para capítulos numerados e não numerados
+% Aqui padronizamos: "<NOME> <número>. <título>" — se for sem número, usa só o título
+\renewcommand{\chapternamenum}{}% evita chapname num automáticos
+\renewcommand{\chaptermark}[1]{%
+    % Para capítulos numerados: "<CAPÍTULO/ANEXO/APÊNDICE> X. Título"
+    \ifnum\value{chapter}>0
+        \markboth{\MakeUppercase{\chaptername\ \thechapter.} \ #1}{}
+    \else
+        \markboth{#1}{}
+    \fi
+}
+
+%===========================================
+% Comandos para ativar seções do documento (front/main/back) e tratar numeração
+\newcommand{\setupfrontmatter}{%
+    \frontmatter
+    % frontmatter: sem numeração visível; manter estilo de capítulo não numerado para itens pré-textuais
+    \chapterstyle{estiloNaoNumerado}
+    % frontmatter normalmente tem paginas sem cabeçalho
+    \pagestyle{plain}
+}
+
+\newcommand{\setupmainmatter}{%
+    % mainmatter: ativa numeração árabica contínua e cabeçalho
+    \mainmatter
+    \chapterstyle{CapitulosNumerado}
+    \pagestyle{meuestilo}
+}
+
+\newcommand{\setupbackmatter}{%
+    \backmatter
+    % por padrão, referencias e itens pós-textuais serão sem numeração ou com estilo especial
+    \chapterstyle{estiloNaoNumerado}
+    \pagestyle{meuestilo}
+}
+
+% Comando para iniciar Apêndices (letra A, A.1...)
+\newcommand{\startapendices}{%
+    \appendix
+    \setcounter{chapter}{0}% garante controle
+    \renewcommand{\chaptername}{APÊNDICE}
+    % redefine chaptermark para incluir palavra APÊNDICE
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{\MakeUppercase{\chaptername\ \thechapter.} \ #1}{}
+    }
+}
+
+% Comando para iniciar Anexos (reusa contagem alfabética, mas com nome ANEXO e reinicia contador)
+\newcommand{\startanexos}{%
+    % Reinicia contagem para letras novamente
+    \setcounter{chapter}{0}%
+    \renewcommand{\thechapter}{\Alph{chapter}}%
+    \renewcommand{\chaptername}{ANEXO}
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{\MakeUppercase{\chaptername\ \thechapter.} \ #1}{}
+    }
+}
+
+%===========================================
+% Configurações do Sumário (centralizado, título em caixa alta)
+\renewcommand{\contentsname}{SUMÁRIO}
+\renewcommand{\cftchapterfont}{\normalfont}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+% centraliza o título do sumario
+\renewcommand{\printtoctitle}[1]{\begin{center}\Large\MakeUppercase{#1}\end{center}}
+% espaçamento horizontal adicional antes do título do capítulo no TOC: aqui simulado com indent
+\setlength{\cftchapindent}{2cm}
+\setlength{\cftbeforechapskip}{6pt}
+
+%===========================================
+% Entrada do documento
+\begin{document}
+
+% FRONTMATTER
+\setupfrontmatter
+
+% Folha de rosto e contra-capa (exemplos)
+\thispagestyle{empty}
+\vspace*{8cm}
+\begin{center}
+    {\bfseries\scshape\Huge Folha de Rosto \par}
+\end{center}
+\clearpage
+
+\thispagestyle{empty}
+\vspace*{8cm}
+\begin{center}
+    {\bfseries\scshape\Huge Contra Capa \par}
+\end{center}
+\clearpage
+
+% Pré-textuais usando \capituloCentralizado
+\capituloCentralizado{Agradecimento}
+\capituloCentralizado{Resumo}
+\capituloCentralizado{Lista de Figuras}
+\capituloCentralizado{Lista de Tabelas}
+\capituloCentralizado{Lista de Abreviaturas e Siglas}
+\capituloCentralizado{Lista de Símbolos}
+
+% Sumário
+\tableofcontents
+\clearpage
+
+% MAINMATTER
+\setupmainmatter
+
+% Introdução (híbrida - sem número mas contabilizada no sumário)
+% Usamos \capituloCentralizado para introdução (sem número aparente)
+\capituloCentralizado{Introdução}
+
+% Exemplo de capítulos numerados
+\chapter{Desenvolvimento}
+Texto de desenvolvimento.
+
+\chapter{Metodologia}
+Texto de metodologia.
+
+\part{Preparação do Relatório}
+\chapter{Planejamento}
+Conteúdo do planejamento.
+
+\part{Resultado do Relatório}
+\chapter{Conclusão}
+Conteúdo da conclusão.
+
+% BACKMATTER
+\setupbackmatter
+
+% Referências (capítulo não numerado)
+\capituloCentralizado{Referências}
+
+% APÊNDICES
+\startapendices
+\chapter{Título do Apêndice A} % gerará APÊNDICE A
+Conteúdo do apêndice A.
+
+\chapter{Título do Apêndice B} % gerará APÊNDICE B
+Conteúdo do apêndice B.
+
+% ANEXOS
+\startanexos
+\chapter{Título do Anexo A} % gerará ANEXO A
+Conteúdo do anexo A.
+
+\chapter{Título do Anexo B} % gerará ANEXO B
+Conteúdo do anexo B.
+
+\end{document}
+%===========================================
+% Notas:
+% - O template foi construído para ser modular: os comandos \setupfrontmatter, \setupmainmatter, \setupbackmatter, \capituloCentralizado, \startapendices e \startanexos permitem ativar/desativar comportamentos.
+% - Ajustes finos (tamanhos, recuos no TOC, formatação exata ABNT) podem ser parametrizados facilmente alterando os blocos acima.
+% - Compile com XeLaTeX (fontspec usado).
