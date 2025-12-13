@@ -7,10 +7,12 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{hyperref}
-\usepackage{amssymb}  % Estrela bonita
+\usepackage{amssymb}  % Símbolos 
 \usepackage{amsmath}  % Matemática
 \usepackage{lipsum}
 \usepackage{fontspec}
+\usepackage{textcase}
+\usepackage{etoolbox} 
 \setmainfont{CMU Serif}
 
 
@@ -20,6 +22,51 @@
 \OnehalfSpacing
 \setlength{\parindent}{1.25cm}
 
+% ==========================================================
+% sumário mostra ate subseção
+% ==========================================================
+\settocdepth{subsection}
+\setsecnumdepth{subsection}
+% ativar pontilhado nos capítulos no sumário
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+% ==========================================================
+
+% ---------------------------------------------
+% É controle espaço horizontal título sumário
+% ---------------------------------------------
+\cftsetindents{part}{0pt}{2cm}
+\cftsetindents{chapter}{0pt}{2cm}
+\cftsetindents{section}{0pt}{2cm}
+\cftsetindents{subsection}{0pt}{2cm}
+% ---------------------------------------------
+
+
+
+
+% ==========================================================
+% Defini capítulos para maiúsculas no sumario
+% ==========================================================
+\makeatletter
+% Salva o comando original que desenha a linha do sumário
+\let\oldcontentsline\contentsline
+
+% Redefine para interceptar e modificar o texto
+\renewcommand\contentsline[4]{%
+  \ifboolexpr{
+    test {\ifstrequal{#1}{chapter}} or 
+    test {\ifstrequal{#1}{part}} or 
+    test {\ifstrequal{#1}{appendix}} % <--- O SEGREDO: Pega também se for classificado como apêndice
+  }
+    {\oldcontentsline{#1}{\MakeTextUppercase{#2}}{#3}{#4}} % Se for um dos 3, Caixa Alta
+    {\oldcontentsline{#1}{#2}{#3}{#4}} % Se for seção ou outro, mantém normal
+}
+\makeatother
+% ==========================================================
+
+
+% ==========================================================
+% sumário
+% ==========================================================
 
 \makechapterstyle{SumarioStyle}{
   \setlength{\beforechapskip}{-73pt}  % ajuste fino da altura
@@ -36,6 +83,7 @@
     \end{center}%
   }
 }
+% ==========================================================
 
 
 
@@ -45,11 +93,8 @@
    \clearpage
    \pagestyle{empty}
    \aliaspagestyle{chapter}{empty}
-
    \chapterstyle{SumarioStyle}  % só para o sumário
-
    \tableofcontents*
-
    \cleardoublepage
    \aliaspagestyle{chapter}{plain}
    \chapterstyle{CapitulosNumerado}  % volta ao normal
@@ -127,39 +172,7 @@
 }
 
 
-\usetikzlibrary{decorations.text}
-\newcommand{\PerfectBuildSeal}{%
-\begin{tikzpicture}[scale=1.3]
-    % Círculo externo
-    \draw[line width=1pt] (0,0) circle (2cm);
-    % Círculo interno
-    \draw[line width=0.8pt] (0,0) circle (1.6cm);
-    % Texto superior curvo
-    \draw[
-        decoration={
-            text along path,
-            text={|\small\bfseries|WENES AQUINO},
-            text align=center
-        },
-        decorate
-    ] (180:1.69cm) arc (180:0:1.69cm);
-    % Texto inferior curvo
-    \draw[
-        decoration={
-            text along path,
-            text={|\small\bfseries|CONSTRUÇÃO PERFEITA},
-            text align=center
-        },
-        decorate
-    ] (180:1.90cm) arc (180:360:1.90cm); 
-    % Estrela central
-    \node at (0,0.8) {\large$\bigstar\bigstar\bigstar\bigstar\bigstar$};
-    % Texto do meio
-    \node at (0,0.3) {\bfseries\small ZERO};
-    \node at (0,-0.1) {\bfseries\small WARNINGS};
-    \node at (0,-0.6) {\tiny Copyright © 2026 - Wenes};
-\end{tikzpicture}
-}
+
 
 %===========================================
 
@@ -290,29 +303,7 @@
 
 
 
-%===========================================
-% FOLHA / CONTRA
-%===========================================
-\newcommand{\folha}{%
-    \thispagestyle{empty}%
-    \vspace*{10em}%
-    \begin{center}
-        \PerfectBuildSeal
-    \end{center}
-    \begin{center}
-    {\bfseries\scshape\Huge Folha de Rosto \par}
-    \end{center}%
-    \clearpage
-}
 
-\newcommand{\contra}{%
-  \thispagestyle{empty}%
-  \vspace*{8cm}%
-  \begin{center}
-    {\bfseries\scshape\Huge Contra Capa \par}
-  \end{center}%
-  \clearpage
-}
 
 %===========================================
 % CABEÇALHOS E NUMERAÇÃO
@@ -404,6 +395,42 @@
 \cftsetindents{section}{0pt}{2cm}
 \cftsetindents{subsection}{0pt}{2cm}
 
+
+
+%===========================================
+% FOLHA / CONTRA
+%===========================================
+\newcommand{\folha}{%
+    \thispagestyle{empty}%
+    \vspace*{10em}%
+    \begin{center}
+    {\bfseries\scshape\Huge Folha de Rosto \par}
+    \end{center}%
+    \clearpage
+}
+
+\newcommand{\contra}{%
+  \thispagestyle{empty}%
+  \vspace*{8cm}%
+  \begin{center}
+    {\bfseries\scshape\Huge Contra Capa \par}
+  \end{center}%
+  \clearpage
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %===========================================
 % DOCUMENTO
 %===========================================
@@ -456,7 +483,15 @@
 \lipsum[1]
 
 \part{Preparação do Relatório}
+
+
 \chapter{Desenvolvimento}
+\section{Coleta de Dados}
+\section{Desenvolvimento}
+\subsection{Desenvolvimento}
+\lipsum[1-5]
+\subsubsection{Coleta de Dados}
+
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -505,11 +540,15 @@
 
 
 
-
-\section{Desenvolvimento}
-\lipsum[1-5]
 \part{Resultado do Relatório}
+
+
+
 \chapter{Conclusão}
+\section{Donec pellentesque}
+\lipsum[55]
+\section{Donec pellentesque}
+\lipsum[101]
 \begin{table}[ht]
     \centering
     \caption{Tabela estilosa 5×5}
@@ -580,32 +619,44 @@
 \end{table}
 
 
-\section{Conclusão}
-\lipsum[1-5]
+\section{Donec pellentesque}
+\lipsum[101]
+\section{Donec pellentesque}
+\lipsum[101]
+
 \backmatter
 
 \capituloCentralizado{Referências}
 \paginaDivisoria{APÊNDICES}
 \inicioApendices
 
-\chapter{Título do Apêndice A}
+\chapter{Título do Apêndice}
 \section{Conclusão}
 \lipsum[1]
+\section{Donec pellentesque}
+\lipsum[101]
 
-\chapter{Título do Apêndice B}
+
+\chapter{Título do Apêndice}
 \section{Conclusão}
 \lipsum[1]
-
+\section{Donec pellentesque}
+\lipsum[101]
 
 \paginaDivisoria{ANEXOS}
 \inicioAnexos
 
-\chapter{Título do Anexo A}
+\chapter{Título do Anexo}
 \section{Conclusão}
 \lipsum[1]
+\section{Donec pellentesque}
+\lipsum[101]
 
-\chapter{Título do Anexo B}
+
+
+\chapter{Título do Anexo}
 \section{Conclusão}
 \lipsum[1]
-
+\section{Donec pellentesque}
+\lipsum[101]
 \end{document}

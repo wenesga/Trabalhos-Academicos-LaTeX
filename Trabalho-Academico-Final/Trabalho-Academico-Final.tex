@@ -90,7 +90,6 @@
 \setsecnumdepth{subsection}
 
 \renewcommand{\printtoctitle}[1]{{\bfseries\scshape\centering\huge{#1}\par}}
-\renewcommand{\cftpartdotsep}{\cftnodots} 
 \renewcommand{\cftchapterdotsep}{\cftdotsep}
 
 
@@ -494,20 +493,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % ===============================================================================================================================================
 % INÍCIO DO DOCUMENTO
 % ===============================================================================================================================================
@@ -643,6 +628,8 @@
 
 \chapter{Justificativa}
 \section{Coleta de Dados}
+\section{Coleta de Dados}
+\subsection{Coleta de Dados}
 \lipsum[5]
 
 
@@ -656,86 +643,6 @@
     \label{fig:teste-estilosa}
 \end{figure}
 
-
-
-
-
-% no preâmbulo: \usepackage{tikz}
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}[scale=1, line join=round]
-    % dimensões (ajuste se quiser)
-    \def\doorW{4}    % largura da porta (cm)
-    \def\doorH{8}    % altura (cm) - representacional
-    \def\frame{0.3}  % largura do batente
-
-    % batente exterior
-    \draw[line width=1pt] (0,0) rectangle (\doorW+\frame,\doorH+\frame);
-
-    % linha do batente interior (moldura)
-    \draw[line width=0.8pt] (\frame, \frame) rectangle (\doorW+\frame, \doorH+\frame);
-
-    % dobradiça (ponto de giro) no canto inferior esquerdo da porta
-    \filldraw[fill=black] (\frame,\frame) circle (0.06);
-
-    % porta fechada (reta, sobre o lado esquerdo)
-    \draw[line width=1pt, fill=white] (\frame,\frame) -- (\doorW+\frame,\frame) -- (\doorW+\frame,\doorH+\frame) -- (\frame,\doorH+\frame) -- cycle;
-
-    % linha de corte da espessura da porta (sombra simples)
-    \draw[draw=black!40] (\frame,\frame) -- ++(-0.15,-0.15) -- ++(\doorW,0) -- ++(0,\doorH) -- ++(-\doorW,0) -- cycle;
-
-    % puxador (lado direito, a 1/2 altura)
-    \draw[line width=1pt] (\doorW+\frame-0.5, \frame+0.5*\doorH) circle (0.12);
-    \draw[line width=1pt] (\doorW+\frame-0.5, \frame+0.5*\doorH) -- ++(0.5,0);
-
-    % porta aberta (arco e posição aberta a 90°)
-    % posição da porta aberta (mostrada com traço)
-    \draw[dashed, line width=0.9pt] (\frame,\frame) -- ++(0,\doorH) coordinate (hingeTop);
-    \draw[dashed, line width=0.9pt] (\frame,\frame) -- ++(\doorH,0) coordinate (openEnd); % representação rotacionada 90°
-    \draw[dashed, line width=0.9pt] (\frame,\frame) -- ++(0,\doorH) -- ++(\doorH,0);
-
-    % arco de abertura (90°)
-    \draw[->, line width=0.9pt] (\frame+0.2,\frame+0.2) arc (90:0:0.9);
-
-    % indicador de ângulo
-    \node at (\frame+1.2,\frame+0.25) {90\textdegree};
-
-    % etiquetas dimensionais (opcionais)
-    \draw[<->] (\doorW+\frame+0.6,\frame) -- (\doorW+\frame+0.6,\doorH+\frame) node[midway,right] {altura};
-    \draw[<->] (\frame,\doorH+\frame+0.6) -- (\doorW+\frame,\doorH+\frame+0.6) node[midway,above] {largura};
-
-    % legenda simples
-    \node[anchor=west] at (\doorW+\frame+1.2, \doorH+\frame-0.5) {batente};
-    \node[anchor=west] at (\doorW+\frame+1.2, \doorH+\frame-1.2) {porta (fechada)};
-  \end{tikzpicture}
-  \caption{Desenho esquemático de abertura de porta (arco de 90°).}
-  \label{fig:porta-tikz}
-\end{figure}
-
-
-
-
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}[scale=0.12]
-
-% Batente (parede)
-\draw[line width=2pt] (0,0) -- (0,20);
-
-% Porta fechada fictícia (só para referência)
-%\draw[dashed] (0,0) -- (10,0);
-
-% Porta aberta (90°)
-\draw[line width=1.5pt] (0,0) -- (0,20); % eixo
-\draw[line width=1.5pt] (0,0) -- ++(20,0); % porta aberta
-
-% Arco de abertura
-\draw[dashed] (0,0) arc (270:360:20);
-
-\end{tikzpicture}
-\caption{Representação simples de uma porta aberta (TikZ)}
-\end{figure}
 
 
 
@@ -808,44 +715,6 @@
         \bottomrule
     \end{tabular}
 \end{table}
-
-
-
-
-
-
-% Definição de cores (pode ficar no preâmbulo para organizar)
-\definecolor{mouseBodyBottom}{HTML}{7F8C8D}
-\definecolor{mouseBodyTop}{HTML}{ECF0F1}
-\definecolor{scrollWheel}{HTML}{E74C3C}
-\definecolor{cableGray}{HTML}{95A5A6}
-
-
-\begin{figure}[h] % Ambiente de figura para centralizar e legendar
-    \centering
-    \begin{tikzpicture}[scale=0.8] % 'scale' ajusta o tamanho se ficar muito grande
-        % [COLE AQUI O CÓDIGO DO MOUSE QUE ENVIEI ANTES, ENTRE \begin{tikzpicture} e \end{tikzpicture}]
-        % (Vou resumir a primeira parte só para ilustrar)
-
-        % Sombra
-        \shade[inner color=black!40, outer color=white, opacity=0.5, blur shadow={shadow blur steps=5}] (0,-2.5) ellipse (2.8cm and 0.8cm);
-
-        % Corpo (Definição simplificada para exemplo)
-        \def\mousecontour{(0, 3) to[out=180, in=90] (-2, 1) to[out=270, in=90] (-1.8,-2) to[out=270, in=270] (1.8,-2) to[out=90, in=270] (2, 1) to[out=90, in=0] (0, 3) -- cycle}
-        \shade[top color=mouseBodyTop, bottom color=mouseBodyBottom] \mousecontour;
-        \draw[color=black!60, line width=1pt] \mousecontour;
-
-        % ... (Restante do código dos botões, roda e cabo) ...
-
-    \end{tikzpicture}
-    \caption{Mouse desenhado com TikZ}
-    \label{fig:mouse_tikz}
-\end{figure}
-
-
-
-
-
 
 
 
