@@ -16,11 +16,23 @@
 \setmainfont{CMU Serif}
 
 
+\usepackage[style=abnt,backend=biber]{biblatex}
+\addbibresource{Arquivos/Referencias.bib}
+\usepackage{ragged2e}
+\AtBeginBibliography{\justifying}
+\urlstyle{same}
+
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{3cm}{2cm}{*}
 \checkandfixthelayout
 \OnehalfSpacing
 \setlength{\parindent}{1.25cm}
+
+
+
+
+
+
 
 % ==========================================================
 % sumário mostra ate subseção
@@ -39,7 +51,7 @@
 \cftsetindents{section}{0pt}{2cm}
 \cftsetindents{subsection}{0pt}{2cm}
 % ---------------------------------------------
-
+ 
 
 
 
@@ -208,7 +220,7 @@
   \chapterstyle{estiloNaoNumerado}%
   \chapter*{#1}%
   \markboth{#1}{}%
-  \addcontentsline{toc}{chapter}{#1}%  % entra no sumário
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
   \chapterstyle{CapitulosNumerado}%
 }
 
@@ -435,6 +447,7 @@
 % DOCUMENTO
 %===========================================
 \begin{document}
+\nocite{*}
 \frontmatter
 
 \folha
@@ -624,9 +637,12 @@
 \section{Donec pellentesque}
 \lipsum[101]
 
+
 \backmatter
 
 \capituloCentralizado{Referências}
+\printbibliography[heading=none]
+
 \paginaDivisoria{APÊNDICES}
 \inicioApendices
 
