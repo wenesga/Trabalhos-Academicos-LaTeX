@@ -62,8 +62,8 @@
 % ----------------------------------------------------------
 % Espaçamento Entre Linhas
 % ----------------------------------------------------------
-%\OnehalfSpacing
-\setSpacing{1.35} % 1.3 = 1.5 Real
+\OnehalfSpacing
+%\setSpacing{1.35} % 1.3 = 1.5 Real
 % ----------------------------------------------------------
 % Parágrafo
 % ----------------------------------------------------------
@@ -115,9 +115,21 @@
 % 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
 % ==========================================================
 \makeatletter
-% --- Variáveis ---
-\providecommand{\imprimirinstituicao}{}
-\newcommand{\instituicao}[1]{\renewcommand{\imprimirinstituicao}{#1}}
+\ExplSyntaxOn
+\seq_new:N \g_instituicao_seq
+\NewDocumentCommand{\instituicao}{m}{
+    \seq_set_split:Nnn \g_instituicao_seq { \\ } { #1 }
+}
+\NewDocumentCommand{\imprimirinstituicaocapa} {}{
+    \seq_use:Nn \g_instituicao_seq { \\ }
+}
+\NewDocumentCommand{\imprimirinstituicaoficha} {}{
+    \seq_use:Nn \g_instituicao_seq { ,\space }
+}
+\ExplSyntaxOff
+
+
+
 \providecommand{\imprimirpreambulo}{}
 \newcommand{\preambulo}[1]{\renewcommand{\imprimirpreambulo}{#1}}
 \providecommand{\imprimirlocal}{}
@@ -158,7 +170,7 @@
         \begin{center}
             \vspace*{-2cm}
             \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\
-            {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicao\par}%
+            {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicaocapa\par}%
             \vfill\vspace*{-2em}
             {\bfseries\large\imprimirautor\par}
             \vfill
@@ -185,7 +197,7 @@
             \imprimirpreambulo
             \end{minipage}}%
         \vfill
-        \ifcsvoid{imprimirinstituicao}{}{\imprimirinstituicao}%
+        \ifcsvoid{imprimirinstituicaocapa}{}{\imprimirinstituicaocapa}%
         \vfill
         \ifcsvoid{imprimirorientador}{}{%
             {\large\imprimirorientadorRotulo~\imprimirorientador\par}%
@@ -627,38 +639,102 @@
 
 
 
+
+% -----------------------------------------------
+% --------------------ERRATA---------------------
+% -----------------------------------------------
+\newcommand{\errataname}{Errata}
+
+\newenvironment{errata}{
+    \preTexto{\errataname}
+}{
+    \cleardoublepage
+}
+% -----------------------------------------------
+
+
+
+
+
+
+
+% -----------------------------------------------
+% --------Inserir folha de aprovação-------------
+% -----------------------------------------------
+
+
+
+
+
+
+% -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 % ==========================================================
-%          --- Campos específicos da ficha ---
+% -------Ficha Catalografica - Inverter nome do autor-------
+% ==========================================================
+\ExplSyntaxOn
+\tl_new:N \l_autor_bruto_tl
+\RenewDocumentCommand{\autor}{m}{
+    \tl_set:Nn \l_autor_bruto_tl { #1 }
+    \author{#1}
+}
+\newcommand{\imprimirautorinvertido}{%
+    \seq_set_split:NnV \l_tmpa_seq { ~ } \l_autor_bruto_tl
+    \seq_pop_right:NN \l_tmpa_seq \l_tmpb_tl
+    \l_tmpb_tl ,~ \seq_use:Nn \l_tmpa_seq { ~ }
+}
+\ExplSyntaxOff
+% ----------------------------------------------------------
+
+
+
+
+
+
+% ==========================================================
+% -------------------Ficha Catalografica--------------------
 % ==========================================================
 \makeatletter
-
 \newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
 \newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
 
 \fichaPaginas{}
 \fichaAssuntos{}
 
-% --- Ficha catalográfica ---
-\newcommand{\fichaCatalografica}{%
-  \sffamily
-  \vspace*{\fill}
-  \begin{center}
-  \fbox{\begin{minipage}[c][8cm]{13.5cm}
-    \small\setSpacing{1.1}
-    \imprimirautor
-
-    \hspace{0em}\imprimirtitulo /  \imprimirautor.~--~\imprimirlocal, \imprimirdata.
-
-    \hspace{0.5cm} \thelastpage p. : il. ; 30 cm.
-    
-    \vspace{1em}
-    \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \par 
-    
-    \vspace{1em}
-    \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicao, \imprimirdata.\\[0.5em]
-    \hspace{0.5cm}\@fichaAssuntos
-    \end{minipage}}
-  \end{center}
+\newcommand{\fichaCatalografica}{{%
+    \SingleSpacing
+    \sffamily
+    \small
+    \vspace*{\fill}
+    \begin{center}
+    \fbox{%
+        \begin{minipage}[c][7cm]{12.5cm}%
+        \imprimirautorinvertido
+        
+        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautor.~--~\imprimirlocal, \imprimirdata.
+        
+        \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
+        
+        \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \\
+        
+        \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicaoficha, \imprimirdata.\\
+        
+        \hspace{0.5cm}\@fichaAssuntos
+        \end{minipage}}
+    \end{center}
+    }%
 }
 \makeatother
 % ==========================================================
@@ -667,7 +743,8 @@
 
 
 
-\endinput 
-% ----------------------------------------------------------
+
+
 % =====================FIM DA CLASSE========================
-% ----------------------------------------------------------
+
+\endinput 
