@@ -211,9 +211,6 @@
 
 
 
-
-
-
 % ==========================================================
 % sumário mostra ate subseção
 % ==========================================================
@@ -264,10 +261,6 @@
 
 
 
-
-
-
-
 % ==========================================================
 % Defini capítulos para maiúsculas no sumario
 % ==========================================================
@@ -304,7 +297,7 @@
   \renewcommand{\printchaptertitle}[1]{%
     \vspace*{2\onelineskip}
     \begin{center}
-      \Huge\bfseries ##1\par
+      \Huge\bfseries\scshape  ##1\par
     \end{center}%
   }
 }
@@ -324,14 +317,6 @@
    \aliaspagestyle{chapter}{plain}
    \chapterstyle{CapitulosNumerado}  % volta ao normal
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -392,7 +377,7 @@
         \end{tikzpicture}%
     }
     \renewcommand{\printchaptertitle}[1]{%
-        \raggedright\huge\bfseries ##1
+        \raggedright\LARGE\bfseries\scshape  ##1
     }
 }
 
@@ -410,7 +395,7 @@
   \renewcommand{\printchaptertitle}[1]{%
     \vspace*{2\onelineskip}%
     \begin{center}
-      \Huge\bfseries ##1\par
+      \LARGE\bfseries\scshape ##1\par
       \vspace{-1.5\onelineskip}%
       \rule{\textwidth}{0.4pt}%
     \end{center}%
@@ -431,7 +416,7 @@
 % VERSÃO NORMAL – entra no sumário e segue o comportamento atual
 \newcommand{\capituloCentralizado@nostar}[1]{%
   \chapterstyle{estiloNaoNumerado}%
-  \chapter*{#1}%
+  \chapter*{\LARGE\scshape #1}%
   \markboth{#1}{}%
   \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
   \chapterstyle{CapitulosNumerado}%
@@ -440,7 +425,7 @@
 % VERSÃO COM * – sem número de página e FORA do sumário
 \newcommand{\capituloCentralizado@star}[1]{%
   \chapterstyle{estiloNaoNumerado}%
-  \chapter*{#1}%
+  \chapter*{\LARGE\scshape #1}%
   \thispagestyle{empty}%              % sem número de página
   \markboth{#1}{}%
   \chapterstyle{CapitulosNumerado}%
@@ -448,10 +433,6 @@
 \makeatother
 
 % ==========================================================
-
-
-
-
 
 
 
@@ -483,7 +464,7 @@
 \newcommand{\preTexto}[1]{%
   \clearpage
   \chapterstyle{estiloNaoNumerado}%
-  \chapter*{#1}%
+  \chapter*{\scshape #1}%
   \thispagestyle{empty}%
   \chapterstyle{CapitulosNumerado}%
 }
@@ -523,13 +504,6 @@
 
 
 
-
-
-
-
-
-
-
 % ==========================================================
 % ---------------CABEÇALHOS E NUMERAÇÃO---------------------
 % ==========================================================
@@ -548,6 +522,8 @@
   \markboth{\thechapter.\ #1}{}%
 }
 \makeatother
+
+
 
 % ==========================================================
 % -------------FRONT / MAIN / BACK MATTER-------------------
@@ -626,12 +602,7 @@
 
 
 
-
-
-
-
-
-
+\renewcommand{\parttitlefont}{\scshape}
 
 
 

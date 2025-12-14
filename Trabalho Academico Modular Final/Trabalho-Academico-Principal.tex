@@ -3,7 +3,7 @@
 % --------------------------------------------
 % Dados Pré-Textuais
 % --------------------------------------------
-\titulo{Modelo \abnTexUFT para\\ Relatório Técnico por \WenesTex}
+\titulo{Modelo UFT para\\ Relatório Técnico por \WenesTex}
 \autor{Criado por \WenesTex Aquino}
 
 \orientador{Fulano Aquino Carvalho}
@@ -33,15 +33,12 @@
 \frontmatter % =================================
 
 
-
 \folhaderosto
 \contracapa
 
 
 \capituloCentralizado*{Agradecimentos}
 \lipsum[1]
-
-
 
 
 \begin{resumo}
@@ -56,7 +53,6 @@
 
 \textbf{Keywords}: LaTeX. ABNT. Typesetting.
 \end{resumoEN}
-
 
 
 \listaDeFiguras
@@ -80,7 +76,6 @@
 
 
 \mainmatter % ==================================
-
 
 
 \capituloCentralizado{Introdução}
@@ -132,5 +127,55 @@
 \lipsum[1]
 \section{Termos}
 \lipsum[1]
-
+\begin{table}[ht]
+    \centering
+    \caption{Tabela estilosa 5×5}
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{table}[ht]
+    \centering
+    \caption{Comparativo de Tecnologias de Rede}
+    \label{tab:comp-redes}
+    \begin{tabular}{lcc}
+        \toprule
+        Tecnologia & Alcance Típico & Velocidade Máxima (Teórica) \\
+        \midrule
+        Ethernet (Gigabit) & Curto & 1 Gbps \\
+        Wi-Fi 6 (802.11ax) & Médio & 9.6 Gbps \\
+        Fibra Óptica & Longo & > 100 Gbps \\
+        Bluetooth & Muito Curto & 3 Mbps \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[thick, fill=blue!20] (2.5, 1.5) circle (1.2);
+        \draw[ultra thick, ->, >=stealth, red!70!black] (2.5, 2.7) -- (2.5, 3.8);
+        \node at (2.5,1.5) {Processo};
+        \node at (2.5,4.1) {Saída};
+    \end{tikzpicture}
+    \caption{Fluxo circular simples.}
+    \label{fig:fluxo-simples}
+\end{figure}
 \end{document} 
