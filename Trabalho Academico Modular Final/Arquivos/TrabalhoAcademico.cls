@@ -62,7 +62,8 @@
 % ----------------------------------------------------------
 % Espaçamento Entre Linhas
 % ----------------------------------------------------------
-\OnehalfSpacing
+%\OnehalfSpacing
+\setSpacing{1.35} % 1.3 = 1.5 Real
 % ----------------------------------------------------------
 % Parágrafo
 % ----------------------------------------------------------
@@ -93,6 +94,19 @@
     \raisebox{0.05ex}{T}
 }
 % ==========================================================
+
+
+
+
+% ==========================================================
+% Comandos de dados - tipo de trabalho
+% ==========================================================
+\providecommand{\imprimirtipotrabalho}{}
+\newcommand{\tipotrabalho}[1]{\renewcommand{\imprimirtipotrabalho}{#1}}
+% ==========================================================
+
+
+
 
 
 
@@ -472,21 +486,25 @@
 % Lista de abreviaturas e siglas
 \newcommand{\listadesiglasname}{Lista de abreviaturas e siglas}
 \newenvironment{siglas}{%
-  \preTexto{\listadesiglasname}
-  \begin{symbols}
+    \preTexto{\listadesiglasname}
+    \begin{symbols}%
+        \begin{Spacing}{0.9}
 }{%
-  \end{symbols}
-  \cleardoublepage
+        \end{Spacing}
+    \end{symbols}
+    \cleardoublepage
 }
 
 % Lista de simbolos
 \newcommand{\listadesimbolosname}{Lista de símbolos}
 \newenvironment{simbolos}{%
-  \preTexto{\listadesimbolosname}
-  \begin{symbols}
+    \preTexto{\listadesimbolosname}
+    \begin{symbols}%
+        \begin{Spacing}{0.7}
 }{%
-  \end{symbols}
-  \cleardoublepage
+        \end{Spacing}
+    \end{symbols}
+    \cleardoublepage
 }
 % ==========================================================
 
@@ -598,11 +616,53 @@
 \cftsetindents{chapter}{0pt}{2cm}
 \cftsetindents{section}{0pt}{2cm}
 \cftsetindents{subsection}{0pt}{2cm}
+% ----------------------------------------------------------
 
 
-
-
+% ----------------------------------------------------------
+% Títulos de \part ficam em versalete
+% ----------------------------------------------------------
 \renewcommand{\parttitlefont}{\scshape}
+% ----------------------------------------------------------
+
+
+
+% ==========================================================
+%          --- Campos específicos da ficha ---
+% ==========================================================
+\makeatletter
+
+\newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
+\newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
+
+\fichaPaginas{}
+\fichaAssuntos{}
+
+% --- Ficha catalográfica ---
+\newcommand{\fichaCatalografica}{%
+  \sffamily
+  \vspace*{\fill}
+  \begin{center}
+  \fbox{\begin{minipage}[c][8cm]{13.5cm}
+    \small\setSpacing{1.1}
+    \imprimirautor
+
+    \hspace{0em}\imprimirtitulo /  \imprimirautor. -- \imprimirlocal, \imprimirdata.
+
+    \hspace{0.5cm} \thelastpage p. : il. (algumas color.) ; 30 cm.
+    
+    \vspace{1em}
+    \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \par 
+    
+    \vspace{1em}
+    \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicao, \imprimirdata.\\[0.5em]
+    \hspace{0.5cm}\@fichaAssuntos
+    \end{minipage}}
+  \end{center}
+}
+\makeatother
+% ==========================================================
+
 
 
 
