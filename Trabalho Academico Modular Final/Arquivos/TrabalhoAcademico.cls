@@ -42,6 +42,10 @@
 \AtBeginBibliography{\justifying}
 \urlstyle{same}
 % ----------------------------------------------------------
+% Remove a numeração de páginas de \part
+% ----------------------------------------------------------
+\aliaspagestyle{part}{empty}
+% ----------------------------------------------------------
 % Texto de Teste
 % ----------------------------------------------------------
 \RequirePackage{lipsum} % Gerador de texto
@@ -62,6 +66,7 @@
 % ----------------------------------------------------------
 % Parágrafo
 % ----------------------------------------------------------
+\RequirePackage{indentfirst}
 \setlength{\parindent}{1.25cm}
 % ==========================================================
 
@@ -227,6 +232,39 @@
 \cftsetindents{subsection}{0pt}{2cm}
 % ----------------------------------------------------------
  
+
+
+
+% ==========================================================
+\newcommand{\ResumoNomePT}{Resumo}
+\newcommand{\ResumoNomeEN}{Abstract}
+
+\newenvironment{ResumoBase}[1]{%
+    \preTexto{#1}%
+    \vspace*{-2\onelineskip}%
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{2em}%
+}{%
+    \clearpage
+}
+% ----------------------------------------------------------
+\newenvironment{resumo}{%
+  \begin{ResumoBase}{\ResumoNomePT}%
+}{%
+  \end{ResumoBase}%
+}
+% ----------------------------------------------------------
+\newenvironment{resumoEN}{%
+  \begin{ResumoBase}{\ResumoNomeEN}%
+}{%
+  \end{ResumoBase}%
+}
+% ==========================================================
+
+
+
+
+
 
 
 

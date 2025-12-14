@@ -4,7 +4,7 @@
 % Dados Pré-Textuais
 % --------------------------------------------
 \titulo{Modelo \abnTexUFT para\\ Relatório Técnico por \WenesTex}
-\autor{Editado por \WenesTex Aquino}
+\autor{Criado por \WenesTex Aquino}
 
 \orientador{Fulano Aquino Carvalho}
 \coorientador{Beltrano Vitória Almeida}
@@ -28,7 +28,10 @@
 
 \begin{document}
 \nocite{*}
-\frontmatter
+
+
+\frontmatter % =================================
+
 
 
 \folhaderosto
@@ -36,11 +39,24 @@
 
 
 \capituloCentralizado*{Agradecimentos}
-\lipsum[101]
+\lipsum[1]
 
 
-\capituloCentralizado*{Resumo}
-\lipsum[101]
+
+
+\begin{resumo}
+\lipsum[1]
+
+\textbf{Palavras-chaves}: latex. abntex. editoração de texto.
+\end{resumo}
+
+
+\begin{resumoEN}
+\lipsum[1]
+
+\textbf{Keywords}: LaTeX. ABNT. Typesetting.
+\end{resumoEN}
+
 
 
 \listaDeFiguras
@@ -48,24 +64,73 @@
 
 
 \begin{siglas}
-  \item[CPU] Unidade Central de Processamento
-  \item[RAM] Memória de Acesso Aleatório
-  \item[SSD] Unidade de Estado Sólido (Solid State Drive)
+    \item[CPU] Unidade Central de Processamento
+    \item[RAM] Memória de Acesso Aleatório
+    \item[SSD] Unidade de Estado Sólido (Solid State Drive)
 \end{siglas}
 
 
 \begin{simbolos}
-\item[$\alpha$] Alfa (Ângulo, Coeficiente de Temperatura)
-\item[$\beta$] Beta (Ângulo, Ganho de Corrente do Transistor)
-\item[$\sum$] Somatório (Usado em Séries Matemáticas e Estatística)
+    \item[$\alpha$] Alfa (Ângulo, Coeficiente de Temperatura)
+    \item[$\beta$] Beta (Ângulo, Ganho de Corrente do Transistor)
+    \item[$\sum$] Somatório (Usado em Séries Matemáticas e Estatística)
 \end{simbolos}
 
+\Sumario
 
-\backmatter
+
+\mainmatter % ==================================
+
+
+
+\capituloCentralizado{Introdução}
+\lipsum[1]
+
+
+\part{Preparação}
+
+\chapter{Desenvolvimento}
+\section{Desenvolvimento}
+\lipsum[1]
+\section{Desenvolvimento}
+\lipsum[1]
+
+\part{Resultado}
+
+\chapter{Resultado}
+\section{Resultado}
+\lipsum[1]
+\section{Resultado}
+\lipsum[1]
+
+\chapter{Conclusão}
+\section{Conclusão}
+\lipsum[1]
+\section{Conclusão}
+\lipsum[1]
+
+
+\backmatter % ==================================
 
 
 \capituloCentralizado{Referências}
 \printbibliography[heading=none]
 
+
+\paginaDivisoria{APÊNDICES}
+\inicioApendices
+\chapter{Fichas}
+\section{Fichas}
+\lipsum[1]
+\section{Fichas}
+\lipsum[1]
+
+\paginaDivisoria{ANEXOS}
+\inicioAnexos
+\chapter{Termos}
+\section{Termos}
+\lipsum[1]
+\section{Termos}
+\lipsum[1]
 
 \end{document} 
