@@ -647,9 +647,9 @@
     \small\setSpacing{1.1}
     \imprimirautor
 
-    \hspace{0em}\imprimirtitulo /  \imprimirautor. -- \imprimirlocal, \imprimirdata.
+    \hspace{0em}\imprimirtitulo /  \imprimirautor.~--~\imprimirlocal, \imprimirdata.
 
-    \hspace{0.5cm} \thelastpage p. : il. (algumas color.) ; 30 cm.
+    \hspace{0.5cm} \thelastpage p. : il. ; 30 cm.
     
     \vspace{1em}
     \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \par 
