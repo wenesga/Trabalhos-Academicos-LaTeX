@@ -237,6 +237,61 @@
 
 
 
+
+
+
+% -----------------------------------------------
+% --------Inserir folha de aprovação-------------
+% -----------------------------------------------
+\newcommand{\assinatura}[1]{%
+    \begin{center}
+        \vspace*{0.5em}
+        \rule{8cm}{0.8pt}\\
+        #1
+    \end{center}
+}
+% -----------------------------------------------
+\newcommand{\folhadeaprovacao}{%
+    \begin{center}
+        {\bfseries\large\imprimirautor}
+
+        \vspace*{\fill}\vspace*{\fill}
+
+        {\bfseries\Large\imprimirtitulo}
+
+        \vspace*{\fill}
+
+        \hspace{.45\textwidth}
+        \begin{minipage}{.5\textwidth}
+            \imprimirpreambulo
+        \end{minipage}%
+        \vspace*{\fill}
+    \end{center}
+
+    Trabalho aprovado. \imprimirlocal, 15 de Desembro de 2025:
+    
+    \vspace*{1.5em}
+    \assinatura{\textbf{\imprimirorientador}\\Orientador}
+    \assinatura{\textbf{Professor}\\ Convidado 1}
+    \assinatura{\textbf{Professor}\\ Convidado 2}
+
+    \begin{center}
+        \vspace*{0.5cm}
+        {\large\imprimirlocal}
+        \par
+        {\large\imprimirdata}
+    \end{center}
+}
+% -----------------------------------------------
+
+
+
+
+
+
+
+
+
 % ==========================================================
 % sumário mostra ate subseção
 % ==========================================================
@@ -658,16 +713,7 @@
 
 
 
-% -----------------------------------------------
-% --------Inserir folha de aprovação-------------
-% -----------------------------------------------
 
-
-
-
-
-
-% -----------------------------------------------
 
 
 
@@ -723,7 +769,7 @@
         \begin{minipage}[c][7cm]{12.5cm}%
         \imprimirautorinvertido
         
-        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautor.~--~\imprimirlocal, \imprimirdata.
+        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
         
         \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
         
@@ -731,7 +777,7 @@
         
         \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicaoficha, \imprimirdata.\\
         
-        \hspace{0.5cm}\@fichaAssuntos
+        \hspace{0.35cm}\@fichaAssuntos
         \end{minipage}}
     \end{center}
     }%
