@@ -164,7 +164,11 @@
 \newcommand{\professor}[2][Professor:]{%
   \renewcommand{\imprimirprofessorRotulo}{#1}\renewcommand{\imprimirprofessor}{#2}}
 
-% --- Layout da Capa ---
+
+
+% ==========================================================
+% --- Folha de Rosto ---
+% ==========================================================
 \newcommand{\folhaderosto}{%
     \begin{titlingpage}%
         \begin{center}
@@ -183,7 +187,10 @@
     \end{titlingpage}
 }
 
-% --- Layout da Folha de Rosto ---
+
+% ==========================================================
+% --- Contracapa ---
+% ==========================================================
 \newcommand{\folhaderostocontent}{%
     \begin{center}
         {\bfseries\large\imprimirautor\par}
@@ -224,16 +231,88 @@
 }
 
 \newcommand{\contracapa}{%
-  \clearpage
-  \thispagestyle{empty}
+  \cleardoublepage
   \folhaderostocontent
   \clearpage
 }
 \makeatother
 % ==========================================================
-% FIM DAS CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
+
+
+
+
+
+
+
+
+
+
+% ==========================================================
+% -------Ficha Catalografica: Inverter nome do autor--------
+% ==========================================================
+\ExplSyntaxOn
+\tl_new:N \l_autor_bruto_tl
+\RenewDocumentCommand{\autor}{m}{
+    \tl_set:Nn \l_autor_bruto_tl { #1 }
+    \author{#1}
+}
+\newcommand{\imprimirautorinvertido}{%
+    \seq_set_split:NnV \l_tmpa_seq { ~ } \l_autor_bruto_tl
+    \seq_pop_right:NN \l_tmpa_seq \l_tmpb_tl
+    \l_tmpb_tl ,~ \seq_use:Nn \l_tmpa_seq { ~ }
+}
+\ExplSyntaxOff
+% ==========================================================
+% -------------------Ficha Catalografica--------------------
+% ==========================================================
+\makeatletter
+\newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
+\newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
+
+\fichaPaginas{}
+\fichaAssuntos{}
+
+\newcommand{\fichaCatalografica}{{%
+    \SingleSpacing
+    \sffamily
+    \small
+    \vspace*{\fill}
+    \begin{center}
+    \fbox{%
+        \begin{minipage}[c][7cm]{12.5cm}%
+        \imprimirautorinvertido
+        
+        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
+        
+        \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
+        
+        \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \\
+        
+        \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicaoficha, \imprimirdata.\\
+        
+        \hspace{0.35cm}\@fichaAssuntos
+        \end{minipage}}
+    \end{center}
+    }%
+}
+\makeatother
 % ==========================================================
 
+
+
+
+
+% -----------------------------------------------
+% --------------------ERRATA---------------------
+% -----------------------------------------------
+\newcommand{\errataname}{Errata}
+
+\newenvironment{errata}{
+    \preTexto{\errataname}
+}{
+    \cleardoublepage
+}
+% -----------------------------------------------
 
 
 
@@ -252,17 +331,17 @@
 }
 % -----------------------------------------------
 \newcommand{\folhadeaprovacao}{%
+    \cleardoublepage
     \begin{center}
-        {\bfseries\large\imprimirautor}
-
+        {\bfseries\large\imprimirautor\par}
         \vspace*{\fill}\vspace*{\fill}
-
-        {\bfseries\Large\imprimirtitulo}
+        {\bfseries\Large\imprimirtitulo\par}
 
         \vspace*{\fill}
 
         \hspace{.45\textwidth}
         \begin{minipage}{.5\textwidth}
+            \SingleSpacing
             \imprimirpreambulo
         \end{minipage}%
         \vspace*{\fill}
@@ -276,10 +355,9 @@
     \assinatura{\textbf{Professor}\\ Convidado 2}
 
     \begin{center}
-        \vspace*{0.5cm}
-        {\large\imprimirlocal}
-        \par
-        {\large\imprimirdata}
+    \vfill
+    \large\imprimirlocal\\
+    \imprimirdata
     \end{center}
 }
 % -----------------------------------------------
@@ -290,26 +368,80 @@
 
 
 
+% ===============================================
+% ---------------Dedicatoria---------------------
+% ===============================================
+\newenvironment{dedicatoria}{%
+    \cleardoublepage
+    \vspace*{\fill}
+    \begin{center}
+        \begin{minipage}{0.65\textwidth}
+            \centering
+            \itshape}{%
+        \end{minipage}
+    \end{center}
+    \vspace*{\fill}
+}
+
+% -----------------------------------------------
+
+
+
+
+
 
 
 % ==========================================================
-% sumário mostra ate subseção
-% ==========================================================
-\settocdepth{subsection}
-\setsecnumdepth{subsection}
-% ativar pontilhado nos capítulos no sumário
-\renewcommand{\cftchapterdotsep}{\cftdotsep}
+\def\defaultchapterstyle{CapitulosNumerado}
+
+\makeatletter
+\newcommand{\capituloCentralizado}{%
+  \@ifstar{\capituloCentralizado@star}{\capituloCentralizado@nostar}}
+  
+% VERSÃO NORMAL – entra no sumário e segue o comportamento atual
+\newcommand{\capituloCentralizado@nostar}[1]{%
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{\LARGE\scshape #1}%
+  \markboth{#1}{}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
+  \chapterstyle{CapitulosNumerado}%
+}
+
+% VERSÃO COM * – sem número de página e FORA do sumário
+\newcommand{\capituloCentralizado@star}[1]{%
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{\LARGE\scshape #1}%
+  \thispagestyle{empty}%              % sem número de página
+  \markboth{#1}{}%
+  \chapterstyle{CapitulosNumerado}%
+}
+\makeatother
+
 % ==========================================================
 
-% ----------------------------------------------------------
-% É controle espaço horizontal título sumário
-% ----------------------------------------------------------
-\cftsetindents{part}{0pt}{2cm}
-\cftsetindents{chapter}{0pt}{2cm}
-\cftsetindents{section}{0pt}{2cm}
-\cftsetindents{subsection}{0pt}{2cm}
-% ----------------------------------------------------------
- 
+
+
+
+
+
+
+% ===============================================
+% -------------------Epígrafe--------------------
+% -----------------------------------------------
+\newenvironment{epigrafe}{%
+    \cleardoublepage
+    \vspace*{\fill}
+    \begin{flushright}
+        \itshape
+        \setlength{\parskip}{0.5em}}{%
+    \end{flushright}
+}
+% ==============================================
+
+
+
+
+
 
 
 
@@ -342,11 +474,129 @@
 
 
 
+
+
 % ==========================================================
-% Defini capítulos para maiúsculas no sumario
+% LISTA DE FIGURAS 
+% ==========================================================
+\newcommand{\listaDeFiguras}{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \listoffigures*% usa o estilo acima e NÃO entra no sumário
+  \thispagestyle{empty}% tira o número da página desta folha
+  \chapterstyle{CapitulosNumerado}%
+}
+% ==========================================================
+% LISTA DE TABELAS 
+% ==========================================================
+\newcommand{\listaDeTabelas}{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \listoftables*%
+  \thispagestyle{empty}%
+  \chapterstyle{CapitulosNumerado}%
+}
+% ==========================================================
+% Exibir nome (Figuras, Tabelas) na lista 
+% ==========================================================
+\renewcommand{\cftfigurename}{Figura\space}
+\renewcommand{\cfttablename}{Tabela\space}
+% ==========================================================
+% Exibir "-" na lista
+% ==========================================================
+\renewcommand{\cftfigureaftersnum}{\space\space--}
+\renewcommand{\cfttableaftersnum}{\space\space--}
+% ==========================================================
+% Texto do título começa após esses 3em
+% ==========================================================
+\cftsetindents{figure}{0em}{3em}
+\cftsetindents{table}{0em}{3em}
+% ==========================================================
+
+
+
+
+
+
+
+
+
+
+% ==========================================================
+\newcommand{\preTexto}[1]{%
+  \clearpage
+  \chapterstyle{estiloNaoNumerado}%
+  \chapter*{\scshape #1}%
+  \thispagestyle{empty}%
+  \chapterstyle{CapitulosNumerado}%
+}
+
+% Lista de abreviaturas e siglas
+\newcommand{\listadesiglasname}{Lista de abreviaturas e siglas}
+\newenvironment{siglas}{%
+    \preTexto{\listadesiglasname}
+    \begin{symbols}%
+        \begin{Spacing}{0.9}
+}{%
+        \end{Spacing}
+    \end{symbols}
+    \cleardoublepage
+}
+
+% Lista de simbolos
+\newcommand{\listadesimbolosname}{Lista de símbolos}
+\newenvironment{simbolos}{%
+    \preTexto{\listadesimbolosname}
+    \begin{symbols}%
+        \begin{Spacing}{0.7}
+}{%
+        \end{Spacing}
+    \end{symbols}
+    \cleardoublepage
+}
+% ==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ===============================================================================
+% ==========================================================
+% Sumário mostra ate subseção
+% ==========================================================
+\settocdepth{subsection}
+\setsecnumdepth{subsection}
+% ativar pontilhado nos capítulos no sumário
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+% ==========================================================
+
+% ----------------------------------------------------------
+% É controle espaço horizontal título Sumário
+% ----------------------------------------------------------
+\cftsetindents{part}{0pt}{2cm}
+\cftsetindents{chapter}{0pt}{2cm}
+\cftsetindents{section}{0pt}{2cm}
+\cftsetindents{subsection}{0pt}{2cm}
+% ----------------------------------------------------------
+
+% ==========================================================
+% Defini capítulos para maiúsculas no Sumario
 % ==========================================================
 \makeatletter
-% Salva o comando original que desenha a linha do sumário
+% Salva o comando original que desenha a linha do Sumário
 \let\oldcontentsline\contentsline
 
 % Redefine para interceptar e modificar o texto
@@ -362,11 +612,9 @@
 \makeatother
 % ==========================================================
 
-
 % ==========================================================
 % ------------------------sumário---------------------------
 % ==========================================================
-
 \makechapterstyle{SumarioStyle}{
   \setlength{\beforechapskip}{-73pt}  % ajuste fino da altura
   \setlength{\afterchapskip}{1\onelineskip}
@@ -385,12 +633,8 @@
 % ==========================================================
 
 
-
-
-
 \newcommand{\Sumario}{
    \clearpage
-   \pagestyle{empty}
    \aliaspagestyle{chapter}{empty}
    \chapterstyle{SumarioStyle}  % só para o sumário
    \tableofcontents*
@@ -398,6 +642,31 @@
    \aliaspagestyle{chapter}{plain}
    \chapterstyle{CapitulosNumerado}  % volta ao normal
 }
+
+% ==========================================================
+% Recuo no Sumário
+% ----------------------------------------------------------
+\cftsetindents{chapter}{0pt}{2cm}
+\cftsetindents{section}{0pt}{2cm}
+\cftsetindents{subsection}{0pt}{2cm}
+% ==========================================================
+% ===============================================================================
+
+
+
+
+
+
+
+% ----------------------------------------------------------
+% Títulos de \part ficam em versalete
+% ----------------------------------------------------------
+\renewcommand{\parttitlefont}{\scshape}
+% ----------------------------------------------------------
+
+
+
+
 
 
 
@@ -466,7 +735,6 @@
 
 
 % ==========================================================
-
 \makechapterstyle{estiloNaoNumerado}{%
   \setlength{\beforechapskip}{-73pt}%
   \setlength{\afterchapskip}{2\onelineskip}%
@@ -487,105 +755,19 @@
 
 
 
-% ==========================================================
-\def\defaultchapterstyle{CapitulosNumerado}
-
-\makeatletter
-\newcommand{\capituloCentralizado}{%
-  \@ifstar{\capituloCentralizado@star}{\capituloCentralizado@nostar}}
-  
-% VERSÃO NORMAL – entra no sumário e segue o comportamento atual
-\newcommand{\capituloCentralizado@nostar}[1]{%
-  \chapterstyle{estiloNaoNumerado}%
-  \chapter*{\LARGE\scshape #1}%
-  \markboth{#1}{}%
-  \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
-  \chapterstyle{CapitulosNumerado}%
-}
-
-% VERSÃO COM * – sem número de página e FORA do sumário
-\newcommand{\capituloCentralizado@star}[1]{%
-  \chapterstyle{estiloNaoNumerado}%
-  \chapter*{\LARGE\scshape #1}%
-  \thispagestyle{empty}%              % sem número de página
-  \markboth{#1}{}%
-  \chapterstyle{CapitulosNumerado}%
-}
-\makeatother
-
-% ==========================================================
 
 
 
-% ==========================================================
-
-% LISTA DE FIGURAS (pré-textual, sem número de página, fora do sumário)
-\newcommand{\listaDeFiguras}{%
-  \clearpage
-  \chapterstyle{estiloNaoNumerado}%
-  \listoffigures*% usa o estilo acima e NÃO entra no sumário
-  \thispagestyle{empty}% tira o número da página desta folha
-  \chapterstyle{CapitulosNumerado}%
-}
-% ==========================================================
-
-% LISTA DE TABELAS (mesma ideia)
-\newcommand{\listaDeTabelas}{%
-  \clearpage
-  \chapterstyle{estiloNaoNumerado}%
-  \listoftables*%
-  \thispagestyle{empty}%
-  \chapterstyle{CapitulosNumerado}%
-}
-% ==========================================================
 
 
 
-% ==========================================================
-\newcommand{\preTexto}[1]{%
-  \clearpage
-  \chapterstyle{estiloNaoNumerado}%
-  \chapter*{\scshape #1}%
-  \thispagestyle{empty}%
-  \chapterstyle{CapitulosNumerado}%
-}
-
-% Lista de abreviaturas e siglas
-\newcommand{\listadesiglasname}{Lista de abreviaturas e siglas}
-\newenvironment{siglas}{%
-    \preTexto{\listadesiglasname}
-    \begin{symbols}%
-        \begin{Spacing}{0.9}
-}{%
-        \end{Spacing}
-    \end{symbols}
-    \cleardoublepage
-}
-
-% Lista de simbolos
-\newcommand{\listadesimbolosname}{Lista de símbolos}
-\newenvironment{simbolos}{%
-    \preTexto{\listadesimbolosname}
-    \begin{symbols}%
-        \begin{Spacing}{0.7}
-}{%
-        \end{Spacing}
-    \end{symbols}
-    \cleardoublepage
-}
-% ==========================================================
 
 
 
-% Exibir nome (Figuras, Tabelas) na lista 
-\renewcommand{\cftfigurename}{Figura\space}
-\renewcommand{\cfttablename}{Tabela\space}
-% Exibir "-" na lista
-\renewcommand{\cftfigureaftersnum}{\space\space--}
-\renewcommand{\cfttableaftersnum}{\space\space--}
 
-\cftsetindents{figure}{0em}{3em}
-\cftsetindents{table}{0em}{3em}
+
+
+
 
 
 
@@ -650,6 +832,7 @@
 
 
 
+
 \newcommand{\inicioApendices}{%
   \appendix
   \setcounter{chapter}{0}%
@@ -677,161 +860,10 @@
 
 
 
-% ----------------------------------------------------------
-% Recuo no Sumário
-% ----------------------------------------------------------
-\cftsetindents{chapter}{0pt}{2cm}
-\cftsetindents{section}{0pt}{2cm}
-\cftsetindents{subsection}{0pt}{2cm}
-% ----------------------------------------------------------
-
-
-% ----------------------------------------------------------
-% Títulos de \part ficam em versalete
-% ----------------------------------------------------------
-\renewcommand{\parttitlefont}{\scshape}
-% ----------------------------------------------------------
-
-
-
-
-% -----------------------------------------------
-% --------------------ERRATA---------------------
-% -----------------------------------------------
-\newcommand{\errataname}{Errata}
-
-\newenvironment{errata}{
-    \preTexto{\errataname}
-}{
-    \cleardoublepage
-}
-% -----------------------------------------------
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% ==========================================================
-% -------Ficha Catalografica - Inverter nome do autor-------
-% ==========================================================
-\ExplSyntaxOn
-\tl_new:N \l_autor_bruto_tl
-\RenewDocumentCommand{\autor}{m}{
-    \tl_set:Nn \l_autor_bruto_tl { #1 }
-    \author{#1}
-}
-\newcommand{\imprimirautorinvertido}{%
-    \seq_set_split:NnV \l_tmpa_seq { ~ } \l_autor_bruto_tl
-    \seq_pop_right:NN \l_tmpa_seq \l_tmpb_tl
-    \l_tmpb_tl ,~ \seq_use:Nn \l_tmpa_seq { ~ }
-}
-\ExplSyntaxOff
-% ----------------------------------------------------------
-
-
-
-
-
-
-% ==========================================================
-% -------------------Ficha Catalografica--------------------
-% ==========================================================
-\makeatletter
-\newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
-\newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
-
-\fichaPaginas{}
-\fichaAssuntos{}
-
-\newcommand{\fichaCatalografica}{{%
-    \SingleSpacing
-    \sffamily
-    \small
-    \vspace*{\fill}
-    \begin{center}
-    \fbox{%
-        \begin{minipage}[c][7cm]{12.5cm}%
-        \imprimirautorinvertido
-        
-        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
-        
-        \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
-        
-        \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \\
-        
-        \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicaoficha, \imprimirdata.\\
-        
-        \hspace{0.35cm}\@fichaAssuntos
-        \end{minipage}}
-    \end{center}
-    }%
-}
-\makeatother
-% ==========================================================
-
-
-
-
-% ===============================================
-% ---------------Dedicatoria---------------------
-% ===============================================
-\newenvironment{dedicatoria}{%
-    \cleardoublepage
-    \vspace*{\fill}
-    \begin{center}
-        \begin{minipage}{0.65\textwidth}
-            \centering
-            \itshape}{%
-        \end{minipage}
-    \end{center}
-    \vspace*{\fill}
-}
-
-% -----------------------------------------------
-
-
-
-
-% ===============================================
-% -------------------Epígrafe--------------------
-% -----------------------------------------------
-\newenvironment{epigrafe}{%
-    \cleardoublepage
-    \vspace*{\fill}
-    \begin{flushright}
-        \itshape
-        \setlength{\parskip}{0.5em}}{%
-    \end{flushright}
-}
-% ==============================================
-
-
-
-
-
-
-
-
-
-
-
-
-% =====================FIM DA CLASSE========================
-
-\endinput 
+\endinput % =====================FIM DA CLASSE===================================
