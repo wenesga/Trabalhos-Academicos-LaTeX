@@ -786,17 +786,40 @@
 % ==========================================================
 
 
-% ---
-% Dedicatoria
-\newcommand{\dedicatorianame}{Dedicatóoria}
-\newenvironment{dedicatoria}[1][]{%
-   \ifthenelse{\equal{#1}{}}{%
-    \PRIVATEbookmarkthis{\dedicatorianame}
-    }{\pretextualchapter{#1}}
-  }{\PRIVATEclearpageifneeded}
-% ---
 
 
+% ===============================================
+% ---------------Dedicatoria---------------------
+% ===============================================
+\newenvironment{dedicatoria}{%
+    \cleardoublepage
+    \vspace*{\fill}
+    \begin{center}
+        \begin{minipage}{0.65\textwidth}
+            \centering
+            \itshape}{%
+        \end{minipage}
+    \end{center}
+    \vspace*{\fill}
+}
+
+% -----------------------------------------------
+
+
+
+
+% ===============================================
+% -------------------Epígrafe--------------------
+% -----------------------------------------------
+\newenvironment{epigrafe}{%
+    \cleardoublepage
+    \vspace*{\fill}
+    \begin{flushright}
+        \itshape
+        \setlength{\parskip}{0.5em}}{%
+    \end{flushright}
+}
+% ==============================================
 
 
 
