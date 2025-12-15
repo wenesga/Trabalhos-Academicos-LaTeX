@@ -786,6 +786,24 @@
 % ==========================================================
 
 
+% ---
+% Dedicatoria
+\newcommand{\dedicatorianame}{Dedicatóoria}
+\newenvironment{dedicatoria}[1][]{%
+   \ifthenelse{\equal{#1}{}}{%
+    \PRIVATEbookmarkthis{\dedicatorianame}
+    }{\pretextualchapter{#1}}
+  }{\PRIVATEclearpageifneeded}
+% ---
+
+
+
+
+
+
+
+
+
 
 
 
