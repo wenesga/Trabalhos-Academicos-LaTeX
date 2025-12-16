@@ -3,8 +3,7 @@
 % --------------------------------------------
 % Dados Pré-Textuais
 % --------------------------------------------
-\titulo{Modelo UFT:\\ 
-    para Relatório Técnico}
+\titulo{Relatório Técnico - Modelo UFT}
     
 \autor{Wenes Aquino}
 
@@ -54,7 +53,7 @@
 \nocite{*}
 
 
-\frontmatter % =================================
+\pretextual % =================================
 
 
 \folhaderosto
@@ -68,7 +67,22 @@
 
 % ======= SOMENTE PARA TCC ==========%
 \begin{errata}
-    Este é um exemplo de Errata (Elemento Opcional)
+\noindent Elemento opcional. Deve ser inserida logo após a folha de rosto, constituído pela referência da publicação e pelo texto da errata. Apresentada em papel avulso ou encartado, acrescida ao relatório depois de impresso.\\[1em]
+
+\noindent EXEMPLO:\\[1em]
+
+\noindent ULLER, Leonardo; LOPES, Oswaldo. \textbf{Coordenação de pesquisa sobre corrosão na produção e utilização do álcool}: relatório parcial de 15 de março a 15 de junho de 1982. Rio de Janeiro: FTI, 1982.\\[1em]
+
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+    \begin{tabular}{|c|c|l|l|}
+        \hline
+        Folha & Linha & Onde se lê & Leia-se \\
+        \hline
+        32 & 3 & publiacao & publicação \\
+        \hline
+    \end{tabular}
+\end{center}
 \end{errata}
 
 
@@ -108,7 +122,7 @@
 
 % ======== RELATÓRIO e TCC ==========%
 \capituloCentralizado*{Agradecimentos}
-\lipsum[1]
+Elemento opcional. Devem ser inseridos após a errata, se houver.
 
 
 
@@ -174,19 +188,55 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
 \Sumario
 
 
-\mainmatter % ==================================
+\textual % ==================================
 
 
-\capituloCentralizado{Introdução}
-\lipsum[1]
+\chapter{Introdução}
+Introdução a parte inicial que delimita o tema, apresenta os objetivos e a relevância da pesquisa. Ela deve seguir regras de formatação específicas (fonte, tamanho, alinhamento) e é onde a contagem de páginas começa, embora a numeração apareça a partir dela. 
+
+Os textos devem ser apresentados em cor preta, podendo ser utilizadas outras cores somente para
+as ilustrações. Se impresso, deve ser utilizado papel branco ou reciclado, no formato A4 (21 cm × 29,7 cm).
+
+Recomenda-se, quando o trabalho for digitado, a fonte tamanho 12 para todo o texto, inclusive a
+capa, excetuando-se citações diretas com mais de três linhas, notas de rodapé, paginação, dados
+internacionais de catalogação na publicação, fontes e legendas das ilustrações e das tabelas, que
+devem ser em tamanho menor e uniforme.
+
+Todo o texto deve ser digitado ou datilografado com espaçamento 1,5 entre as linhas, excetuando-se as citações diretas com mais de três linhas, notas de rodapé, referências, títulos das ilustrações e das tabelas, fontes e legendas das ilustrações e das tabelas, natureza (tipo do trabalho, objetivo, nome da instituição a que é submetido e área de concentração), que devem ser digitados ou datilografados em espaço simples. As referências, ao final do trabalho, devem ser separadas entre si por um espaço simples em branco. 
+
+Na folha de rosto e na folha de aprovação, a natureza do trabalho deve ser alinhada do meio da mancha gráfica até a margem direita.
+
+As folhas ou páginas pré-textuais devem ser contadas, mas não numeradas. O verso da folha de rosto, que contém os dados internacionais de catalogação, não pode ser contado ou numerado.
+
+Para trabalhos digitados ou datilografados somente no anverso, todas as folhas, a partir da folha de rosto, devem ser contadas sequencialmente, considerando somente o anverso. A numeração deve figurar, a partir da primeira folha da parte textual, em algarismos arábicos, no canto superior direito da folha, a 2 cm da borda superior, ficando o último algarismo a 2 cm da borda direita da folha.
+
+Quando o trabalho for digitado ou datilografado no anverso e verso, a numeração das páginas deve ser colocada no anverso da folha, no canto superior direito; e no verso, no canto superior esquerdo. 
+
+No caso de o trabalho ser constituído por mais de um volume, deve ser mantida uma única sequência de numeração das folhas ou páginas, do primeiro ao último volume. Se houver apêndice e anexo, as suas folhas ou páginas devem ser numeradas de maneira contínua, e sua paginação deve dar seguimento à do texto principal.
+
+
+
+
+
+
 
 
 % ======== RELATÓRIO e TCC ==========%
 \part{Preparação} % Opcional 
 
 \chapter{Desenvolvimento}
-\section{Desenvolvimento}
-\lipsum[1]
+Os títulos das seções primárias devem figurar na parte superior da mancha gráfica e ser separados do
+texto que os sucede por um espaço de 1,5 entre as linhas. Da mesma forma, os títulos das subseções
+devem ser separados do texto que os precede e que os sucede por um espaço de 1,5 entre as linhas.
+Títulos que ocupem mais de uma linha devem ser, a partir da segunda linha, alinhados abaixo da
+primeira letra da primeira palavra do título.
+
+
+\section{Títulos sem indicativo numérico}
+Os títulos sem indicativo numérico – errata, agradecimentos, lista de ilustrações, lista de tabelas, lista
+de abreviaturas e siglas, lista de símbolos, resumos, sumário, referências, glossário, apêndice(s),
+anexo(s) e índice(s) – devem ser centralizados.
+
 \section{Desenvolvimento}
 \lipsum[1]
 
@@ -200,14 +250,14 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
 \section{Resultado}
 \lipsum[1]
 
-\chapter{Conclusão}
+\chapter{Considerações finais}
 \section{Conclusão}
 \lipsum[1]
 \section{Conclusão}
 \lipsum[1]
 
 
-\backmatter % ==================================
+\postextual % ==================================
 
 
 \capituloCentralizado{Referências}
@@ -216,19 +266,30 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
 
 \paginaDivisoria{APÊNDICES}
 \inicioApendices
-\chapter{Fichas}
-\section{Fichas}
-\lipsum[1]
-\section{Fichas}
-\lipsum[1]
+\chapter{Apêndice}
+Elemento opcional. O texto deve ser precedido da palavra APÊNDICE, identificado por letras maiúsculas
+consecutivas, travessão e pelo respectivo título. Na identificação dos apêndices, quando esgotadas
+as letras do alfabeto, devem ser utilizadas letras maiúsculas dobradas. O destaque tipográfico (negrito,
+itálico ou sublinhado) deve ser o mesmo da seção primária.\\[1em]
+
+\noindent EXEMPLO\\[1em]
+
+\noindent APÊNDICE A — AVALIAÇÃO NUMÉRICA DE CÉLULAS INFLAMATÓRIAS
+
 
 \paginaDivisoria{ANEXOS}
 \inicioAnexos
-\chapter{Termos}
-\section{Termos}
-\lipsum[1]
-\section{Termos}
-\lipsum[1]
+\chapter{Anexo}
+Elemento opcional. O texto deve ser precedido da palavra ANEXO, identificado por letras maiúsculas consecutivas, travessão e pelo respectivo título. Na identificação dos anexos, quando esgotadas as letras do alfabeto, devem ser utilizadas letras maiúsculas dobradas. O destaque tipográfico (negrito, itálico ou sublinhado) deve ser o mesmo da seção primária.\\[1em]
+
+\noindent EXEMPLO\\[1em]
+
+\noindent ANEXO A — REPRESENTAÇÃO GRÁFICA DE CONTAGEM DE CÉLULAS INFLAMATÓRIAS PRESENTES
+NAS CAUDAS EM REGENERAÇÃO – GRUPO DE CONTROLE I (TEMPERATURA...)
+
+
+\section{Exemplos de Figuras}
+
 \begin{table}[ht]
     \centering
     \caption{Tabela estilosa 5×5}
@@ -245,21 +306,7 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
         \bottomrule
     \end{tabular}
 \end{table}
-\begin{table}[ht]
-    \centering
-    \caption{Comparativo de Tecnologias de Rede}
-    \label{tab:comp-redes}
-    \begin{tabular}{lcc}
-        \toprule
-        Tecnologia & Alcance Típico & Velocidade Máxima (Teórica) \\
-        \midrule
-        Ethernet (Gigabit) & Curto & 1 Gbps \\
-        Wi-Fi 6 (802.11ax) & Médio & 9.6 Gbps \\
-        Fibra Óptica & Longo & > 100 Gbps \\
-        Bluetooth & Muito Curto & 3 Mbps \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -269,6 +316,7 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
     \caption{Figura de teste estilizada}
     \label{fig:teste-estilosa}
 \end{figure}
+
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -280,4 +328,5 @@ This abstract complies with ABNT NBR 6028:2021, which establishes the requiremen
     \caption{Fluxo circular simples.}
     \label{fig:fluxo-simples}
 \end{figure}
+
 \end{document} 

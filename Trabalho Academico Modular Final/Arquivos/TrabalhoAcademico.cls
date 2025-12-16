@@ -107,10 +107,6 @@
 
 
 
-
-
-
-
 % ==========================================================
 % 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
 % ==========================================================
@@ -240,13 +236,6 @@
 
 
 
-
-
-
-
-
-
-
 % ==========================================================
 % -------Ficha Catalografica: Inverter nome do autor--------
 % ==========================================================
@@ -316,9 +305,6 @@
 
 
 
-
-
-
 % -----------------------------------------------
 % --------Inserir folha de aprovação-------------
 % -----------------------------------------------
@@ -364,10 +350,6 @@
 
 
 
-
-
-
-
 % ===============================================
 % ---------------Dedicatoria---------------------
 % ===============================================
@@ -384,9 +366,6 @@
 }
 
 % -----------------------------------------------
-
-
-
 
 
 
@@ -422,9 +401,6 @@
 
 
 
-
-
-
 % ===============================================
 % -------------------Epígrafe--------------------
 % -----------------------------------------------
@@ -437,9 +413,6 @@
     \end{flushright}
 }
 % ==============================================
-
-
-
 
 
 
@@ -470,8 +443,6 @@
   \end{ResumoBase}%
 }
 % ==========================================================
-
-
 
 
 
@@ -517,11 +488,6 @@
 
 
 
-
-
-
-
-
 % ==========================================================
 \newcommand{\preTexto}[1]{%
   \clearpage
@@ -555,19 +521,6 @@
     \cleardoublepage
 }
 % ==========================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -655,17 +608,11 @@
 
 
 
-
-
-
 % ----------------------------------------------------------
 % Títulos de \part ficam em versalete
 % ----------------------------------------------------------
 \renewcommand{\parttitlefont}{\scshape}
 % ----------------------------------------------------------
-
-
-
 
 
 
@@ -756,21 +703,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % ==========================================================
 % ---------------CABEÇALHOS E NUMERAÇÃO---------------------
 % ==========================================================
@@ -796,18 +728,18 @@
 % -------------FRONT / MAIN / BACK MATTER-------------------
 % ==========================================================
 \makeatletter
-\renewcommand{\frontmatter}{%
+\newcommand{\pretextual}{%
   \cleardoublepage
   \pagenumbering{arabic}%
   \pagestyle{empty}%
   \chapterstyle{estiloNaoNumerado}%
 }
-\renewcommand{\mainmatter}{%
+\newcommand{\textual}{%
   \cleardoublepage
   \pagestyle{meuestilo}%
   \chapterstyle{\defaultchapterstyle}%
 }
-\renewcommand{\backmatter}{%
+\newcommand{\postextual}{%
   \cleardoublepage
   \pagestyle{meuestilo}%
   \chapterstyle{\defaultchapterstyle}%
@@ -831,8 +763,6 @@
 
 
 
-
-
 \newcommand{\inicioApendices}{%
   \appendix
   \setcounter{chapter}{0}%
@@ -847,22 +777,18 @@
 }
 
 \newcommand{\inicioAnexos}{%
-  \cleardoublepage
-  \setcounter{chapter}{0}%
-  \renewcommand{\chaptername}{Anexo}%
-  \renewcommand{\thechapter}{\Alph{chapter}}%
-  \makeatletter
-  \renewcommand{\chaptermark}[1]{%
-    \markboth{ANEXO~\thechapter.\ ##1}{}%
-  }%
-  \makeatother
+    \cleardoublepage
+    \setcounter{chapter}{0}%
+    \renewcommand{\chaptername}{Anexo}%
+    \renewcommand{\appendixname}{Anexo}%
+    \renewcommand{\thechapter}{\Alph{chapter}}%
+    \renewcommand{\theHchapter}{anexo.\thechapter}%
+    \makeatletter
+    \renewcommand{\chaptermark}[1]{%
+        \markboth{ANEXO~\thechapter.\ ##1}{}%
+    }%
+    \makeatother
 }
-
-
-
-
-
-
 
 
 
