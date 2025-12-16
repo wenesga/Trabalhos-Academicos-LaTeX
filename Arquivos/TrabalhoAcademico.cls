@@ -236,6 +236,9 @@
 
 
 
+
+\newcommand{\tituloficha}[1]{\def\@tituloficha{#1}}
+\newcommand{\imprimirtituloficha}{\@tituloficha}
 % ==========================================================
 % -------Ficha Catalografica: Inverter nome do autor--------
 % ==========================================================
@@ -271,7 +274,7 @@
         \begin{minipage}[c][7cm]{12.5cm}%
         \imprimirautorinvertido
         
-        \hspace{0.5cm}\imprimirtitulo~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
+        \hspace{0.5cm}\imprimirtituloficha~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
         
         \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
         
