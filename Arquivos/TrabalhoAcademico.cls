@@ -582,7 +582,7 @@
   \renewcommand{\printchaptertitle}[1]{%
     \vspace*{2\onelineskip}
     \begin{center}
-      \Huge\bfseries\scshape  ##1\par
+      \LARGE\bfseries\scshape  ##1\par
     \end{center}%
   }
 }
