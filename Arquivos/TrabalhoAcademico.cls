@@ -49,7 +49,9 @@
 % Texto de Teste
 % ----------------------------------------------------------
 \RequirePackage{lipsum} % Gerador de texto
-% ==========================================================
+
+
+
 
 
 
@@ -81,7 +83,7 @@
     Wenes%
     \raisebox{0ex}{T}\kern-0.168em%
     \raisebox{-0.5ex}{E}\kern-0.124em%
-    \raisebox{0ex}{X}
+    \raisebox{0ex}{X}%
 }
 \newcommand{\abnTexUFT}{%
     abn%
@@ -91,7 +93,7 @@
     \raisebox{0.4ex}{-}%
     \raisebox{0.05ex}{U}\kern-0em
     \raisebox{0.05ex}{F}\kern-0em
-    \raisebox{0.05ex}{T}
+    \raisebox{0.05ex}{T}%
 }
 % ==========================================================
 
@@ -319,7 +321,7 @@
     \end{center}
 }
 % -----------------------------------------------
-\newcommand{\folhadeaprovacao}{%
+\newcommand{\folhadeaprovacao}[1]{%
     \cleardoublepage
     \begin{center}
         {\bfseries\large\imprimirautor\par}
@@ -336,7 +338,7 @@
         \vspace*{\fill}
     \end{center}
 
-    Trabalho aprovado. \imprimirlocal, 15 de Desembro de 2025:
+    Trabalho aprovado. \imprimirlocal, #1:
     
     \vspace*{1.5em}
     \assinatura{\textbf{\imprimirorientador}\\Orientador}
