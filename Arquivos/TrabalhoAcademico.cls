@@ -79,11 +79,13 @@
 % ==========================================================
 % ------Marca Tex: WenesTEX - abnTEX-UFT------
 % ----------------------------------------------------------
+\RequirePackage{xspace}
 \newcommand{\WenesTex}{%
     Wenes%
     \raisebox{0ex}{T}\kern-0.168em%
     \raisebox{-0.5ex}{E}\kern-0.124em%
     \raisebox{0ex}{X}%
+    \xspace
 }
 \newcommand{\abnTexUFT}{%
     abn%
@@ -94,6 +96,7 @@
     \raisebox{0.05ex}{U}\kern-0em
     \raisebox{0.05ex}{F}\kern-0em
     \raisebox{0.05ex}{T}%
+    \unskip\ignorespaces
 }
 % ==========================================================
 
@@ -276,7 +279,7 @@
         \begin{minipage}[c][7cm]{12.5cm}%
         \imprimirautorinvertido
         
-        \hspace{0.5cm}\imprimirtituloficha~/~\imprimirautorinvertido.~--~\imprimirlocal, \imprimirdata.
+        \hspace{0.5cm}\imprimirtituloficha\ /\ \imprimirautor.\ -- \imprimirlocal, \imprimirdata.
         
         \hspace{0.5cm}\thelastpage p. : il. ; 30 cm.\\
         
