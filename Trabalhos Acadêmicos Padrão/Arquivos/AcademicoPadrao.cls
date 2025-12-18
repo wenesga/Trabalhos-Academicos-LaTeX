@@ -1,11 +1,11 @@
 % ==========================================================
-% Classe: TrabalhoAcademico.cls
+% Classe: AcademicoPadrao.cls
 % Autor: Wenes Aquino - Copyright © 2025
 % ==========================================================
 % Núcleo da Classe
 % ----------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{Arquivos/TrabalhoAcademico}[2025/12/13 v-2.0 TrabalhoAcademico ABNT-UFT]
+\ProvidesClass{Arquivos/AcademicoPadrao}[2025/12/13 v-2.0 Trabalho Academico ABNT-UFT]
 \LoadClass[12pt,a4paper,oneside]{memoir}
 % ==========================================================
 % Idioma e Tipografia
@@ -378,6 +378,50 @@
 
 
 
+
+
+% ==========================================================
+% ------------ESTILOS DE CAPÍTULO (MODULARES)---------------
+% ==========================================================
+\makechapterstyle{CapitulosNumerado}{%
+    \chapterstyle{hangnum} 
+    \setlength{\beforechapskip}{-1.4cm} % Remove espaço branco no topo
+    \setlength{\afterchapskip}{1.5cm}   % Espaço após o título
+    
+    % --- Configura a numeração e o recuo do título ---
+    \renewcommand*{\printchapternum}{\chapnumfont \thechapter}
+    \renewcommand*{\afterchapternum}{\hspace{0.75cm}} 
+}
+
+
+
+
+% ==========================================================
+\makechapterstyle{estiloNaoNumerado}{%
+  \setlength{\beforechapskip}{-73pt}%
+  \setlength{\afterchapskip}{2\onelineskip}%
+  \renewcommand{\printchaptername}{}%
+  \renewcommand{\chapternamenum}{}%
+  \renewcommand{\printchapternum}{}%
+  \renewcommand{\printchaptertitle}[1]{%
+    \vspace*{2\onelineskip}%
+    \begin{center}
+      \LARGE\bfseries\scshape ##1\par
+%      \vspace{-1.5\onelineskip}%
+%      \rule{\textwidth}{0.4pt}%
+    \end{center}%
+  }%
+}
+% ==========================================================
+
+
+
+
+
+
+
+
+
 % ==========================================================
 \def\defaultchapterstyle{CapitulosNumerado}
 
@@ -625,87 +669,6 @@
 
 
 
-% ==========================================================
-% ------------ESTILOS DE CAPÍTULO (MODULARES)---------------
-% ==========================================================
-\makechapterstyle{CapitulosNumerado}{%
-    \setlength{\beforechapskip}{0.46cm} % Descer estilo de capítulo
-    \renewcommand{\printchaptername}{}
-    \renewcommand{\chapternamenum}{}
-    \renewcommand{\afterchapternum}{}
-    \setlength{\midchapskip}{1.3cm} 
-    \renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
-    \renewcommand{\printchapternum}{%
-        \noindent
-        \begin{tikzpicture}[remember picture, overlay]
-            \def\numsize{61} % Tamanho do número          
-            \def\barwidth{0.8pt} % Espessura da linha      
-            \def\leftoffset{2.3cm} % Reta horizontal esquerda
-            
-            \node[inner sep=0pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
-             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
-             
-            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
-             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
-            
-            \node[inner sep=0pt, anchor=south west, font=\large\rmfamily] (chaptext)
-                 at (0pt, -4pt) {\chaptername};
-            
-            % --- ALTURA FIXA PARA O RETÂNGULO ---
-            \def\boxheight{41pt}   % ajuste aqui até ficar perfeito
-            
-            % --- PONTO ESQUERDO DO L ---
-            \coordinate (Lbase) at (0.5*\barwidth,15pt);         % base fixa
-            \coordinate (Ltop)  at (0.5*\barwidth,\boxheight);   % topo fixo
-            
-            % --- DESENHA O L FIXO ---
-            % --- AJUSTE: distância horizontal entre o L e o número ---
-            \def\Lgap{0.2cm} % ajuste aqui até ficar visualmente perfeito
-            
-            % --- DESENHO DO L FIXO ---
-            \draw[line width=\barwidth]
-                (Lbase) -- (Ltop)
-                -- ++(\leftoffset - 0.5*\barwidth - \Lgap,0);
-
-            % --- PONTOS DO RETÂNGULO FIXO ---
-            \coordinate (NumRightBase) at ($(num.south east)+(0.2cm,0)$);
-            \coordinate (NumRightTop)  at ($(NumRightBase)+(0,\boxheight)$);
-            
-            \coordinate (RightTop)     at (\linewidth,\boxheight);
-            \coordinate (RightBase)    at (\linewidth,0);
-            
-            % --- CAIXA FIXA ---
-            \draw[line width=\barwidth]
-                (NumRightTop) -- (RightTop)
-                              -- (RightBase)
-                              -- (NumRightBase);
-        \end{tikzpicture}%
-    }
-    \renewcommand{\printchaptertitle}[1]{%
-        \raggedright\LARGE\bfseries\scshape  ##1
-    }
-}
-
-
-
-
-% ==========================================================
-\makechapterstyle{estiloNaoNumerado}{%
-  \setlength{\beforechapskip}{-73pt}%
-  \setlength{\afterchapskip}{2\onelineskip}%
-  \renewcommand{\printchaptername}{}%
-  \renewcommand{\chapternamenum}{}%
-  \renewcommand{\printchapternum}{}%
-  \renewcommand{\printchaptertitle}[1]{%
-    \vspace*{2\onelineskip}%
-    \begin{center}
-      \LARGE\bfseries\scshape ##1\par
-      \vspace{-1.5\onelineskip}%
-      \rule{\textwidth}{0.4pt}%
-    \end{center}%
-  }%
-}
-% ==========================================================
 
 
 
