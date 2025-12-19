@@ -320,6 +320,7 @@
   \secdef\@part\@spart}
 
 \def\@part[#1]#2{%
+    \thispagestyle{empty}
     \ifnum \c@secnumdepth >-2\relax
       \refstepcounter{part}%
       \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
@@ -331,11 +332,11 @@
      \interlinepenalty \@M
      \normalfont
      \ifnum \c@secnumdepth >-2\relax
-       \huge\bfseries \partname\nobreakspace\thepart
+       \Large\bfseries\scshape \partname\nobreakspace\thepart
        \par
        \vskip 20\p@
      \fi
-     \Huge \bfseries #2\par}%
+     \LARGE\bfseries\scshape #2\par}%
     \@endpart}
 \def\@spart#1{%
     {\centering
@@ -405,23 +406,23 @@
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
-                                   {\normalfont\Large\bfseries}}
+                                   {\normalfont\Large\scshape}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\large\bfseries}}
+                                     {\normalfont\large\scshape}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries}}
+                                     {\normalfont\normalsize\scshape}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {3.25ex \@plus1ex \@minus.2ex}%
                                     {-1em}%
-                                    {\normalfont\normalsize\bfseries}}
+                                    {\normalfont\normalsize\scshape}}
 \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
-                                      {\normalfont\normalsize\bfseries}}
+                                      {\normalfont\normalsize\scshape}}
 \if@twocolumn
   \setlength\leftmargini  {2em}
 \else
@@ -466,28 +467,51 @@
                {\endlist}
 \newcommand*\descriptionlabel[1]{\hspace\labelsep
                                 \normalfont\bfseries #1}
+
+
+
+
+
+
+
+
+\newcommand{\resumoname}{Resumo}
+\newcommand{\abstractnameEN}{Abstract}
 \if@titlepage
-  \newenvironment{abstract}{%
-    \chapter*{\abstractname}%
-    \addcontentsline{toc}{chapter}{\abstractname}%
+  \newenvironment{resumo}{%
+    \chapter*{\resumoname}%
+    \addcontentsline{toc}{chapter}{\resumoname}%
     \thispagestyle{empty}%
     \@beginparpenalty\@lowpenalty
+    \def\palavraschave##1{%
+      \par\nobreak
+      \vspace{1.5em}%
+      \noindent\textbf{Palavras-chave:} ##1%
+    }%
+  }{%
+    \par
+    \@endparpenalty\@M
+  }
+  \newenvironment{abstract}{%
+    \chapter*{\abstractnameEN}%
+    \addcontentsline{toc}{chapter}{\abstractnameEN}%
+    \thispagestyle{empty}%
+    \@beginparpenalty\@lowpenalty
+    \def\keywords##1{%
+      \par\nobreak
+      \vspace{1.5em}%
+      \noindent\textbf{Keywords:} ##1%
+    }%
   }{%
     \par
     \@endparpenalty\@M
   }
 \fi
 
-\newcommand{\abstractnameEN}{Abstract}
-\newenvironment{abstracten}{%
-  \chapter*{\abstractnameEN}%
-  \addcontentsline{toc}{chapter}{\abstractnameEN}%
-  \thispagestyle{empty}%
-  \@beginparpenalty\@lowpenalty
-}{%
-  \par
-  \@endparpenalty\@M
-}
+
+
+
+
 
 
 
@@ -849,16 +873,6 @@
 
 
 
-\newcommand{\palavraschave}[1]{%
-  \par\nobreak
-  \vspace{1.5em}%
-  \noindent\textbf{Palavras-chave:} #1%
-}
-\newcommand{\keywords}[1]{%
-  \par\nobreak
-  \vspace{1.5em}%
-  \noindent\textbf{Keywords:} #1%
-}
 
 
 

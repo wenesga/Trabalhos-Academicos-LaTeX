@@ -8,47 +8,177 @@
 
 
 
+
+
+
+% 1. Capítulos Numerados
+\usepackage{titlesec}
+\usepackage{xcolor}
+\definecolor{verde}{HTML}{298073}
+
+\titleformat{\chapter}[display]
+  {\bfseries}
+  {
+    \filleft                 % Alinha à direita
+    \color{black!50!}     % <--- COR CINZA PARA TUDO (Texto + Número)
+    \large\scshape{\chaptertitlename} 
+    \fontsize{50}{50}\selectfont\thechapter 
+  } 
+  {-1ex} % Espaço entre o número e a linha do título
+  {
+    \titlerule
+    \vspace{0.5cm}   
+    \filright
+    \LARGE\scshape
+    \color{black}            % <--- Garante que o Título volte a ser PRETO
+  } 
+  [
+    \vspace{0.35cm}  
+    \titlerule
+  ]
+
+% 2. Capítulos Sem Numeração (Mantido igual)
+\titleformat{name=\chapter, numberless}[display]
+  {\bfseries\filcenter}
+  {}
+  {1ex}
+  {
+    \titlerule
+    \vspace{0.5cm}   
+    \LARGE\scshape
+  }
+  [
+    \vspace{0.35cm} 
+    \titlerule
+  ]
+
+\titlespacing*{\chapter}{0pt}{-1cm}{1.3cm}
+%---------------------------------------------
+
+
+
+
+% ============================================
+% --- Estilo das Seções 
+% ============================================
+\newcommand{\MeuEstiloSecao}{%
+    \titleformat{\section}
+    {\Large\scshape}           % Formato
+    {\color{black!100!}\thesection}  % Label (Verde)
+    {1em}                       % Espaço
+    {\color{black}}             % Título (Preto)
+}
+\MeuEstiloSecao
+% ============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{document} 
 \nocite{*}
+
+
+
+
 \pretextual
+
+
+
+% ================================
+% folhaDeRosto
+% contraCapa
+% fichaCatalografica
+% errata
+% folhaDeAprovacao
+% dedicatoria
+% ================================
+
+
+
+
+
 
 
 \chapter*{Agradecimentos}
 \lipsum[1]
 
-\begin{abstract}
+
+
+% ================================
+% epigrafe
+% listaDeFiguras
+% listaDeTabelas
+% siglas
+% simbolas
+% ================================
+
+
+
+
+
+\begin{resumo}
 \lipsum[1]
 \palavraschave{latex; classes; formatação.}
+\end{resumo}
+
+
+\begin{abstract}
+\lipsum[1]
+\keywords{latex; classes; formatting.}
 \end{abstract}
 
 
-\begin{abstracten}
-\lipsum[1]
-\keywords{latex; classes; formatting.}
-\end{abstracten}
-
-
 \tableofcontents
+
+
 
 
 \textual
 
 
 
+
 \chapter*{Introdução}
 \lipsum[1]
-
 
 \part{Preparação do Relatório}
 
 \chapter{Desenvolvimento}
-\lipsum[1-10]
+\lipsum[1]
+
+\section{Loremonto Dolor Amet}
+\lipsum[1]
+
+\subsection{Lorem ipsum dolor sit amet}
+\lipsum[1]
+
+\subsubsection{Habitant Tristique Senectus}
+\lipsum[1]
+
+\paragraph{Curabitur Dictum~~~--}
+\lipsum[1]
+
+\subparagraph{Pellentesque Habitant:}
+\lipsum[1]
+
 
 
 \part{Resultados}
 
 \chapter{Considerações Finais}
 \lipsum[1-10]
+
+
 
 
 \referencias
@@ -66,10 +196,5 @@
 \chapter{Identificado por letras maiúsculas consecutivas, travessão e pelo respectivo título}
 \section{Respectivo}
 \lipsum[1]
-
-
-
-
-
 
 \end{document} 
