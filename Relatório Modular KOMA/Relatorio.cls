@@ -468,7 +468,6 @@
                                 \normalfont\bfseries #1}
 \if@titlepage
   \newenvironment{abstract}{%
-    \titlepage
     \chapter*{\abstractname}%
     \addcontentsline{toc}{chapter}{\abstractname}%
     \thispagestyle{empty}%
@@ -476,7 +475,6 @@
   }{%
     \par
     \@endparpenalty\@M
-    \endtitlepage
   }
 \fi
 
@@ -911,6 +909,37 @@
   \appendix
 }
 
+
+\makeatletter
+\newif\if@shownumber
+\@shownumbertrue
+
+\let\orig@thepage\thepage
+\renewcommand{\thepage}{%
+  \if@shownumber
+    \orig@thepage
+  \fi
+}
+\makeatother
+
+
+
+\makeatletter
+\newcommand{\pretextual}{%
+  \@shownumberfalse
+}
+\makeatother
+
+
+
+
+
+\makeatletter
+\newcommand{\textual}{%
+  \clearpage
+  \@shownumbertrue
+}
+\makeatother
 
 
 
