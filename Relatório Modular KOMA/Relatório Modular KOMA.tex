@@ -1,4 +1,7 @@
-\documentclass[12pt,brazil]{report}
+\documentclass[12pt,brazil]{Relatorio}
+\addbibresource{Referencias.bib}
+
+
 \usepackage{lipsum}
 
 
@@ -6,14 +9,29 @@
 
 
 \begin{document} 
+\nocite{*}
 
 
 
 \chapter*{Agradecimentos}
 \lipsum[1]
 
-\chapter*{Resumo}
+\begin{abstract}
 \lipsum[1]
+\palavraschave{latex; classes; formatação.}
+\end{abstract}
+
+
+\begin{abstracten}
+\lipsum[1]
+\keywords{latex; classes; formatting.}
+\end{abstracten}
+
+
+\tableofcontents
+
+
+
 
 \chapter*{Introdução}
 \lipsum[1]
@@ -29,6 +47,26 @@
 
 \chapter{Considerações Finais}
 \lipsum[1-10]
+
+
+\referencias
+
+
+
+
+\apendices
+\chapter{Precedido da palavra consecutivas}
+\section{Consecutivas}
+\lipsum[1]
+
+
+\anexos
+\chapter{Identificado por letras maiúsculas consecutivas, travessão e pelo respectivo título}
+\section{Respectivo}
+\lipsum[1]
+
+
+
 
 
 

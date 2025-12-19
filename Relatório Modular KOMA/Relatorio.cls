@@ -1,7 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{report}[2025/01/22 v1.0 Wenes Aquino]
-
-
+\ProvidesClass{Relatorio}[2025/12/18 v1.0 Wenes Aquino]
 
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -383,7 +381,7 @@
   {\parindent \z@ \raggedright \normalfont
     \interlinepenalty\@M
     \ifnum \c@secnumdepth >\m@ne
-      \Huge\bfseries \thechapter\hspace{0.75em}{\scshape #1}\par\nobreak
+      \LARGE\bfseries \thechapter\hspace{0.75em}{\scshape #1}\par\nobreak
     \else
       \Huge\bfseries{\scshape #1}\par\nobreak
     \fi
@@ -400,7 +398,7 @@
   \vspace*{-30\p@}%
   {\parindent \z@ \centering \normalfont
     \interlinepenalty\@M
-    \Huge\bfseries{\scshape #1}\par\nobreak
+    \LARGE\bfseries{\scshape #1}\par\nobreak
     \vskip 40\p@
   }}
 
@@ -470,27 +468,31 @@
                                 \normalfont\bfseries #1}
 \if@titlepage
   \newenvironment{abstract}{%
-      \titlepage
-      \null\vfil
-      \@beginparpenalty\@lowpenalty
-      \begin{center}%
-        \bfseries \abstractname
-        \@endparpenalty\@M
-      \end{center}}%
-     {\par\vfil\null\endtitlepage}
-\else
-  \newenvironment{abstract}{%
-      \if@twocolumn
-        \section*{\abstractname}%
-      \else
-        \small
-        \begin{center}%
-          {\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
-        \end{center}%
-        \quotation
-      \fi}
-      {\if@twocolumn\else\endquotation\fi}
+    \titlepage
+    \chapter*{\abstractname}%
+    \addcontentsline{toc}{chapter}{\abstractname}%
+    \thispagestyle{empty}%
+    \@beginparpenalty\@lowpenalty
+  }{%
+    \par
+    \@endparpenalty\@M
+    \endtitlepage
+  }
 \fi
+
+\newcommand{\abstractnameEN}{Abstract}
+\newenvironment{abstracten}{%
+  \chapter*{\abstractnameEN}%
+  \addcontentsline{toc}{chapter}{\abstractnameEN}%
+  \thispagestyle{empty}%
+  \@beginparpenalty\@lowpenalty
+}{%
+  \par
+  \@endparpenalty\@M
+}
+
+
+
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -643,7 +645,7 @@
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
     \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{1.5em}%
+    \setlength\@tempdima{4em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
@@ -656,11 +658,11 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-\newcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
-\newcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
-\newcommand*\l@subsubsection{\@dottedtocline{3}{7.0em}{4.1em}}
-\newcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
-\newcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
+\newcommand*\l@section{\@dottedtocline{1}{4em}{2.3em}}
+\newcommand*\l@subsection{\@dottedtocline{2}{4em}{3.2em}}
+\newcommand*\l@subsubsection{\@dottedtocline{3}{4em}{4.1em}}
+\newcommand*\l@paragraph{\@dottedtocline{4}{10em}{4em}}
+\newcommand*\l@subparagraph{\@dottedtocline{5}{4em}{6em}}
 \newcommand\listoffigures{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
@@ -845,6 +847,78 @@
 % espaçamento entre linha
 \renewcommand{\baselinestretch}{1.3}
 \normalsize
+
+
+
+
+\newcommand{\palavraschave}[1]{%
+  \par\nobreak
+  \vspace{1.5em}%
+  \noindent\textbf{Palavras-chave:} #1%
+}
+\newcommand{\keywords}[1]{%
+  \par\nobreak
+  \vspace{1.5em}%
+  \noindent\textbf{Keywords:} #1%
+}
+
+
+
+\RequirePackage{ragged2e}
+\RequirePackage[backend=biber,style=abnt]{biblatex}
+\newcommand{\referencias}{%
+  \chapter*{Referências}%
+  \addcontentsline{toc}{chapter}{Referências}%
+  \printbibliography[heading=none]%
+  
+}
+\AtBeginBibliography{\justifying}
+\urlstyle{same}
+
+
+
+
+\makeatletter
+\def\ABNT@appendix@chapterhead#1{%
+  \vspace*{-30\p@}%
+  {\parindent\z@
+   \centering
+   \normalfont\bfseries\LARGE\scshape
+   \MakeUppercase{\@chapapp~\thechapter\space--}\space #1\par\nobreak
+   \vskip 40\p@
+  }%
+}
+\makeatother
+
+
+
+
+\makeatletter
+\let\orig@appendix\appendix
+\renewcommand{\appendix}{%
+  \orig@appendix
+  \let\@makechapterhead\ABNT@appendix@chapterhead
+}
+\makeatother
+
+\newcommand{\apendices}{%
+  \renewcommand{\appendixname}{Apêndice}%
+  \appendix
+}
+
+\newcommand{\anexos}{%
+  \renewcommand{\appendixname}{Anexo}%
+  \appendix
+}
+
+
+
+
+
+
+
+
+
 
 
 
