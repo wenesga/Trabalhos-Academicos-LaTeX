@@ -1,11 +1,54 @@
+%%
+%% This is file `article.cls',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% classes.dtx  (with options: `article')
+%% 
+%% This is a generated file.
+%% 
+%% The source is maintained by the LaTeX Project team and bug
+%% reports for it can be opened at https://latex-project.org/bugs.html
+%% (but please observe conditions on bug reports sent to that address!)
+%% 
+%% 
+%% Copyright (C) 1993-2025
+%% The LaTeX Project and any individual authors listed elsewhere
+%% in this file.
+%% 
+%% This file was generated from file(s) of the LaTeX base system.
+%% --------------------------------------------------------------
+%% 
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    https://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008 or later.
+%% 
+%% This file has the LPPL maintenance status "maintained".
+%% 
+%% This file may only be distributed together with a copy of the LaTeX
+%% base system. You may however distribute the LaTeX base system without
+%% such generated files.
+%% 
+%% The list of all files belonging to the LaTeX base distribution is
+%% given in the file `manifest.txt'. See also `legal.txt' for additional
+%% information.
+%% 
+%% The list of derived (unpacked) files belonging to the distribution
+%% and covered by LPPL is defined by the unpacking scripts (with
+%% extension .ins) which are part of the distribution.
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{Relatorio}[2025/12/18 v1.0 Wenes Aquino]
-
+\ProvidesClass{article}
+              [2025/01/22 v1.4n
+ Standard LaTeX document class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
-\@titlepagetrue
-\newif\if@openright
+\@titlepagefalse
 \if@compatibility\else
   \DeclareOption{a4paper}
      {\setlength\paperheight {297mm}%
@@ -49,11 +92,6 @@
 \if@compatibility\else
   \DeclareOption{notitlepage}{\@titlepagefalse}
 \fi
-\if@compatibility
-\else
-\DeclareOption{openright}{\@openrighttrue}
-\DeclareOption{openany}{\@openrightfalse}
-\fi
 \if@compatibility\else
   \DeclareOption{onecolumn}{\@twocolumnfalse}
 \fi
@@ -70,78 +108,9 @@
       }%
     \renewcommand\newblock{\par}}%
 }
-
-
-
-% ========================================================================
-% ========================================================================
+\ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final}
 \ProcessOptions
 \input{size1\@ptsize.clo}
-% ========================================================================
-
-
-
-\DeclareOption{brazil}{\PassOptionsToPackage{brazil}{babel}}
-
-\ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany,brazil}
-\ProcessOptions\relax
-\RequirePackage[utf8]{inputenc}
-\RequirePackage{babel}
-
-
-% ===== AJUSTE DE MARGENS ACADÊMICAS (A4) =====
-% 3 cm esquerda | 2 cm direita | 3 cm topo | 2 cm inferior
-
-\setlength{\oddsidemargin}{4.6mm}   % 30mm - 25.4mm
-\setlength{\evensidemargin}{4.6mm}
-
-\setlength{\topmargin}{4.6mm}       % 30mm - 25.4mm
-
-\setlength{\headheight}{12pt}
-\setlength{\headsep}{12pt}
-
-\setlength{\textwidth}{160mm}       % 210 - 30 - 20
-\setlength{\textheight}{247mm}      % 297 - 30 - 20
-
-\RequirePackage{fontspec}
-\setmainfont{CMU Serif}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
@@ -149,9 +118,6 @@
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-
-
-
 \setcounter{topnumber}{2}
 \renewcommand\topfraction{.7}
 \setcounter{bottomnumber}{1}
@@ -168,27 +134,27 @@
       \def\@evenhead{\thepage\hfil\slshape\leftmark}%
       \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
       \let\@mkboth\markboth
-    \def\chaptermark##1{%
+    \def\sectionmark##1{%
       \markboth {\MakeUppercase{%
-        \ifnum \c@secnumdepth >\m@ne
-            \@chapapp\ \thechapter. \ %
+        \ifnum \c@secnumdepth >\z@
+          \thesection\quad
         \fi
         ##1}}{}}%
-    \def\sectionmark##1{%
-      \markright {\MakeUppercase{%
-        \ifnum \c@secnumdepth >\z@
-          \thesection. \ %
+    \def\subsectionmark##1{%
+      \markright {%
+        \ifnum \c@secnumdepth >\@ne
+          \thesubsection\quad
         \fi
-        ##1}}}}
+        ##1}}}
 \else
   \def\ps@headings{%
     \let\@oddfoot\@empty
     \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
     \let\@mkboth\markboth
-    \def\chaptermark##1{%
+    \def\sectionmark##1{%
       \markright {\MakeUppercase{%
         \ifnum \c@secnumdepth >\m@ne
-            \@chapapp\ \thechapter. \ %
+          \thesection\quad
         \fi
         ##1}}}}
 \fi
@@ -197,8 +163,8 @@
     \def\@evenhead{\thepage\hfil\slshape\leftmark}%
     \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
     \let\@mkboth\@gobbletwo
-    \let\chaptermark\@gobble
     \let\sectionmark\@gobble
+    \let\subsectionmark\@gobble
     }
 \if@titlepage
   \newcommand\maketitle{\begin{titlepage}%
@@ -286,143 +252,73 @@
   \par
   \vskip 1.5em}
 \fi
-\newcommand*\chaptermark[1]{}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{3}
 \newcounter {part}
-\newcounter {chapter}
-\newcounter {section}[chapter]
+\newcounter {section}
 \newcounter {subsection}[section]
 \newcounter {subsubsection}[subsection]
 \newcounter {paragraph}[subsubsection]
 \newcounter {subparagraph}[paragraph]
 \renewcommand \thepart {\@Roman\c@part}
-\renewcommand \thechapter {\@arabic\c@chapter}
-\renewcommand \thesection {\thechapter.\@arabic\c@section}
+\renewcommand \thesection {\@arabic\c@section}
 \renewcommand\thesubsection   {\thesection.\@arabic\c@subsection}
 \renewcommand\thesubsubsection{\thesubsection.\@arabic\c@subsubsection}
 \renewcommand\theparagraph    {\thesubsubsection.\@arabic\c@paragraph}
 \renewcommand\thesubparagraph {\theparagraph.\@arabic\c@subparagraph}
-\newcommand\@chapapp{\chaptername}
 \newcommand\part{%
-  \if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi
-  \thispagestyle{plain}%
-  \if@twocolumn
-    \onecolumn
-    \@tempswatrue
-  \else
-    \@tempswafalse
-  \fi
-  \null\vfil
-  \secdef\@part\@spart}
+   \if@noskipsec \leavevmode \fi
+   \par
+   \addvspace{4ex}%
+   \@afterindentfalse
+   \secdef\@part\@spart}
 
 \def\@part[#1]#2{%
-    \thispagestyle{empty}
-    \ifnum \c@secnumdepth >-2\relax
+    \ifnum \c@secnumdepth >\m@ne
       \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\hb@xt@4.2em{\thepart\hfil}#1}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
     \else
       \addcontentsline{toc}{part}{#1}%
     \fi
-    \markboth{}{}%
-    {\centering
+    {\parindent \z@ \raggedright
      \interlinepenalty \@M
      \normalfont
-     \ifnum \c@secnumdepth >-2\relax
-       \Large\bfseries\scshape \partname\nobreakspace\thepart
-       \par
-       \vskip 20\p@
+     \ifnum \c@secnumdepth >\m@ne
+       \Large\bfseries \partname\nobreakspace\thepart
+       \par\nobreak
      \fi
-     \LARGE\bfseries\scshape #2\par}%
-    \@endpart}
+     \huge \bfseries #2%
+     \markboth{}{}\par}%
+    \nobreak
+    \vskip 3ex
+    \@afterheading}
 \def\@spart#1{%
-    {\centering
+    {\parindent \z@ \raggedright
      \interlinepenalty \@M
      \normalfont
-     \Huge \bfseries #1\par}%
-    \@endpart}
-\def\@endpart{\vfil\newpage
-              \if@twoside
-               \if@openright
-                \null
-                \thispagestyle{empty}%
-                \newpage
-               \fi
-              \fi
-              \if@tempswa
-                \twocolumn
-              \fi}
-\newcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
-                    \thispagestyle{plain}%
-                    \global\@topnum\z@
-                    \@afterindentfalse
-                    \secdef\@chapter\@schapter}
-\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
-                         \refstepcounter{chapter}%
-                         \typeout{\@chapapp\space\thechapter.}%
-                         \addcontentsline{toc}{chapter}%
-                                   {\protect\numberline{\thechapter}#1}%
-                    \else
-                      \addcontentsline{toc}{chapter}{#1}%
-                    \fi
-                    \chaptermark{#1}%
-                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
-                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
-                    \if@twocolumn
-                      \@topnewpage[\@makechapterhead{#2}]%
-                    \else
-                      \@makechapterhead{#2}%
-                      \@afterheading
-                    \fi}
-\def\@makechapterhead#1{%
-  \vspace*{-30\p@}%
-  {\parindent \z@ \raggedright \normalfont
-    \interlinepenalty\@M
-    \ifnum \c@secnumdepth >\m@ne
-      \LARGE\bfseries \thechapter\hspace{0.75em}{\scshape #1}\par\nobreak
-    \else
-      \Huge\bfseries{\scshape #1}\par\nobreak
-    \fi
-    \vskip 40\p@
-  }}
-
-\def\@schapter#1{\if@twocolumn
-                   \@topnewpage[\@makeschapterhead{#1}]%
-                 \else
-                   \@makeschapterhead{#1}%
-                   \@afterheading
-                 \fi}
-\def\@makeschapterhead#1{%
-  \vspace*{-30\p@}%
-  {\parindent \z@ \centering \normalfont
-    \interlinepenalty\@M
-    \LARGE\bfseries{\scshape #1}\par\nobreak
-    \vskip 40\p@
-  }}
-
+     \huge \bfseries #1\par}%
+     \nobreak
+     \vskip 3ex
+     \@afterheading}
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
-                                   {\normalfont\Large\scshape}}
+                                   {\normalfont\Large\bfseries}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\large\scshape}}
+                                     {\normalfont\large\bfseries}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\scshape}}
+                                     {\normalfont\normalsize\bfseries}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {3.25ex \@plus1ex \@minus.2ex}%
                                     {-1em}%
-                                    {\normalfont\normalsize\scshape}}
+                                    {\normalfont\normalsize\bfseries}}
 \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
-                                      {\normalfont\normalsize\scshape}}
+                                      {\normalfont\normalsize\bfseries}}
 \if@twocolumn
   \setlength\leftmargini  {2em}
 \else
@@ -467,54 +363,29 @@
                {\endlist}
 \newcommand*\descriptionlabel[1]{\hspace\labelsep
                                 \normalfont\bfseries #1}
-
-
-
-
-
-
-
-
-\newcommand{\resumoname}{Resumo}
-\newcommand{\abstractnameEN}{Abstract}
 \if@titlepage
-  \newenvironment{resumo}{%
-    \chapter*{\resumoname}%
-    \addcontentsline{toc}{chapter}{\resumoname}%
-    \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
-    \def\palavraschave##1{%
-      \par\nobreak
-      \vspace{1.5em}%
-      \noindent\textbf{Palavras-chave:} ##1%
-    }%
-  }{%
-    \par
-    \@endparpenalty\@M
-  }
   \newenvironment{abstract}{%
-    \chapter*{\abstractnameEN}%
-    \addcontentsline{toc}{chapter}{\abstractnameEN}%
-    \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
-    \def\keywords##1{%
-      \par\nobreak
-      \vspace{1.5em}%
-      \noindent\textbf{Keywords:} ##1%
-    }%
-  }{%
-    \par
-    \@endparpenalty\@M
-  }
+      \titlepage
+      \null\vfil
+      \@beginparpenalty\@lowpenalty
+      \begin{center}%
+        \bfseries \abstractname
+        \@endparpenalty\@M
+      \end{center}}%
+     {\par\vfil\null\endtitlepage}
+\else
+  \newenvironment{abstract}{%
+      \if@twocolumn
+        \section*{\abstractname}%
+      \else
+        \small
+        \begin{center}%
+          {\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
+        \end{center}%
+        \quotation
+      \fi}
+      {\if@twocolumn\else\endquotation\fi}
 \fi
-
-
-
-
-
-
-
-
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -566,10 +437,9 @@
     }
 \fi
 \newcommand\appendix{\par
-  \setcounter{chapter}{0}%
   \setcounter{section}{0}%
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
+  \setcounter{subsection}{0}%
+  \gdef\thesection{\@Alph\c@section}}
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -578,12 +448,9 @@
 \skip\@mpfootins = \skip\footins
 \setlength\fboxsep{3\p@}
 \setlength\fboxrule{.4\p@}
-\@addtoreset {equation}{chapter}
-\renewcommand\theequation
-  {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@equation}
-\newcounter{figure}[chapter]
-\renewcommand \thefigure
-     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@figure}
+\renewcommand \theequation {\@arabic\c@equation}
+\newcounter{figure}
+\renewcommand \thefigure {\@arabic\c@figure}
 \def\fps@figure{tbp}
 \def\ftype@figure{1}
 \def\ext@figure{lof}
@@ -594,9 +461,8 @@
 \newenvironment{figure*}
                {\@dblfloat{figure}}
                {\end@dblfloat}
-\newcounter{table}[chapter]
-\renewcommand \thetable
-     {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@table}
+\newcounter{table}
+\renewcommand\thetable{\@arabic\c@table}
 \def\fps@table{tbp}
 \def\ftype@table{2}
 \def\ext@table{lot}
@@ -633,18 +499,12 @@
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
-\setcounter{tocdepth}{5}
+\setcounter{tocdepth}{3}
 \newcommand\tableofcontents{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    \chapter*{\contentsname
+    \section*{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
     }
 \newcommand*\l@part[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -655,7 +515,7 @@
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       {\leavevmode
-       \large \bfseries \MakeUppercase{#1}\hfil 
+       \large \bfseries #1\hfil
        \hb@xt@\@pnumwidth{\hss #2%
                           \kern-\p@\kern\p@}}\par
        \nobreak
@@ -665,64 +525,46 @@
       \fi
     \endgroup
   \fi}
-  
-\newcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{5em}%
+\newcommand*\l@section[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty\@secpenalty
+    \addvspace{1.0em \@plus\p@}%
+    \setlength\@tempdima{1.5em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       \leavevmode \bfseries
       \advance\leftskip\@tempdima
       \hskip -\leftskip
-    \MakeUppercase{#1}\nobreak
-    {\def\@dotsep{0.5}%
-     \leaders\hbox{.\kern\@dotsep em}\hfill}%
-    \nobreak\hb@xt@\@pnumwidth{\hss #2%
-                               \kern-\p@\kern\p@}\par
-    \penalty\@highpenalty
+      #1\nobreak\hfil
+      \nobreak\hb@xt@\@pnumwidth{\hss #2%
+                                 \kern-\p@\kern\p@}\par
     \endgroup
   \fi}
-
-\newcommand*\l@section{\@dottedtocline{1}{0em}{5em}}
-\newcommand*\l@subsection{\@dottedtocline{2}{0em}{5em}}
-\newcommand*\l@subsubsection{\@dottedtocline{3}{0em}{5em}}
-\newcommand*\l@paragraph{\@dottedtocline{4}{0em}{5em}}
-\newcommand*\l@subparagraph{\@dottedtocline{5}{0em}{5em}}
+\newcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\newcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+\newcommand*\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
+\newcommand*\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
 \newcommand\listoffigures{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    \chapter*{\listfigurename}%
+    \section*{\listfigurename}%
       \@mkboth{\MakeUppercase\listfigurename}%
               {\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
-    \if@restonecol\twocolumn\fi
     }
 \newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
 \newcommand\listoftables{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    \chapter*{\listtablename}%
+    \section*{\listtablename}%
       \@mkboth{%
           \MakeUppercase\listtablename}%
          {\MakeUppercase\listtablename}%
     \@starttoc{lot}%
-    \if@restonecol\twocolumn\fi
     }
 \let\l@table\l@figure
 \newdimen\bibindent
 \setlength\bibindent{1.5em}
 \newenvironment{thebibliography}[1]
-     {\chapter*{\bibname}%
-      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+     {\section*{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -747,7 +589,7 @@
                 \else
                   \@restonecoltrue
                 \fi
-                \twocolumn[\@makeschapterhead{\indexname}]%
+                \twocolumn[\section*{\indexname}]%
                 \@mkboth{\MakeUppercase\indexname}%
                         {\MakeUppercase\indexname}%
                 \thispagestyle{plain}\parindent\z@
@@ -764,7 +606,6 @@
   \kern-3\p@
   \hrule\@width.4\columnwidth
   \kern2.6\p@}
-\@addtoreset{footnote}{chapter}
 \newcommand\@makefntext[1]{%
     \parindent 1em%
     \noindent
@@ -772,12 +613,11 @@
 \newcommand\contentsname{Contents}
 \newcommand\listfigurename{List of Figures}
 \newcommand\listtablename{List of Tables}
-\newcommand\bibname{Bibliography}
+\newcommand\refname{References}
 \newcommand\indexname{Index}
 \newcommand\figurename{Figure}
 \newcommand\tablename{Table}
 \newcommand\partname{Part}
-\newcommand\chaptername{Chapter}
 \newcommand\appendixname{Appendix}
 \newcommand\abstractname{Abstract}
 \def\today{\ifcase\month\or
@@ -799,174 +639,6 @@
 \else
   \onecolumn
 \fi
-%================================================================================
-
-
-
-
-
-
-\makeatletter
-\let\@oddfoot\@empty
-\let\@evenfoot\@empty
-\makeatother
-
-
-
-
-
-
-%==========================================================
-% 1. Cabeçalho pagina sem titulo
-%==========================================================
-\makeatletter
-\renewcommand{\chaptermark}[1]{%
-  \markboth{\thechapter.\ #1}{}%
-}
-\def\ps@meuestilo{%
-  \def\@oddhead{%
-    \vbox{%
-      \hbox to \textwidth{%
-        \footnotesize\textit{\leftmark}\hfil
-        \footnotesize\thepage}%
-      \vskip 2pt
-      \hrule height 0.4pt
-    }%
-  }%
-  \let\@evenhead\@oddhead
-}
-\makeatother
-
-%==========================================================
-% 2. Cabeçalho pagina com titulo
-%==========================================================
-\makeatletter
-\def\ps@plain{%
-  \def\@oddhead{%
-    \vbox{%
-      \vskip 0.5pt % ← mesmo ajuste do outro
-      \hbox to \textwidth{\hfil\footnotesize\thepage}%
-    }%
-  }%
-}
-\makeatother
-
-
-
-
-
-
-
-
-\pagestyle{meuestilo}
-
-% cabeçalho
-\setlength{\topmargin}{-17.7pt} % aproxima do topo
-\setlength{\headheight}{0pt}    % altura real do cabeçalho
-\setlength{\headsep}{30pt}      % distância cabeçalho ↔ texto
-
-% espaçamento entre linha
-\renewcommand{\baselinestretch}{1.3}
-\normalsize
-
-
-
-
-
-
-\RequirePackage{hyperref}
-\RequirePackage{ragged2e}
-\RequirePackage[backend=biber,style=abnt]{biblatex}
-\newcommand{\referencias}{%
-  \chapter*{Referências}%
-  \addcontentsline{toc}{chapter}{Referências}%
-  \printbibliography[heading=none]%
-  
-}
-\AtBeginBibliography{\justifying}
-\urlstyle{same}
-
-
-
-
-\makeatletter
-\def\ABNT@appendix@chapterhead#1{%
-  \vspace*{-30\p@}%
-  {\parindent\z@
-   \centering
-   \normalfont\bfseries\LARGE\scshape
-   \MakeUppercase{\@chapapp~\thechapter\space--}\space #1\par\nobreak
-   \vskip 40\p@
-  }%
-}
-\makeatother
-
-
-
-
-\makeatletter
-\let\orig@appendix\appendix
-\renewcommand{\appendix}{%
-  \orig@appendix
-  \let\@makechapterhead\ABNT@appendix@chapterhead
-}
-\makeatother
-
-\newcommand{\apendices}{%
-  \renewcommand{\appendixname}{Apêndice}%
-  \appendix
-}
-
-\newcommand{\anexos}{%
-  \renewcommand{\appendixname}{Anexo}%
-  \appendix
-}
-
-
-\makeatletter
-\newif\if@shownumber
-\@shownumbertrue
-
-\let\orig@thepage\thepage
-\renewcommand{\thepage}{%
-  \if@shownumber
-    \orig@thepage
-  \fi
-}
-\makeatother
-
-
-
-\makeatletter
-\newcommand{\pretextual}{%
-  \@shownumberfalse
-}
-\makeatother
-
-
-
-
-
-\makeatletter
-\newcommand{\textual}{%
-  \clearpage
-  \@shownumbertrue
-}
-\makeatother
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \endinput
-
-
+%%
+%% End of file `article.cls'.
