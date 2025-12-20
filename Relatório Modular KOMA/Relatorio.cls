@@ -1,5 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{Relatorio}[2025/12/18 v1.0 Wenes Aquino]
+%================================================================================
 
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -70,28 +71,28 @@
       }%
     \renewcommand\newblock{\par}}%
 }
+%================================================================================
 
 
 
-% ========================================================================
-% ========================================================================
+%==========================================================
+% Os ajuste sempre depois desse bloco
+%==========================================================
 \ProcessOptions
 \input{size1\@ptsize.clo}
-% ========================================================================
-
-
+%==========================================================
 
 \DeclareOption{brazil}{\PassOptionsToPackage{brazil}{babel}}
-
 \ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany,brazil}
 \ProcessOptions\relax
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{babel}
 
 
-% ===== AJUSTE DE MARGENS ACADÊMICAS (A4) =====
-% 3 cm esquerda | 2 cm direita | 3 cm topo | 2 cm inferior
-
+% AJUSTE DE MARGENS
+%==========================================================
+% 3cm esquerda | 2cm direita | 3cm topo | 2cm inferior
+%==========================================================
 \setlength{\oddsidemargin}{4.6mm}   % 30mm - 25.4mm
 \setlength{\evensidemargin}{4.6mm}
 
@@ -105,43 +106,11 @@
 
 \RequirePackage{fontspec}
 \setmainfont{CMU Serif}
+%==========================================================
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%================================================================================
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
@@ -149,8 +118,6 @@
 \@lowpenalty   51
 \@medpenalty  151
 \@highpenalty 301
-
-
 
 \setcounter{topnumber}{2}
 \renewcommand\topfraction{.7}
@@ -471,50 +438,6 @@
 
 
 
-
-
-
-
-\newcommand{\resumoname}{Resumo}
-\newcommand{\abstractnameEN}{Abstract}
-\if@titlepage
-  \newenvironment{resumo}{%
-    \chapter*{\resumoname}%
-    \addcontentsline{toc}{chapter}{\resumoname}%
-    \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
-    \def\palavraschave##1{%
-      \par\nobreak
-      \vspace{1.5em}%
-      \noindent\textbf{Palavras-chave:} ##1%
-    }%
-  }{%
-    \par
-    \@endparpenalty\@M
-  }
-  \newenvironment{abstract}{%
-    \chapter*{\abstractnameEN}%
-    \addcontentsline{toc}{chapter}{\abstractnameEN}%
-    \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
-    \def\keywords##1{%
-      \par\nobreak
-      \vspace{1.5em}%
-      \noindent\textbf{Keywords:} ##1%
-    }%
-  }{%
-    \par
-    \@endparpenalty\@M
-  }
-\fi
-
-
-
-
-
-
-
-
 \newenvironment{verse}
                {\let\\\@centercr
                 \list{}{\itemsep      \z@
@@ -635,6 +558,8 @@
 \newcommand\@dotsep{4.5}
 \setcounter{tocdepth}{5}
 \newcommand\tableofcontents{%
+    \clearpage
+    \pagestyle{empty}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -645,6 +570,8 @@
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
+    \clearpage
+    \pagestyle{cabecalho}
     }
 \newcommand*\l@part[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -799,31 +726,61 @@
 \else
   \onecolumn
 \fi
+
+%================================================================================
+% ----------------------- AJUSTE E ADAPTAÇÕES AQUI ------------------------------
 %================================================================================
 
+\newcommand{\resumoname}{Resumo}
+\newcommand{\abstractnameEN}{Abstract}
+\if@titlepage
+  \newenvironment{resumo}{%
+    \chapter*{\resumoname}%
+    \thispagestyle{empty}%
+    \@beginparpenalty\@lowpenalty
+    \def\palavraschave##1{%
+      \par\nobreak
+      \vspace{1.5em}%
+      \noindent\textbf{Palavras-chave:} ##1%
+    }%
+  }{%
+    \par
+    \@endparpenalty\@M
+  }
+  \newenvironment{abstract}{%
+    \chapter*{\abstractnameEN}%
+    \thispagestyle{empty}%
+    \@beginparpenalty\@lowpenalty
+    \def\keywords##1{%
+      \par\nobreak
+      \vspace{1.5em}%
+      \noindent\textbf{Keywords:} ##1%
+    }%
+  }{%
+    \par
+    \@endparpenalty\@M
+  }
+\fi
+%==========================================================
 
-
-
-
-
-\makeatletter
-\let\@oddfoot\@empty
-\let\@evenfoot\@empty
-\makeatother
-
-
-
-
-
+\newcommand{\capituloNaoNumerado}[1]{%
+    \chapter*{#1}%
+     \addcontentsline{toc}{chapter}{\protect\numberline{}#1}%
+}
 
 %==========================================================
-% 1. Cabeçalho pagina sem titulo
+\makeatletter
+\let\@oddfoot\@empty   % páginas ímpares sem rodapé
+\let\@evenfoot\@empty  % páginas pares sem rodapé
+\makeatother
+%==========================================================
+% 1. Cabeçalho de paginas sem titulo
 %==========================================================
 \makeatletter
 \renewcommand{\chaptermark}[1]{%
   \markboth{\thechapter.\ #1}{}%
 }
-\def\ps@meuestilo{%
+\def\ps@cabecalho{%
   \def\@oddhead{%
     \vbox{%
       \hbox to \textwidth{%
@@ -836,9 +793,8 @@
   \let\@evenhead\@oddhead
 }
 \makeatother
-
 %==========================================================
-% 2. Cabeçalho pagina com titulo
+% 2. Cabeçalho de pagina com titulo
 %==========================================================
 \makeatletter
 \def\ps@plain{%
@@ -850,15 +806,12 @@
   }%
 }
 \makeatother
+%==========================================================
 
 
 
-
-
-
-
-
-\pagestyle{meuestilo}
+%==========================================================
+\pagestyle{cabecalho}
 
 % cabeçalho
 \setlength{\topmargin}{-17.7pt} % aproxima do topo
@@ -868,6 +821,7 @@
 % espaçamento entre linha
 \renewcommand{\baselinestretch}{1.3}
 \normalsize
+%==========================================================
 
 
 
@@ -878,14 +832,28 @@
 \RequirePackage{ragged2e}
 \RequirePackage[backend=biber,style=abnt]{biblatex}
 \newcommand{\referencias}{%
-  \chapter*{Referências}%
-  \addcontentsline{toc}{chapter}{Referências}%
-  \printbibliography[heading=none]%
-  
+    \chapter*{Referências}%
+    \addtocontents{toc}{\protect\vskip1em}%
+    \addcontentsline{toc}{chapter}{\protect\numberline{}Referências}%
+    \addtocontents{toc}{\protect\vskip1em}%
+    \printbibliography[heading=none]%
 }
 \AtBeginBibliography{\justifying}
 \urlstyle{same}
 
+
+
+\newcommand{\paginaDivisoria}[1]{%
+  \clearpage
+  \thispagestyle{empty}
+  \phantomsection % Cria âncora para o link 
+  \vspace*{8cm}
+  \begin{center}
+     \textbf{\Huge #1}
+  \end{center}
+  \addcontentsline{toc}{chapter}{\protect\numberline{}\large{#1}}
+  \clearpage
+}
 
 
 
@@ -901,9 +869,6 @@
 }
 \makeatother
 
-
-
-
 \makeatletter
 \let\orig@appendix\appendix
 \renewcommand{\appendix}{%
@@ -917,10 +882,14 @@
   \appendix
 }
 
+\makeatletter
 \newcommand{\anexos}{%
   \renewcommand{\appendixname}{Anexo}%
   \appendix
+  \renewcommand{\theHchapter}{anexo.\thechapter}%
 }
+\makeatother
+
 
 
 \makeatletter
@@ -966,7 +935,12 @@
 
 
 
-
+\RequirePackage{xspace}
+\newcommand{\WenesTex}{%
+    Wenes%
+    \raisebox{0ex}{T}\kern-0.168em%
+    \raisebox{-0.5ex}{E}\kern-0.124em%
+    \raisebox{0ex}{X}%
+    \xspace
+}
 \endinput
-
-
