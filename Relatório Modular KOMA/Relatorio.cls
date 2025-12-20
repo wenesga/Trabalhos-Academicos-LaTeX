@@ -952,14 +952,15 @@
 %==========================================================
 \RequirePackage{titlesec}
 \RequirePackage{xcolor}
+\RequirePackage{tikz}
 \definecolor{verde}{HTML}{298073}
+\newcommand{\espacoReta}{0.3cm}
+\newcommand{\espessuraReta}{0.4pt}
 %==========================================================
 % 1. Estilo Retas paralelas - Capítulos Com Numeração
 %==========================================================
 \newcommand{\retasParalelas}{%
     \estilocapitulotrue % ← marca que o estilo foi ativado
-    \newcommand{\espacoReta}{0.3cm}
-    \newcommand{\espessuraReta}{0.4pt}
     \titleformat{\chapter}[display]
     {\bfseries}
     {
@@ -996,10 +997,90 @@
         \vspace{\espacoReta}
         \titleline{\rule{\linewidth}{\espessuraReta}}
     ]
-    
     \titlespacing*{\chapter}{0pt}{-1.5cm}{1.5cm}
 }
 %==========================================================
+
+
+
+
+
+%==========================================================
+% 1. Estilo Semi-Retangulo - Capítulos Com Numeração
+%==========================================================
+\newcommand{\semiRetangulo}{%
+    \estilocapitulotrue % ← marca que o estilo foi ativado
+    \newcommand{\CaixaCapituloNumero}{%
+    \noindent
+    \begin{tikzpicture}
+     \node[fill=black!60, text=white, font=\fontsize{35}{35}\selectfont\bfseries,
+           minimum width=2cm, minimum height=1.4cm, anchor=east, inner sep=0pt]
+           (numbox) at (\linewidth, 0) {
+             \raisebox{3pt}{\thechapter} 
+           };   
+     \node[anchor=south east, color=black!80, font=\normalfont\fontsize{14}{14}\selectfont, inner xsep=8pt, yshift=1pt] at (numbox.west) {{\chaptertitlename}};
+     \draw[line width=0.6pt, color=black!30] (numbox.west) -- (0,0);
+     \draw[line width=0.6pt, color=black!30] (0,0) -- (0, -1.6cm);
+    \end{tikzpicture}%
+    }
+    \titleformat{\chapter}[display]
+      {\normalfont\rmfamily\bfseries}
+      {\CaixaCapituloNumero} 
+      {-31pt}
+        {%
+          \raggedright % alinha à esquerda 
+          \setlength{\leftskip}{0.2cm}  % ajuste fino
+          \Huge          % tamanho do titulo 
+        }   
+      [{
+        \vspace{18pt}      
+        {\color{black!30}\titlerule[0.6pt]}
+      }] 
+    %==========================================================
+    % 2. Capítulos Sem Numeração
+    %==========================================================
+    \titleformat{name=\chapter, numberless}[display]
+    {\bfseries\filcenter}
+    {}
+    {1ex}
+    {
+        \titlerule[\espessuraReta]
+        \vspace{\espacoReta}   
+        \LARGE\scshape
+    }
+    [
+        \vspace{\espacoReta}
+        \titleline{\rule{\linewidth}{\espessuraReta}}
+    ]
+    \titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+}
+%==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
