@@ -1,83 +1,9 @@
 \documentclass[12pt,brazil]{Relatorio}
 \addbibresource{Referencias.bib}
 
-
 \usepackage{lipsum}
 
-
-
-
-
-
-
-
-
-
-
-%==========================================================
-% 1. Capítulos Com Numeração
-%==========================================================
-\usepackage{titlesec}
-\usepackage{xcolor}
-\definecolor{verde}{HTML}{298073}
-
-%==========================================================
-\newcommand{\EstiloCapitulo}{%
-    \newcommand{\espacoReta}{0.3cm}
-    \newcommand{\espessuraReta}{0.4pt}
-    \titleformat{\chapter}[display]
-    {\bfseries}
-    {
-        \filleft % Alinha à direita
-        \color{black!50!} % Cor Texto + Número
-        \large\scshape{\chaptertitlename} 
-        \fontsize{50}{50}\selectfont\thechapter 
-    } 
-    {-2.5ex} % Espaço entre o número e a linha do título
-    {
-        \titlerule[\espessuraReta]
-        \vspace{\espacoReta}   
-        \filright
-        \LARGE\scshape
-        \color{black} % Garante que o Título volte a ser PRETO
-    } 
-    [
-        \vspace{\espacoReta}
-        \titleline{\rule{\linewidth}{\espessuraReta}}
-    ]
-    %==========================================================
-    % 2. Capítulos Sem Numeração
-    %==========================================================
-    \titleformat{name=\chapter, numberless}[display]
-    {\bfseries\filcenter}
-    {}
-    {1ex}
-    {
-        \titlerule[\espessuraReta]
-        \vspace{\espacoReta}   
-        \LARGE\scshape
-    }
-    [
-        \vspace{\espacoReta}
-        \titleline{\rule{\linewidth}{\espessuraReta}}
-    ]
-    
-    \titlespacing*{\chapter}{0pt}{-2.14cm}{1.5cm}
-}
-
-%\EstiloCapitulo
-%==========================================================
-
-
-
-
-
-
-
-
-
-
-
+%\retasParalelas % Estilo de Capítulos 
 
 
 %==========================================================
@@ -174,10 +100,10 @@
 \lipsum[1]
 \subsection{Phasellus eu tellus sit}
 \lipsum[1]
-\chapter*{Sem Numero Considerações Finais}
+\chapter{Sem Numero Considerações Finais}
 \lipsum[1-5]
 
-\chapter{Identificado letras maiúsculas Respectivo}
+\chapter{Identificado maiúsculas Respectivo}
 \subsection{Aliquam Tincidunt Urna}
 \lipsum[1-7]
 
@@ -196,7 +122,7 @@
 
 \paginaDivisoria{ANEXOS}
 \anexos
-\chapter{Identificado Maiúsculas consecutivas Respectivo Título}
+\chapter{Identificado Maiúsculas Respectivo Título}
 \section{Nulla malesuada porttitor diam}
 \lipsum[3-10]
 \subsection{Pellentesque habitant morbi}

@@ -869,19 +869,40 @@
 }
 \makeatother
 
+
+
+%==========================================================
+% Cria condições:
+%\ifestilocapitulo      % TESTE (if)
+%\estilocapitulotrue    % LIGA
+%\estilocapitulofalse   % DESLIGA
+\newif\ifestilocapitulo
+\estilocapitulofalse % padrão: estilo DESLIGADO
+%==========================================================
+
+
+
+%==========================================================
 \makeatletter
-\let\orig@appendix\appendix
-\renewcommand{\appendix}{%
-  \orig@appendix
-  \let\@makechapterhead\ABNT@appendix@chapterhead
+\AtBeginDocument{%
+  \ifestilocapitulo
+    % estilo ativo → não faz nada
+  \else
+    % estilo desligado → fallback
+    \let\orig@appendix\appendix
+    \renewcommand{\appendix}{%
+      \orig@appendix
+      \let\@makechapterhead\ABNT@appendix@chapterhead
+    }
+  \fi
 }
 \makeatother
-
+%==========================================================
 \newcommand{\apendices}{%
   \renewcommand{\appendixname}{Apêndice}%
   \appendix
 }
-
+%==========================================================
 \makeatletter
 \newcommand{\anexos}{%
   \renewcommand{\appendixname}{Anexo}%
@@ -889,6 +910,7 @@
   \renewcommand{\theHchapter}{anexo.\thechapter}%
 }
 \makeatother
+%==========================================================
 
 
 
@@ -925,9 +947,59 @@
 
 
 
-
-
-
+%==========================================================
+% ---------------ESTILOS DE CAPITULOS----------------------
+%==========================================================
+\RequirePackage{titlesec}
+\RequirePackage{xcolor}
+\definecolor{verde}{HTML}{298073}
+%==========================================================
+% 1. Estilo Retas paralelas - Capítulos Com Numeração
+%==========================================================
+\newcommand{\retasParalelas}{%
+    \estilocapitulotrue % ← marca que o estilo foi ativado
+    \newcommand{\espacoReta}{0.3cm}
+    \newcommand{\espessuraReta}{0.4pt}
+    \titleformat{\chapter}[display]
+    {\bfseries}
+    {
+        \filleft % Alinha à direita
+        \color{black!50!} % Cor Texto + Número
+        \large\scshape{\chaptertitlename} 
+        \fontsize{50}{50}\selectfont\thechapter 
+    } 
+    {-2.5ex} % Espaço entre o número e a linha do título
+    {
+        \titlerule[\espessuraReta]
+        \vspace{\espacoReta}   
+        \filright
+        \LARGE\scshape
+        \color{black} % Garante que o Título volte a ser PRETO
+    } 
+    [
+        \vspace{\espacoReta}
+        \titleline{\rule{\linewidth}{\espessuraReta}}
+    ]
+    %==========================================================
+    % 2. Capítulos Sem Numeração
+    %==========================================================
+    \titleformat{name=\chapter, numberless}[display]
+    {\bfseries\filcenter}
+    {}
+    {1ex}
+    {
+        \titlerule[\espessuraReta]
+        \vspace{\espacoReta}   
+        \LARGE\scshape
+    }
+    [
+        \vspace{\espacoReta}
+        \titleline{\rule{\linewidth}{\espessuraReta}}
+    ]
+    
+    \titlespacing*{\chapter}{0pt}{-1.5cm}{1.5cm}
+}
+%==========================================================
 
 
 
