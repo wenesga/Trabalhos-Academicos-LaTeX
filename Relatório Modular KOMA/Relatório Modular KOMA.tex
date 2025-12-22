@@ -3,37 +3,58 @@
 
 \usepackage{lipsum}
 
-%\retasParalelas % Estilo de Capítulos 
-%\semiRetangulo  % Estilo de Capítulos 
-
+%==========================================================
+% Estilo de Capítulos 
+%==========================================================
+\estiloLenny  
+%\estiloSonny
+%\retasParalelas 
+%\semiRetangulo  
+%\estiloConny
+%\estiloBjornstrup
+%\estiloBjarne
 %==========================================================
 
+
+
+
+
+
+% DADO DO AUTOT AQUI
+
+
+
+
+
+
+
+%==========================================================
 \begin{document} 
 \nocite{*}
-
+%==========================================================
 \pretextual
+%==========================================================
 
 
-
-% ================================
+%==========================================================
 % folhaDeRosto
 % contraCapa
 % fichaCatalografica
 % errata
 % folhaDeAprovacao
 % dedicatoria
-% ================================
+%==========================================================
 
 \chapter*{Agradecimentos}
 \emph{\textbf{\WenesTex}} \lipsum[1]
 
-% ================================
+%==========================================================
 % epigrafe
 % listaDeFiguras
 % listaDeTabelas
 % siglas
 % simbolas
-% ================================
+%==========================================================
 
 
 
@@ -54,13 +75,13 @@
 \tableofcontents
 
 
-
+%==========================================================
 \textual
+%==========================================================
 
 
-
-%\chapter{Introdução}
-\capituloNaoNumerado{Introdução} % Introdução não numerada e no sumário
+%\chapter{Introdução} % Introdução numerada 
+\capituloNaoNumerado{Introdução} % Introdução não numerada 
 \emph{\textbf{\WenesTex}} \lipsum[1]
 
 \part{Preparação do Relatório}
@@ -68,7 +89,11 @@
 \chapter{\WenesTex Desenvolvimento}
 \lipsum[1]
 
-\section{Este é um exemplo de nome de seção longo. Ele deve estar alinhado à esquerda e a segunda e demais linhas devem iniciar logo abaixo da primeira palavra da primeira linha}
+\section{Este é um exemplo de nome de seção longo. 
+Ele deve estar alinhado à esquerda e a segunda e 
+demais linhas devem iniciar logo abaixo da 
+primeira palavra da primeira linha}
+
 \lipsum[1]
 \subsection{Lorem ipsum dolor sit amet}
 \lipsum[1]
@@ -89,11 +114,11 @@
 \subsection{Phasellus eu tellus sit}
 \lipsum[1]
 \chapter{Sem Numero Considerações Finais}
-\lipsum[1-5]
+\lipsum[1]
 
 \chapter{Identificado maiúsculas Respectivo}
 \subsection{Aliquam Tincidunt Urna}
-\lipsum[1-7]
+\lipsum[7]
 
 
 \referencias
@@ -103,17 +128,17 @@
 \apendices
 \chapter{Precedido da palavra consecutivas}
 \section{Consecutivas}
-\lipsum[1-8]
+\lipsum[8]
 \subsection{Integer non enim}
 \lipsum[1]
 
 
 \paginaDivisoria{ANEXOS}
 \anexos
-\chapter{Identificado Maiúsculas Respectivo Título}
+\chapter{Identificado Maiúsculas Respectivo}
 \section{Nulla malesuada porttitor diam}
-\lipsum[3-10]
+\lipsum[3]
 \subsection{Pellentesque habitant morbi}
-\lipsum[8-15]
+\lipsum[15]
 
 \end{document} 

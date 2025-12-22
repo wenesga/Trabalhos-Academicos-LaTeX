@@ -1065,28 +1065,398 @@
 
 
 
+%=====================================================================
+% Estilo Lenny
+%=====================================================================
+\makeatletter
+\newcommand{\estiloLenny}{%
+
+    \estilocapitulotrue % ← marca que o estilo foi ativado
+    
+    \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
+    \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
+    
+    \newlength{\mylen}
+    \newlength{\myhi}
+    \newlength{\px}
+    \newlength{\py}
+    \newlength{\pyy}
+    \newlength{\pxx}
+    
+    \def\mghrulefill##1{\leavevmode\leaders\hrule\@height ##1\hfill\kern\z@}
+    
+    \def\@makechapterhead##1{%
+      \vspace*{-14\p@}%
+      {\parindent \z@ \raggedright \normalfont
+    
+        \ifnum \c@secnumdepth >\m@ne
+          \if@mainmatter
+            \settowidth{\px}{{\fontsize{16}{16}\scshape\selectfont \@chapapp}}%
+            \addtolength{\px}{2pt}%
+            \settoheight{\py}{{\fontsize{16}{16}\scshape\selectfont \@chapapp}}%
+            \addtolength{\py}{1pt}%
+    
+            \settowidth{\mylen}{{\fontsize{16}{16}\scshape\selectfont \@chapapp}\space
+              {\fontsize{60}{62}\usefont{OT1}{ptm}{m}{}\selectfont \thechapter}}%
+            \addtolength{\mylen}{1pt}%
+            \settowidth{\pxx}{{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{}\selectfont \thechapter}}%
+            \addtolength{\pxx}{-1pt}%
+    
+            \settoheight{\pyy}{{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{}\selectfont \thechapter}}%
+            \addtolength{\pyy}{-2pt}%
+            \setlength{\myhi}{\pyy}%
+            \addtolength{\myhi}{-\py}%
+    
+            \par
+            \parbox[b]{\textwidth}{%
+              \rule[\py]{0.5pt}{\myhi}%
+              \hskip -0.5pt%
+              \rule[\pyy]{\px}{0.5pt}%
+              \hskip -\px%
+              \raggedright%
+              {\fontsize{16}{16}\scshape\selectfont \@chapapp}\space
+              {\fontsize{60}{62}\usefont{OT1}{ptm}{m}{}\selectfont \thechapter}%
+              \hskip1pt%
+              \mghrulefill{0.5pt}%
+              \rule{0.5pt}{\pyy}\par\nobreak%
+              \vskip -\baselineskip%
+              \vskip -\pyy%
+              \hskip \mylen%
+              \mghrulefill{0.5pt}\par\nobreak%
+              \vskip \pyy%
+            }%
+            \vskip 20\p@%
+          \fi
+        \fi
+    
+        \interlinepenalty\@M
+    
+        \Huge\scshape
+        \if@mainmatter
+          \raggedright ##1\par\nobreak
+        \else
+          \centering ##1\par\nobreak
+        \fi
+        \vskip 40\p@
+      }}
+    
+    \def\@makeschapterhead##1{%
+      \vspace*{-33\p@}%
+      {\parindent \z@ \normalfont
+        \interlinepenalty\@M
+        \Huge\scshape
+        \centering ##1\par\nobreak
+        \vskip 40\p@
+      }}
+}
+\makeatother
+%=====================================================================
 
 
 
 
 
+%=====================================================================
+% Estilo Sonny 
+%=====================================================================
+\makeatletter
+\newcommand{\estiloSonny}{%
+
+\estilocapitulotrue % ← marca que o estilo foi ativado
+
+\@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
+\@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
+
+\newlength{\retaEsp}
+\setlength{\retaEsp}{0.4pt} % espessura da reta
+
+\def\mghrulefill##1{\leavevmode\leaders\hrule\@height ##1\hfill\kern\z@}
+
+% Capítulos numerados
+\def\@makechapterhead##1{%
+  \vspace*{-55\p@} % Altura do cabeçalho
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \raggedleft
+        \large\scshape \@chapapp\space
+        \fontsize{40}{72}\selectfont \thechapter % numero do capítulo
+        \par\nobreak
+        \vskip -25\p@ % espaço entre reta superior e a palavra "Capítulo"
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \Huge\scshape
+    \raggedright
+    \mghrulefill{\retaEsp}\par\nobreak 
+    \vskip 5\p@ % espaço entre reta e titulo
+    ##1\par\nobreak
+    \vskip -10\p@ % espaço entre reta e titulo
+    \mghrulefill{\retaEsp}\par\nobreak 
+    \vskip 40\p@ % espaço entre reta e texto do corpo
+  }}
+  
+% Capítulos não numerados
+\def\@makeschapterhead##1{%
+  \vspace*{-24\p@}%
+  {\parindent \z@ \normalfont
+    \interlinepenalty\@M
+    \Huge\scshape
+    \centering
+    \mghrulefill{\retaEsp}\par\nobreak 
+    \vskip 5\p@ % espaço entre reta e titulo
+    ##1\par\nobreak
+    \vskip -10\p@ % espaço entre reta e titulo
+    \mghrulefill{\retaEsp}\par\nobreak 
+    \vskip 40\p@ % espaço entre reta e texto do corpo
+  }}
+}
+\makeatother
+%=====================================================================
 
 
 
 
+%=====================================================================
+% Estilo Conny 
+%=====================================================================
+\makeatletter
+\newcommand{\estiloConny}{%
+
+\estilocapitulotrue % ← marca que o estilo foi ativado
+
+\@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
+\@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
+
+\def\mghrulefill##1{\leavevmode\leaders\hrule\@height ##1\hfill\kern\z@}
+
+\def\@makechapterhead##1{%
+  \vspace*{-25\p@}%
+  {\parindent \z@ \raggedright \normalfont
+
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \mghrulefill{2.4pt}\par\nobreak
+        \vskip -0.5\baselineskip
+        \mghrulefill{0.8pt}\par\nobreak
+        \centering
+        \Large\scshape \@chapapp\space
+        \Huge \thechapter
+        \par\nobreak
+        \vskip -0.5\baselineskip
+      \fi
+    \fi
+
+    \interlinepenalty\@M
+
+    \if@mainmatter
+      \mghrulefill{0.8pt}\par\nobreak
+      \raggedright\Huge\scshape ##1\par\nobreak
+      \vskip 60\p@
+    \else
+      \mghrulefill{0.8pt}\par\nobreak
+      {\centering\Huge\scshape ##1\par\nobreak}
+      \vskip 60\p@
+    \fi
+  }}
+
+\def\@makeschapterhead##1{%
+  \vspace*{-24\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \mghrulefill{0.8pt}\par\nobreak
+    {\centering\Huge\scshape ##1\par\nobreak}
+    \vskip 60\p@
+  }}
+}
+\makeatother
+%=====================================================================
 
 
 
 
+%=====================================================================
+% Estilo Bjornstrup 
+%=====================================================================
+\makeatletter
+\newcommand{\estiloBjornstrup}{%
+
+\estilocapitulotrue % ← marca que o estilo foi ativado
+
+\RequirePackage{xcolor}
+
+\@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
+\@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
+
+\newlength{\myhi}
+\newlength{\mylen}
+\newlength{\py}
+
+\setlength{\myhi}{10pt}
+\setlength{\mylen}{\textwidth}
+\addtolength{\mylen}{-2\myhi}
+
+\def\@makechapterhead##1{%
+  \vspace*{-35\p@}%
+  {\parindent \z@ \raggedright \normalfont
+
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \settowidth{\py}{{\fontsize{80}{80}\usefont{OT1}{pzc}{m}{n}\selectfont \thechapter}}%
+        \addtolength{\py}{99pt}%
+        \fboxsep=0pt%
+        \colorbox[gray]{.85}{%
+          \rule{0pt}{40pt}%
+          \parbox[b]{\textwidth}{\hfill}%
+        }%
+        \kern-\py%
+        \raise15pt%
+        \hbox{%
+          \color[gray]{.5}%
+          {\bfseries\scshape\fontsize{18}{30}\selectfont \@chapapp\ }%
+          {\fontsize{80}{80}\usefont{OT1}{pzc}{m}{n}\selectfont \thechapter}%
+        }\\%
+      \fi
+    \fi
+
+    \interlinepenalty\@M
+
+    \Huge\scshape
+    \if@mainmatter
+      \nointerlineskip\raggedright
+      \fboxsep=\myhi
+      \vskip-1ex
+      \colorbox[gray]{.85}{%
+        \parbox[t]{\mylen}{\raggedright ##1}%
+      }\par\nobreak
+    \else
+      \fboxsep=0pt
+      \colorbox[gray]{.85}{%
+        \rule{0pt}{0pt}%
+        \parbox[b]{\textwidth}{\kern 30pt}%
+      }\\
+      \nointerlineskip\centering
+      \fboxsep=\myhi
+      \colorbox[gray]{.85}{%
+        \parbox[t]{\mylen}{\raggedright ##1}%
+      }\par\nobreak
+    \fi
+    \vskip 40\p@
+  }}
+
+\def\@makeschapterhead##1{%
+  \vspace*{-24\p@}%
+  {\parindent \z@ \normalfont
+    \interlinepenalty\@M
+    \Huge\scshape
+    \centering
+    \fboxsep=\myhi
+    \colorbox[gray]{.85}{%
+      \parbox[t]{\mylen}{\centering ##1}%
+    }\par\nobreak
+    \vskip 40\p@
+  }}
+}
+\makeatother
+%=====================================================================
 
 
 
+%=====================================================================
+% Estilo Bjarne 
+%=====================================================================
+\makeatletter
+\newcommand{\estiloBjarne}{%
+
+\estilocapitulotrue % ← marca que o estilo foi ativado
+
+\@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
+\@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
+
+\newcounter{AlphaCnt}
+\newcounter{AlphaDecCnt}
+
+\newcommand{\AlphaNo}{%
+  \ifcase\number\theAlphaCnt
+    \ifnum\c@chapter=0 Zero\fi
+  \or Um\or Dois\or Três\or Quatro\or Cinco
+  \or Seis\or Sete\or Oito\or Nove\or Dez
+  \or Onze\or Doze\or Treze\or Quatorze\or Quinze
+  \or Dezesseis\or Dezessete\or Dezoito\or Dezenove
+  \fi
+}
+
+\newcommand{\AlphaDecNo}{%
+  \setcounter{AlphaDecCnt}{0}%
+  \@whilenum\number\theAlphaCnt>0\do{%
+    \addtocounter{AlphaCnt}{-10}%
+    \addtocounter{AlphaDecCnt}{1}%
+  }%
+  \ifnum\number\theAlphaCnt=0\else
+    \addtocounter{AlphaDecCnt}{-1}%
+    \addtocounter{AlphaCnt}{10}%
+  \fi
+  \ifcase\number\theAlphaDecCnt
+  \or Dez\or Vinte\or Trinta\or Quarenta
+  \or Cinquenta\or Sessenta\or Setenta\or Oitenta\or Noventa
+  \fi\space
+}
+
+
+\newcommand{\TheAlphaChapter}{%
+  \ifnum\c@chapter>0
+    \edef\tempchapter{\thechapter}%
+    \ifcat A\tempchapter
+      \thechapter%
+    \else
+      \setcounter{AlphaCnt}{\c@chapter}%
+      \ifnum\c@chapter<20
+        \AlphaNo
+      \else
+        \AlphaDecNo\AlphaNo
+      \fi
+    \fi
+  \fi
+}
 
 
 
+\def\mghrulefill##1{\leavevmode\leaders\hrule\@height ##1\hfill\kern\z@}
 
+\def\@makechapterhead##1{%
+  \vspace*{-25\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \mghrulefill{1pt}\par\nobreak  % espessura da reta
+        \raggedleft\normalsize\scshape \@chapapp\par\nobreak
+        \raggedleft\Large\scshape \TheAlphaChapter\par\nobreak
+        \vskip -1\baselineskip\vskip 5pt%
+        \mghrulefill{1pt}\par\nobreak  % espessura da reta
+        \vskip 20\p@%
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \if@mainmatter
+      \raggedright\Huge\scshape ##1\par\nobreak
+    \else
+      {\centering\Huge\scshape ##1\par\nobreak}
+    \fi
+    \vskip 40\p@
+  }}
 
-
+\def\@makeschapterhead##1{%
+  \vspace*{-24\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    {\centering\Huge\scshape ##1\par\nobreak}
+    \vskip 0pt
+    \mghrulefill{1pt}\par\nobreak % espessura da reta
+    \vskip 40\p@
+  }}
+}
+\makeatother
+%=====================================================================
 
 
 
