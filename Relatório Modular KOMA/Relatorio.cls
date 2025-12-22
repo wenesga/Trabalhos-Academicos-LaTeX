@@ -290,11 +290,11 @@
      \interlinepenalty \@M
      \normalfont
      \ifnum \c@secnumdepth >-2\relax
-       \Large\bfseries\scshape \partname\nobreakspace\thepart
+       \LARGE\scshape \partname\nobreakspace\thepart
        \par
        \vskip 20\p@
      \fi
-     \LARGE\bfseries\scshape #2\par}%
+     \Huge\scshape #2\par}%
     \@endpart}
 \def\@spart#1{%
     {\centering
