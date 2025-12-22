@@ -1,7 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{Relatorio}[2025/12/18 v1.0 Wenes Aquino]
-%================================================================================
+\RequirePackage{babel}
 
+
+
+%=====================================================================
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -71,28 +74,16 @@
       }%
     \renewcommand\newblock{\par}}%
 }
-%================================================================================
-
-
-
-%==========================================================
+%=====================================================================
 % Os ajuste sempre depois desse bloco
-%==========================================================
+%=====================================================================
 \ProcessOptions
 \input{size1\@ptsize.clo}
-%==========================================================
-
-\DeclareOption{brazil}{\PassOptionsToPackage{brazil}{babel}}
-\ExecuteOptions{a4paper,12pt,oneside,onecolumn,final,openany,brazil}
-\ProcessOptions\relax
-\RequirePackage[utf8]{inputenc}
-\RequirePackage{babel}
-
-
+%=====================================================================
 % AJUSTE DE MARGENS
-%==========================================================
+%=====================================================================
 % 3cm esquerda | 2cm direita | 3cm topo | 2cm inferior
-%==========================================================
+%=====================================================================
 \setlength{\oddsidemargin}{4.6mm}   % 30mm - 25.4mm
 \setlength{\evensidemargin}{4.6mm}
 
@@ -106,7 +97,7 @@
 
 \RequirePackage{fontspec}
 \setmainfont{CMU Serif}
-%==========================================================
+%=====================================================================
 
 
 
@@ -557,6 +548,11 @@
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
 \setcounter{tocdepth}{5}
+
+
+
+
+%=====================================================================
 \newcommand\tableofcontents{%
     \clearpage
     \pagestyle{empty}
@@ -573,6 +569,11 @@
     \clearpage
     \pagestyle{cabecalho}
     }
+%=====================================================================
+
+
+
+
 \newcommand*\l@part[2]{%
   \ifnum \c@tocdepth >-2\relax
     \addpenalty\@secpenalty
@@ -727,9 +728,13 @@
   \onecolumn
 \fi
 
-%================================================================================
-% ----------------------- AJUSTE E ADAPTAÇÕES AQUI ------------------------------
-%================================================================================
+%=====================================================================
+% ------------------ AJUSTE E ADAPTAÇÕES AQUI ------------------------
+%=====================================================================
+
+
+
+
 
 \newcommand{\resumoname}{Resumo}
 \newcommand{\abstractnameEN}{Abstract}
@@ -761,21 +766,21 @@
     \@endparpenalty\@M
   }
 \fi
-%==========================================================
+%=====================================================================
 
 \newcommand{\capituloNaoNumerado}[1]{%
     \chapter*{#1}%
      \addcontentsline{toc}{chapter}{\protect\numberline{}#1}%
 }
 
-%==========================================================
+%=====================================================================
 \makeatletter
 \let\@oddfoot\@empty   % páginas ímpares sem rodapé
 \let\@evenfoot\@empty  % páginas pares sem rodapé
 \makeatother
-%==========================================================
+%=====================================================================
 % 1. Cabeçalho de paginas sem titulo
-%==========================================================
+%=====================================================================
 \makeatletter
 \renewcommand{\chaptermark}[1]{%
   \markboth{\thechapter.\ #1}{}%
@@ -793,9 +798,9 @@
   \let\@evenhead\@oddhead
 }
 \makeatother
-%==========================================================
+%=====================================================================
 % 2. Cabeçalho de pagina com titulo
-%==========================================================
+%=====================================================================
 \makeatletter
 \def\ps@plain{%
   \def\@oddhead{%
@@ -806,11 +811,11 @@
   }%
 }
 \makeatother
-%==========================================================
+%=====================================================================
 
 
 
-%==========================================================
+%=====================================================================
 \pagestyle{cabecalho}
 
 % cabeçalho
@@ -821,7 +826,7 @@
 % espaçamento entre linha
 \renewcommand{\baselinestretch}{1.3}
 \normalsize
-%==========================================================
+%=====================================================================
 
 
 
@@ -871,18 +876,18 @@
 
 
 
-%==========================================================
+%=====================================================================
 % Cria condições:
 %\ifestilocapitulo      % TESTE (if)
 %\estilocapitulotrue    % LIGA
 %\estilocapitulofalse   % DESLIGA
 \newif\ifestilocapitulo
 \estilocapitulofalse % padrão: estilo DESLIGADO
-%==========================================================
+%=====================================================================
 
 
 
-%==========================================================
+%=====================================================================
 \makeatletter
 \AtBeginDocument{%
   \ifestilocapitulo
@@ -897,12 +902,12 @@
   \fi
 }
 \makeatother
-%==========================================================
+%=====================================================================
 \newcommand{\apendices}{%
   \renewcommand{\appendixname}{Apêndice}%
   \appendix
 }
-%==========================================================
+%=====================================================================
 \makeatletter
 \newcommand{\anexos}{%
   \renewcommand{\appendixname}{Anexo}%
@@ -910,7 +915,7 @@
   \renewcommand{\theHchapter}{anexo.\thechapter}%
 }
 \makeatother
-%==========================================================
+%=====================================================================
 
 
 
@@ -947,18 +952,18 @@
 
 
 
-%==========================================================
-% ---------------ESTILOS DE CAPITULOS----------------------
-%==========================================================
+%=====================================================================
+% ---------------ESTILOS DE CAPITULOS---------------------------------
+%=====================================================================
 \RequirePackage{titlesec}
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \definecolor{verde}{HTML}{298073}
 \newcommand{\espacoReta}{0.3cm}
 \newcommand{\espessuraReta}{0.4pt}
-%==========================================================
+%=====================================================================
 % 1. Estilo Retas paralelas - Capítulos Com Numeração
-%==========================================================
+%=====================================================================
 \newcommand{\retasParalelas}{%
     \estilocapitulotrue % ← marca que o estilo foi ativado
     \titleformat{\chapter}[display]
@@ -981,9 +986,9 @@
         \vspace{\espacoReta}
         \titleline{\rule{\linewidth}{\espessuraReta}}
     ]
-    %==========================================================
-    % 2. Capítulos Sem Numeração
-    %==========================================================
+%=====================================================================
+% 2. Capítulos Sem Numeração
+%=====================================================================
     \titleformat{name=\chapter, numberless}[display]
     {\bfseries\filcenter}
     {}
@@ -999,46 +1004,47 @@
     ]
     \titlespacing*{\chapter}{0pt}{-1.5cm}{1.5cm}
 }
-%==========================================================
+%=====================================================================
 
 
 
 
 
-%==========================================================
+%=====================================================================
 % 1. Estilo Semi-Retangulo - Capítulos Com Numeração
-%==========================================================
+%=====================================================================
 \newcommand{\semiRetangulo}{%
     \estilocapitulotrue % ← marca que o estilo foi ativado
     \newcommand{\CaixaCapituloNumero}{%
     \noindent
     \begin{tikzpicture}
      \node[fill=black!60, text=white, font=\fontsize{35}{35}\selectfont\bfseries,
-           minimum width=2cm, minimum height=1.4cm, anchor=east, inner sep=0pt]
-           (numbox) at (\linewidth, 0) {
-             \raisebox{3pt}{\thechapter} 
-           };   
-     \node[anchor=south east, color=black!80, font=\normalfont\fontsize{14}{14}\selectfont, inner xsep=8pt, yshift=1pt] at (numbox.west) {{\chaptertitlename}};
+        minimum width=1.8cm, minimum height=1.2cm, anchor=east, inner sep=0pt]
+        (numbox) at (\linewidth, 0){\raisebox{3pt}{\thechapter}};   
+        
+     \node[anchor=south east, color=black!80, font=\normalfont\scshape\fontsize{14}{14}\selectfont, 
+        inner xsep=3pt, yshift=-1.5pt] at (numbox.west) {{\chaptertitlename}};
+     
      \draw[line width=0.6pt, color=black!30] (numbox.west) -- (0,0);
-     \draw[line width=0.6pt, color=black!30] (0,0) -- (0, -1.6cm);
+     \draw[line width=0.6pt, color=black!30] (0,0) -- (0, -0.7cm);
     \end{tikzpicture}%
     }
     \titleformat{\chapter}[display]
       {\normalfont\rmfamily\bfseries}
       {\CaixaCapituloNumero} 
-      {-31pt}
+      {-15pt}
         {%
           \raggedright % alinha à esquerda 
-          \setlength{\leftskip}{0.2cm}  % ajuste fino
-          \Huge          % tamanho do titulo 
+          \setlength{\leftskip}{0.0cm}  % ajuste fino
+          \LARGE \scshape        % tamanho do titulo 
         }   
       [{
-        \vspace{18pt}      
+        \vspace{5pt}      
         {\color{black!30}\titlerule[0.6pt]}
       }] 
-    %==========================================================
-    % 2. Capítulos Sem Numeração
-    %==========================================================
+%=====================================================================
+% 2. Capítulos Sem Numeração
+%=====================================================================
     \titleformat{name=\chapter, numberless}[display]
     {\bfseries\filcenter}
     {}
@@ -1052,9 +1058,10 @@
         \vspace{\espacoReta}
         \titleline{\rule{\linewidth}{\espessuraReta}}
     ]
-    \titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+    \titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+    \titlespacing*{name=\chapter,numberless}{0pt}{-41pt}{30pt}
 }
-%==========================================================
+%=====================================================================
 
 
 
