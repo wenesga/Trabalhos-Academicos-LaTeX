@@ -192,7 +192,8 @@
 % ==========================================================
 % --- Contracapa ---
 % ==========================================================
-\newcommand{\folhaderostocontent}{%
+\newcommand{\contracapa}{%
+    \cleardoublepage
     \begin{center}
         {\bfseries\large\imprimirautor\par}
         \vfill\vfill
@@ -229,23 +230,18 @@
         \large\imprimirlocal\\
         \imprimirdata
     \end{center}
-}
-
-\newcommand{\contracapa}{%
-  \cleardoublepage
-  \folhaderostocontent
-  \clearpage
+    \clearpage
 }
 \makeatother
 % ==========================================================
 
 
 
-
-\newcommand{\tituloficha}[1]{\def\@tituloficha{#1}}
-\newcommand{\imprimirtituloficha}{\@tituloficha}
 % ==========================================================
 % -------Ficha Catalografica: Inverter nome do autor--------
+% ==========================================================
+\newcommand{\tituloficha}[1]{\def\@tituloficha{#1}}
+\newcommand{\imprimirtituloficha}{\@tituloficha}
 % ==========================================================
 \ExplSyntaxOn
 \tl_new:N \l_autor_bruto_tl

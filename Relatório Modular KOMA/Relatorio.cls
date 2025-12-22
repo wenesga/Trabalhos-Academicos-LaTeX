@@ -4,7 +4,7 @@
 
 
 
-%=====================================================================
+%==============================================================
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -74,16 +74,16 @@
       }%
     \renewcommand\newblock{\par}}%
 }
-%=====================================================================
+%==============================================================
 % Os ajuste sempre depois desse bloco
-%=====================================================================
+%==============================================================
 \ProcessOptions
 \input{size1\@ptsize.clo}
-%=====================================================================
+%==============================================================
 % AJUSTE DE MARGENS
-%=====================================================================
+%==============================================================
 % 3cm esquerda | 2cm direita | 3cm topo | 2cm inferior
-%=====================================================================
+%==============================================================
 \setlength{\oddsidemargin}{4.6mm}   % 30mm - 25.4mm
 \setlength{\evensidemargin}{4.6mm}
 
@@ -97,11 +97,11 @@
 
 \RequirePackage{fontspec}
 \setmainfont{CMU Serif}
-%=====================================================================
+%==============================================================
 
 
 
-%================================================================================
+%==============================================================
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
@@ -552,7 +552,7 @@
 
 
 
-%=====================================================================
+%==============================================================
 \newcommand\tableofcontents{%
     \clearpage
     \pagestyle{empty}
@@ -569,7 +569,7 @@
     \clearpage
     \pagestyle{cabecalho}
     }
-%=====================================================================
+%==============================================================
 
 
 
@@ -728,21 +728,332 @@
   \onecolumn
 \fi
 
-%=====================================================================
-% ------------------ AJUSTE E ADAPTAÇÕES AQUI ------------------------
-%=====================================================================
+%==============================================================
+% -------------- AJUSTE E ADAPTAÇÕES AQUI ---------------------
+%==============================================================
+
+
+% -------------------------------------------------------------
+% Parágrafo
+% -------------------------------------------------------------
+\RequirePackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+% =============================================================
+\RequirePackage{titling}
+\RequirePackage{setspace}
+\RequirePackage{lastpage}
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ==========================================================
+% Comandos de dados
+% ==========================================================
+\providecommand{\imprimirtipotrabalho}{}
+\newcommand{\tipotrabalho}[1]{\renewcommand{\imprimirtipotrabalho}{#1}}
+% ==========================================================
+
+
+
+% ==========================================================
+% 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
+% ==========================================================
+
+\ExplSyntaxOn
+\seq_new:N \g_instituicao_seq
+\NewDocumentCommand{\instituicao}{m}{
+    \seq_set_split:Nnn \g_instituicao_seq { \\ } { #1 }
+}
+\NewDocumentCommand{\imprimirinstituicaocapa} {}{
+    \seq_use:Nn \g_instituicao_seq { \\ }
+}
+\NewDocumentCommand{\imprimirinstituicaoficha} {}{
+    \seq_use:Nn \g_instituicao_seq { ,\space }
+}
+\ExplSyntaxOff
+
+
+\makeatletter
+\providecommand{\imprimirpreambulo}{}
+\newcommand{\preambulo}[1]{\renewcommand{\imprimirpreambulo}{#1}}
+\providecommand{\imprimirlocal}{}
+\newcommand{\local}[1]{\renewcommand{\imprimirlocal}{#1}}
+
+\newcommand{\titulo}[1]{\title{#1}}\newcommand{\imprimirtitulo}{\thetitle}
+\newcommand{\autor}[1]{\author{#1}}\newcommand{\imprimirautor}{\theauthor}
+\newcommand{\data}[1]{\date{#1}}\newcommand{\imprimirdata}{\thedate}
+
+% --- Responsáveis ---
+\providecommand{\imprimirorientadorRotulo}{} \providecommand{\imprimirorientador}{}
+\newcommand{\orientador}[2][Orientador:]{%
+  \renewcommand{\imprimirorientadorRotulo}{#1}\renewcommand{\imprimirorientador}{#2}}
+
+\providecommand{\imprimircoorientadorRotulo}{} \providecommand{\imprimircoorientador}{}
+\newcommand{\coorientador}[2][Coorientador:]{%
+  \renewcommand{\imprimircoorientadorRotulo}{#1}\renewcommand{\imprimircoorientador}{#2}}
+
+\providecommand{\imprimirsupervisorRotulo}{} \providecommand{\imprimirsupervisor}{}
+\newcommand{\supervisor}[2][Prof. Supervisor:]{%
+  \renewcommand{\imprimirsupervisorRotulo}{#1}\renewcommand{\imprimirsupervisor}{#2}}
+
+\providecommand{\imprimirtutoronlineRotulo}{} \providecommand{\imprimirtutoronline}{}
+\newcommand{\tutoronline}[2][Tutor Online:]{%
+  \renewcommand{\imprimirtutoronlineRotulo}{#1}\renewcommand{\imprimirtutoronline}{#2}}
+
+\providecommand{\imprimirtutordopoloRotulo}{} \providecommand{\imprimirtutordopolo}{}
+\newcommand{\tutordopolo}[2][Tutor do Polo:]{%
+  \renewcommand{\imprimirtutordopoloRotulo}{#1}\renewcommand{\imprimirtutordopolo}{#2}}
+
+\providecommand{\imprimirprofessorRotulo}{} \providecommand{\imprimirprofessor}{}
+\newcommand{\professor}[2][Professor:]{%
+  \renewcommand{\imprimirprofessorRotulo}{#1}\renewcommand{\imprimirprofessor}{#2}}
+
+
+
+% ==========================================================
+% --- Folha de Rosto ---
+% ==========================================================
+\newcommand{\folhaderosto}{%
+    \begin{titlingpage}%
+        \begin{center}
+            \vspace*{-2cm}
+            \includegraphics[width=0.17\textwidth]{LogoUFT.pdf} \\
+            {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicaocapa\par}%
+            \vfill\vspace*{-2em}
+            {\bfseries\large\imprimirautor\par}
+            \vfill
+            %\includegraphics[width=0.5\textwidth]{LogoUABC.pdf} \\
+            {\bfseries\scshape\LARGE\imprimirtitulo\par}
+            \vfill\vfill\vfill\vfill
+            \large\imprimirlocal\\
+            \imprimirdata
+        \end{center}
+    \end{titlingpage}
+}
+
+
+% ==========================================================
+% --- Contracapa ---
+% ==========================================================
+\newcommand{\contracapa}{%
+    \clearpage
+    \thispagestyle{empty}
+    \begin{center}
+        {\bfseries\large\imprimirautor\par}
+        \vfill\vfill
+        {\bfseries\scshape\Large\imprimirtitulo\par}
+        \vfill
+        \ifcsvoid{imprimirpreambulo}{}{%
+            \hspace{0.45\textwidth}
+            \begin{minipage}{0.5\textwidth}%
+            \singlespacing
+            \imprimirpreambulo
+            \end{minipage}}%
+        \vfill
+        \ifcsvoid{imprimirinstituicaocapa}{}{\imprimirinstituicaocapa}%
+        \vfill
+        \ifcsvoid{imprimirorientador}{}{%
+            {\large\imprimirorientadorRotulo~\imprimirorientador\par}%
+        }
+        \ifcsvoid{imprimircoorientador}{}{%
+            {\large\imprimircoorientadorRotulo~\imprimircoorientador\par}%
+        }
+        \ifcsvoid{imprimirprofessor}{}{%
+            {\large\imprimirprofessorRotulo~\imprimirprofessor\par}%
+        }
+        \ifcsvoid{imprimirsupervisor}{}{%
+            {\large\imprimirsupervisorRotulo~\imprimirsupervisor\par}%
+        }
+        \ifcsvoid{imprimirtutoronline}{}{%
+            {\large\imprimirtutoronlineRotulo~\imprimirtutoronline\par}%
+        }
+        \ifcsvoid{imprimirtutordopolo}{}{%
+            {\large\imprimirtutordopoloRotulo~\imprimirtutordopolo\par}%
+        }
+        \vfill
+        \large\imprimirlocal\\
+        \imprimirdata
+    \end{center}
+    \clearpage
+}
+\makeatother
+% ==========================================================
+
+
+
+
+
+
+
+
+
+% ==========================================================
+% -------Ficha Catalografica: Inverter nome do autor--------
+% ==========================================================
+\newcommand{\tituloficha}[1]{\def\@tituloficha{#1}}
+\newcommand{\imprimirtituloficha}{\@tituloficha}
+% ==========================================================
+\ExplSyntaxOn
+\tl_new:N \l_autor_bruto_tl
+\RenewDocumentCommand{\autor}{m}{
+    \tl_set:Nn \l_autor_bruto_tl { #1 }
+    \author{#1}
+}
+\newcommand{\imprimirautorinvertido}{%
+    \seq_set_split:NnV \l_tmpa_seq { ~ } \l_autor_bruto_tl
+    \seq_pop_right:NN \l_tmpa_seq \l_tmpb_tl
+    \l_tmpb_tl ,~ \seq_use:Nn \l_tmpa_seq { ~ }
+}
+\ExplSyntaxOff
+% ==========================================================
+% -------------------Ficha Catalografica--------------------
+% ==========================================================
+\makeatletter
+\newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
+\newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
+
+\fichaPaginas{}
+\fichaAssuntos{}
+
+\newcommand{\fichacatalografica}{{%
+    \thispagestyle{empty}
+    \singlespacing
+    \sffamily
+    \small
+    \vspace*{\fill}
+    \begin{center}
+    \fbox{%
+        \begin{minipage}[c][7cm]{12.5cm}%
+        \imprimirautorinvertido
+        
+        \hspace{0.5cm}\imprimirtituloficha\ /\ \imprimirautor.\ -- \imprimirlocal, \imprimirdata.
+        
+        \hspace{0.5cm}\pageref{LastPage} p. : il. ; 30 cm.\\
+        
+        \hspace{0.5cm}\imprimirorientadorRotulo~\imprimirorientador \\
+        
+        \hspace{0.5cm}\imprimirtipotrabalho~--~\imprimirinstituicaoficha, \imprimirdata.\\
+        
+        \hspace{0.35cm}\@fichaAssuntos
+        \end{minipage}}
+    \end{center}
+    }%
+}
+\makeatother
+% ==========================================================
+
+
+
+
+
+
+
+
+
+
+% ==========================================================
+% ---------------Inserir folha de aprovação-----------------
+% ==========================================================
+\newcommand{\assinatura}[1]{%
+    \begin{center}
+        \vspace*{0.5em}
+        \rule{8cm}{0.8pt}\\
+        #1
+    \end{center}
+}
+% ----------------------------------------------------------
+\newcommand{\folhadeaprovacao}[1]{%
+    \clearpage
+    \thispagestyle{empty}
+    \begin{center}
+        {\bfseries\large\imprimirautor\par}
+        \vspace*{\fill}\vspace*{\fill}
+        {\bfseries\Large\imprimirtitulo\par}
+
+        \vspace*{\fill}
+
+        \hspace{.45\textwidth}
+        \begin{minipage}{.5\textwidth}
+            \singlespacing
+            \imprimirpreambulo
+        \end{minipage}%
+        \vspace*{\fill}
+    \end{center}
+
+    Trabalho aprovado. \imprimirlocal, #1:
+    
+    \vspace*{1.5em}
+    \assinatura{\textbf{\imprimirorientador}\\Orientador}
+    \assinatura{\textbf{Professor}\\ Convidado 1}
+    \assinatura{\textbf{Professor}\\ Convidado 2}
+
+    \begin{center}
+    \vfill
+    \large\imprimirlocal\\
+    \imprimirdata
+    \end{center}
+}
+% ==========================================================
+
+
+
+
+
+
+
+
+% ===============================================
+% ---------------Dedicatoria---------------------
+% ===============================================
+\newenvironment{dedicatoria}{%
+    \clearpage
+    \thispagestyle{empty}
+    \vspace*{\fill}
+    \begin{center}
+        \begin{minipage}{0.65\textwidth}
+            \centering
+            \itshape}{%
+        \end{minipage}
+    \end{center}
+    \vspace*{\fill}
+}
+
+% -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% =============================================================
 \newcommand{\resumoname}{Resumo}
 \newcommand{\abstractnameEN}{Abstract}
-\if@titlepage
   \newenvironment{resumo}{%
+    \setlength{\parindent}{0pt}%
     \chapter*{\resumoname}%
     \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
     \def\palavraschave##1{%
       \par\nobreak
       \vspace{1.5em}%
@@ -750,12 +1061,12 @@
     }%
   }{%
     \par
-    \@endparpenalty\@M
   }
   \newenvironment{abstract}{%
+  \setlength{\parindent}{0pt}%
     \chapter*{\abstractnameEN}%
     \thispagestyle{empty}%
-    \@beginparpenalty\@lowpenalty
+    
     \def\keywords##1{%
       \par\nobreak
       \vspace{1.5em}%
@@ -763,24 +1074,28 @@
     }%
   }{%
     \par
-    \@endparpenalty\@M
   }
-\fi
-%=====================================================================
+% =============================================================
+  
+  
+  
+  
+  
+%==============================================================
 
 \newcommand{\capituloNaoNumerado}[1]{%
     \chapter*{#1}%
      \addcontentsline{toc}{chapter}{\protect\numberline{}#1}%
 }
 
-%=====================================================================
+%==============================================================
 \makeatletter
 \let\@oddfoot\@empty   % páginas ímpares sem rodapé
 \let\@evenfoot\@empty  % páginas pares sem rodapé
 \makeatother
-%=====================================================================
+%==============================================================
 % 1. Cabeçalho de paginas sem titulo
-%=====================================================================
+%==============================================================
 \makeatletter
 \renewcommand{\chaptermark}[1]{%
   \markboth{\thechapter.\ #1}{}%
@@ -798,9 +1113,9 @@
   \let\@evenhead\@oddhead
 }
 \makeatother
-%=====================================================================
+%==============================================================
 % 2. Cabeçalho de pagina com titulo
-%=====================================================================
+%==============================================================
 \makeatletter
 \def\ps@plain{%
   \def\@oddhead{%
@@ -811,11 +1126,11 @@
   }%
 }
 \makeatother
-%=====================================================================
+%==============================================================
 
 
 
-%=====================================================================
+%==============================================================
 \pagestyle{cabecalho}
 
 % cabeçalho
@@ -826,7 +1141,7 @@
 % espaçamento entre linha
 \renewcommand{\baselinestretch}{1.3}
 \normalsize
-%=====================================================================
+%==============================================================
 
 
 
@@ -933,9 +1248,12 @@
 
 
 
+
+
 \makeatletter
 \newcommand{\pretextual}{%
-  \@shownumberfalse
+    \clearpage
+    \@shownumberfalse
 }
 \makeatother
 

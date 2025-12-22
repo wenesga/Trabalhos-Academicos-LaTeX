@@ -192,7 +192,8 @@
 % ==========================================================
 % --- Contracapa ---
 % ==========================================================
-\newcommand{\folhaderostocontent}{%
+\newcommand{\contracapa}{%
+    \cleardoublepage
     \begin{center}
         {\bfseries\large\imprimirautor\par}
         \vfill\vfill
@@ -229,12 +230,7 @@
         \large\imprimirlocal\\
         \imprimirdata
     \end{center}
-}
-
-\newcommand{\contracapa}{%
-  \cleardoublepage
-  \folhaderostocontent
-  \clearpage
+    \clearpage
 }
 \makeatother
 % ==========================================================
