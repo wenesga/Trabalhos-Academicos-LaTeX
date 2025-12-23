@@ -10,7 +10,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloLenny}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -97,7 +97,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloSonny}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -156,7 +156,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloGlenn}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -253,7 +253,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloConny}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -308,7 +308,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloBjornstrup}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -392,7 +392,7 @@
 % ====================================================
 \makeatletter
 \newcommand{\estiloBjarne}{%
-\estilocapitulotrue % ← marca que o estilo foi ativado
+
 \@ifundefined{@chapapp}{\let\@chapapp\chaptername}{}
 \@ifundefined{@mainmatter}{\newif\if@mainmatter \@mainmattertrue}{}
 
@@ -501,21 +501,21 @@
 \newcommand{\retasParalelas}{%
     \estilocapitulotrue % ← marca que o estilo foi ativado
     \titleformat{\chapter}[display]
-    {} % ← NÃO controla mais o negrito geral
+    {\bfseries}
     {
-        \filleft
-        \color{black!50!}
-        \large\scshape\bfseries{\chaptertitlename} % ← negrito do rótulo
-        \fontsize{50}{50}\selectfont\bfseries\thechapter % ← negrito do número
-    }
-    {-2.5ex}
+        \filleft % Alinha à direita
+        \color{black!50!} % Cor Texto + Número
+        \large\scshape{\chaptertitlename} 
+        \fontsize{50}{50}\selectfont\thechapter 
+    } 
+    {-2.5ex} % Espaço entre o número e a linha do título
     {
         \titlerule[\espessuraReta]
-        \vspace{\espacoReta}
+        \vspace{\espacoReta}   
         \filright
-        \huge\scshape % ← título SEM negrito
-        \color{black}
-    }
+        \LARGE\scshape
+        \color{black} % Garante que o Título volte a ser PRETO
+    } 
     [
         \vspace{\espacoReta}
         \titleline{\rule{\linewidth}{\espessuraReta}}
@@ -524,13 +524,13 @@
 % 2. Capítulos Sem Numeração
 %=====================================================
     \titleformat{name=\chapter, numberless}[display]
-    {\filcenter}
+    {\bfseries\filcenter}
     {}
     {1ex}
     {
         \titlerule[\espessuraReta]
         \vspace{\espacoReta}   
-        \huge\scshape
+        \LARGE\scshape
     }
     [
         \vspace{\espacoReta}

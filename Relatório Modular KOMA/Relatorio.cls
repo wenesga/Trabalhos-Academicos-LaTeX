@@ -1093,6 +1093,9 @@
 \let\@oddfoot\@empty   % páginas ímpares sem rodapé
 \let\@evenfoot\@empty  % páginas pares sem rodapé
 \makeatother
+
+
+\RequirePackage{truncate}
 %==============================================================
 % 1. Cabeçalho de paginas sem titulo
 %==============================================================
@@ -1103,9 +1106,10 @@
 \def\ps@cabecalho{%
   \def\@oddhead{%
     \vbox{%
-      \hbox to \textwidth{%
-        \footnotesize\textit{\leftmark}\hfil
-        \footnotesize\thepage}%
+    \hbox to \textwidth{%
+      \truncate{0.96\textwidth}{\footnotesize\textit{\leftmark}}%
+      \hfil
+      \footnotesize\thepage}%   
       \vskip 2pt
       \hrule height 0.4pt
     }%
@@ -1196,7 +1200,7 @@
 
 
 %=====================================================================
-% Cria condições:
+%Cria condições:
 %\ifestilocapitulo      % TESTE (if)
 %\estilocapitulotrue    % LIGA
 %\estilocapitulofalse   % DESLIGA
