@@ -1,18 +1,18 @@
-\documentclass[a4paper,12pt,brazil,oneside]{Relatorio}
+\documentclass[a4paper,12pt,brazilian,oneside]{Relatorio}
 \addbibresource{Referencias.bib}
 
 \usepackage{EstiloCapitulo}
-%===================================================
+%=====================================================
 % Estilo de Capítulos 
-%===================================================
-%\estiloLenny      
+%=====================================================
+\estiloLenny      
 %\estiloSonny     
-\retasParalelas 
+%\retasParalelas 
 %\semiRetangulo  
-%\estiloConny      % X
-%\estiloBjornstrup % X
-%\estiloBjarne     % X
-%===================================================
+%\estiloConny      
+%\estiloBjornstrup 
+%\estiloBjarne     
+%=====================================================
 
 
 
@@ -62,18 +62,23 @@
 
 
 \usepackage{lipsum}
-%===================================================
+%=====================================================
 \begin{document} 
 \nocite{*}
-%===================================================
+
+
+%=====================================================
 \pretextual
-%===================================================
+%=====================================================
 
 
-%===================================================
+%=====================================================
 \folhaderosto
 \contracapa
 \fichacatalografica
+%=====================================================
+
+
 
 
 \chapter*{Errata}
@@ -97,16 +102,16 @@
 
 
 
-
+%=====================================================
 \folhadeaprovacao{\today}
+%=====================================================
 
 
 
 
-
-% ==================================================
-% -----------------Dedicatória----------------------
-% --------------------------------------------------
+%=====================================================
+% ------------------Dedicatória-----------------------
+%=====================================================
 \begin{dedicatoria}
     Dedicado àqueles que compreendem o valor
     inestimável do conhecimento e da busca incessante
@@ -118,35 +123,70 @@
     é fruto da iniciativa privada e do 
     trabalho honesto. Por \WenesTex.
 \end{dedicatoria}
-%===================================================
+%=====================================================
 
 
 
 
-%===================================================
+%=====================================================
 \chapter*{Agradecimentos}
 \emph{\WenesTex} \lipsum[1]
 
 \lipsum[101]
-%===================================================
+%=====================================================
+
+
+
+
+%=====================================================
+% --------------------Epígrafe------------------------
+%=====================================================
+\begin{epigrafe}
+    ``A verdade é o fundamento que sustenta a mente livre.\\
+    Onde há liberdade, nasce a responsabilidade;\\
+    onde há responsabilidade, floresce o mérito;\\
+    e onde o mérito prevalece, nenhum poder arbitrário\\
+    consegue limitar o potencial do indivíduo.\\
+    A busca pela liberdade não é apenas um ideal,\\
+    mas um compromisso diário com a razão, a coragem\\
+    e a defesa daquilo que torna cada ser humano único.''
+    
+    $\forall$ Libertário - \WenesTex
+\end{epigrafe}
+%=====================================================
 
 
 
 
 
-%===================================================
-% epigrafe
-% listaDeFiguras
-% listaDeTabelas
-% siglas
-% simbolas
-%===================================================
+
+
+
+
+%=====================================================
+\listoffigures
+\listoftables
+
+\chapter*{Lista de Abreviaturas e Siglas}
+\begin{siglas}
+    \item[CPU] Unidade Central de Processamento
+    \item[RAM] Memória de Acesso Aleatório
+    \item[SSD] Unidade de Estado Sólido (Solid State Drive)
+\end{siglas}
+
+\chapter*{Lista de Símbolos}
+\begin{simbolos}
+    \item[$\alpha$] Alfa (Ângulo, Coeficiente de Temperatura)
+    \item[$\beta$] Beta (Ângulo, Ganho de Corrente do Transistor)
+    \item[$\sum$] Somatório (Usado em Séries Matemáticas e Estatística)
+\end{simbolos}
+%=====================================================
 
 
 
 
 
-%==========================================================
+%=====================================================
 \begin{resumo}
 \emph{\WenesTex} \lipsum[1] \lipsum[2]
 
@@ -160,32 +200,94 @@
 
 \keywords{latex; classes; formatting.}
 \end{abstract}
-%===================================================
+%=====================================================
 
 
 
 
 
+%=====================================================
 \tableofcontents
+%=====================================================
 
 
 
 
 
-
-%===================================================
+%=====================================================
 \textual
-%===================================================
+%=====================================================
 
 
-%\chapter{Introdução} % Introdução numerada 
-\capituloNaoNumerado{Introdução} % Introdução não numerada 
+
+%=====================================================
+%\chapter{Introdução}                       % Numerada 
+\capituloNaoNumerado{Introdução}        % Não numerada 
 \emph{\textbf{\WenesTex}} \lipsum[1]
+%=====================================================
 
-\part{Preparação do Relatório}
+\part{PREPARAÇÃO DO RELATÓRIO}
 
 \chapter{Este é um exemplo de nome de Capítulo longo}
+\subsection{Este é um exemplo de nome de Capítulo longo}
 \lipsum[1]
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Teste de Tabela Estilosa 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Exemplo de Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+
+
+\subsubsection{Habitant Tristique Senectus}
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Wenes Tabela estilosa 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Arraias Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+
+
 
 \section{Este é um exemplo de nome de seção longo. 
 Ele deve estar alinhado à esquerda e a segunda e 
@@ -198,14 +300,91 @@ demais linhas devem iniciar logo abaixo da}
 \lipsum[1]
 \paragraph{Curabitur Dictum}
 \lipsum[1]
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Brasil Tabela Estilosa 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Tikz Teste Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
 
 
 
-
-\part{Resultados}
+\part{RESULTADOS}
 
 \chapter{Considerações Finais}
 \lipsum[1]
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Aquino Tabela estilosa 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Arraias Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Melão Tabela estilosa 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Lorem ipsum dolor de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
 \section{Loremonto Dolor Amet}
 \lipsum[1]
 \subsection{Phasellus eu tellus sit}
@@ -220,7 +399,10 @@ demais linhas devem iniciar logo abaixo da}
 \lipsum[7]
 
 
+
+%=====================================================
 \referencias
+%=====================================================
 
 
 \paginaDivisoria{APÊNDICES}
@@ -237,7 +419,113 @@ demais linhas devem iniciar logo abaixo da}
 \chapter{Identificado Maiúsculas Respectivo}
 \section{Nulla malesuada porttitor diam}
 \lipsum[3]
-\subsection{Pellentesque habitant morbi}
-\lipsum[15]
 
+
+
+\subsection{Exemplos de Lista de Figuras e Tabelas}
+\lipsum[15]
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Curabitur auctor semper nulla}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Libertário Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Phasellus eu tellus}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Duis eget orci teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Tabela Donec varius 5×5}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Donec varius  de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Praesent eget sem}
+\end{table}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Praesent eget sem estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
 \end{document} 

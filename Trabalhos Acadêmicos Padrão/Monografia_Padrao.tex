@@ -186,7 +186,32 @@ Este resumo está em conformidade com a \textbf{ABNT NBR 6028:2021}, que estabel
 
 \chapter{Introdução}
 \section{Desenvolvimento}
+\begin{table}[ht]
+    \centering
+    \caption{Tabela estilosa 5×5}
+    \label{tab:estilosa}
+    \begin{tabular}{ccccc}
+        \toprule
+        Col 1 & Col 2 & Col 3 & Col 4 & Col 5 \\
+        \midrule
+        A1 & B1 & C1 & D1 & E1 \\
+        A2 & B2 & C2 & D2 & E2 \\
+        A3 & B3 & C3 & D3 & E3 \\
+        A4 & B4 & C4 & D4 & E4 \\
+        A5 & B5 & C5 & D5 & E5 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[rounded corners=8pt, thick] (0,0) rectangle (5,3);
+        \node at (2.5,1.5) {Figura de Teste};
+    \end{tikzpicture}
+    \caption{Figura de teste estilizada}
+    \label{fig:teste-estilosa}
+\end{figure}
 \part{Preparação} % Opcional 
 \chapter{Desenvolvimento}
 \section{Desenvolvimento}
