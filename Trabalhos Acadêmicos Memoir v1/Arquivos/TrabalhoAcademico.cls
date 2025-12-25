@@ -1,53 +1,53 @@
-% ==========================================================
+% ===============================================
 % Classe: TrabalhoAcademico.cls
 % Autor: Wenes Aquino - Copyright © 2025
-% ==========================================================
+% ===============================================
 % Núcleo da Classe
-% ----------------------------------------------------------
+% -----------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Arquivos/TrabalhoAcademico}[2025/12/13 v-2.0 TrabalhoAcademico ABNT-UFT]
 \LoadClass[12pt,a4paper,oneside]{memoir}
-% ==========================================================
+% ===============================================
 % Idioma e Tipografia
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage[brazilian]{babel}
 \RequirePackage{fontspec}
 \setmainfont{CMU Serif}
-% ==========================================================
+% ===============================================
 % Matemática e Símbolos
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Utilidades de Texto
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{textcase}
 \RequirePackage{etoolbox}
 \RequirePackage{ragged2e}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Gráficos e Diagramas
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Hiperligações
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{hyperref}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Referências Bibliográficas
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{csquotes}
 \RequirePackage[style=abnt,backend=biber]{biblatex}
 \addbibresource{Arquivos/Referencias.bib}
 \AtBeginBibliography{\justifying}
 \urlstyle{same}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Remove a numeração de páginas de \part
-% ----------------------------------------------------------
+% -----------------------------------------------
 \aliaspagestyle{part}{empty}
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Texto de Teste
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{lipsum} % Gerador de texto
 
 
@@ -55,30 +55,30 @@
 
 
 
-% ==========================================================
+% ===============================================
 % Margens e Bloco de Texto
-% ----------------------------------------------------------
+% -----------------------------------------------
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{3cm}{2cm}{*}
 \checkandfixthelayout
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Espaçamento Entre Linhas
-% ----------------------------------------------------------
+% -----------------------------------------------
 \OnehalfSpacing
 %\setSpacing{1.35} % 1.3 = 1.5 Real
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Parágrafo
-% ----------------------------------------------------------
+% -----------------------------------------------
 \RequirePackage{indentfirst}
 \setlength{\parindent}{1.25cm}
-% ==========================================================
+% ===============================================
 
 
 
 
-% ==========================================================
-% ------Marca Tex: WenesTEX - abnTEX-UFT------
-% ----------------------------------------------------------
+% ===============================================
+% ------Marca Tex: WenesTEX - abnTEX-UFT---------
+% -----------------------------------------------
 \RequirePackage{xspace}
 \newcommand{\WenesTex}{%
     Wenes%
@@ -98,23 +98,23 @@
     \raisebox{0.05ex}{T}%
     \unskip\ignorespaces
 }
-% ==========================================================
+% ===============================================
 
 
 
 
-% ==========================================================
+% ===============================================
 % Comandos de dados - tipo de trabalho
-% ==========================================================
+% ===============================================
 \providecommand{\imprimirtipotrabalho}{}
 \newcommand{\tipotrabalho}[1]{\renewcommand{\imprimirtipotrabalho}{#1}}
-% ==========================================================
+% ===============================================
 
 
 
-% ==========================================================
+% ===============================================
 % 7. CONFIGURAÇÕES DE CAPA E FOLHA DE ROSTO 
-% ==========================================================
+% ===============================================
 \makeatletter
 \ExplSyntaxOn
 \seq_new:N \g_instituicao_seq
@@ -167,9 +167,9 @@
 
 
 
-% ==========================================================
-% --- Folha de Rosto ---
-% ==========================================================
+% ===============================================
+% ------------- Folha de Rosto ------------------
+% ===============================================
 \newcommand{\folhaderosto}{%
     \begin{titlingpage}%
         \begin{center}
@@ -189,9 +189,9 @@
 }
 
 
-% ==========================================================
-% --- Contracapa ---
-% ==========================================================
+% ===============================================
+% ---------------- Contracapa -------------------
+% ===============================================
 \newcommand{\contracapa}{%
     \cleardoublepage
     \begin{center}
@@ -233,16 +233,16 @@
     \clearpage
 }
 \makeatother
-% ==========================================================
+% ===============================================
 
 
 
 
 \newcommand{\tituloficha}[1]{\def\@tituloficha{#1}}
 \newcommand{\imprimirtituloficha}{\@tituloficha}
-% ==========================================================
-% -------Ficha Catalografica: Inverter nome do autor--------
-% ==========================================================
+% ===============================================
+% --Ficha Catalografica: Inverter nome do autor--
+% ===============================================
 \ExplSyntaxOn
 \tl_new:N \l_autor_bruto_tl
 \RenewDocumentCommand{\autor}{m}{
@@ -255,9 +255,9 @@
     \l_tmpb_tl ,~ \seq_use:Nn \l_tmpa_seq { ~ }
 }
 \ExplSyntaxOff
-% ==========================================================
+% ===============================================
 % -------------------Ficha Catalografica--------------------
-% ==========================================================
+% ===============================================
 \makeatletter
 \newcommand{\fichaPaginas}[1]{\def\@fichaPaginas{#1}}
 \newcommand{\fichaAssuntos}[1]{\def\@fichaAssuntos{#1}}
@@ -289,7 +289,7 @@
     }%
 }
 \makeatother
-% ==========================================================
+% ===============================================
 
 
 
@@ -374,9 +374,7 @@
 
 
 
-% ==========================================================
-\def\defaultchapterstyle{CapitulosNumerado}
-
+% ===============================================
 \makeatletter
 \newcommand{\capituloCentralizado}{%
   \@ifstar{\capituloCentralizado@star}{\capituloCentralizado@nostar}}
@@ -387,7 +385,6 @@
   \chapter*{\LARGE\scshape #1}%
   \markboth{#1}{}%
   \addcontentsline{toc}{chapter}{\protect\numberline{}#1}
-  \chapterstyle{CapitulosNumerado}%
 }
 
 % VERSÃO COM * – sem número de página e FORA do sumário
@@ -396,11 +393,10 @@
   \chapter*{\LARGE\scshape #1}%
   \thispagestyle{empty}%              % sem número de página
   \markboth{#1}{}%
-  \chapterstyle{CapitulosNumerado}%
 }
 \makeatother
 
-% ==========================================================
+% ===============================================
 
 
 
@@ -422,7 +418,7 @@
 
 
 
-% ==========================================================
+% ===============================================
 \newcommand{\ResumoNomePT}{Resumo}
 \newcommand{\ResumoNomeEN}{Abstract}
 
@@ -434,71 +430,68 @@
 }{%
     \clearpage
 }
-% ----------------------------------------------------------
+% -----------------------------------------------
 \newenvironment{resumo}{%
   \begin{ResumoBase}{\ResumoNomePT}%
 }{%
   \end{ResumoBase}%
 }
-% ----------------------------------------------------------
+% -----------------------------------------------
 \newenvironment{resumoEN}{%
   \begin{ResumoBase}{\ResumoNomeEN}%
 }{%
   \end{ResumoBase}%
 }
-% ==========================================================
+% ===============================================
 
 
 
 
-% ==========================================================
+% ===============================================
 % LISTA DE FIGURAS 
-% ==========================================================
+% ===============================================
 \newcommand{\listaDeFiguras}{%
   \clearpage
   \chapterstyle{estiloNaoNumerado}%
   \listoffigures*% usa o estilo acima e NÃO entra no sumário
   \thispagestyle{empty}% tira o número da página desta folha
-  \chapterstyle{CapitulosNumerado}%
 }
-% ==========================================================
+% ===============================================
 % LISTA DE TABELAS 
-% ==========================================================
+% ===============================================
 \newcommand{\listaDeTabelas}{%
   \clearpage
   \chapterstyle{estiloNaoNumerado}%
   \listoftables*%
   \thispagestyle{empty}%
-  \chapterstyle{CapitulosNumerado}%
 }
-% ==========================================================
+% ===============================================
 % Exibir nome (Figuras, Tabelas) na lista 
-% ==========================================================
+% ===============================================
 \renewcommand{\cftfigurename}{Figura\space}
 \renewcommand{\cfttablename}{Tabela\space}
-% ==========================================================
+% ===============================================
 % Exibir "-" na lista
-% ==========================================================
+% ===============================================
 \renewcommand{\cftfigureaftersnum}{\space\space--}
 \renewcommand{\cfttableaftersnum}{\space\space--}
-% ==========================================================
+% ===============================================
 % Texto do título começa após esses 3em
-% ==========================================================
+% ===============================================
 \cftsetindents{figure}{0em}{3em}
 \cftsetindents{table}{0em}{3em}
-% ==========================================================
+% ===============================================
 
 
 
 
 
-% ==========================================================
+% ===============================================
 \newcommand{\preTexto}[1]{%
   \clearpage
   \chapterstyle{estiloNaoNumerado}%
   \chapter*{\scshape #1}%
   \thispagestyle{empty}%
-  \chapterstyle{CapitulosNumerado}%
 }
 
 % Lista de abreviaturas e siglas
@@ -524,34 +517,34 @@
     \end{symbols}
     \cleardoublepage
 }
-% ==========================================================
+% ===============================================
 
 
 
 
 
-% ===============================================================================
-% ==========================================================
+% ===============================================
+% ===============================================
 % Sumário mostra ate subseção
-% ==========================================================
+% ===============================================
 \settocdepth{subsection}
 \setsecnumdepth{subsection}
 % ativar pontilhado nos capítulos no sumário
 \renewcommand{\cftchapterdotsep}{\cftdotsep}
-% ==========================================================
+% ===============================================
 
-% ----------------------------------------------------------
+% -----------------------------------------------
 % É controle espaço horizontal título Sumário
-% ----------------------------------------------------------
+% -----------------------------------------------
 \cftsetindents{part}{0pt}{2cm}
 \cftsetindents{chapter}{0pt}{2cm}
 \cftsetindents{section}{0pt}{2cm}
 \cftsetindents{subsection}{0pt}{2cm}
-% ----------------------------------------------------------
+% -----------------------------------------------
 
-% ==========================================================
+% ===============================================
 % Defini capítulos para maiúsculas no Sumario
-% ==========================================================
+% ===============================================
 \makeatletter
 % Salva o comando original que desenha a linha do Sumário
 \let\oldcontentsline\contentsline
@@ -567,11 +560,11 @@
     {\oldcontentsline{#1}{#2}{#3}{#4}} % Se for seção ou outro, mantém normal
 }
 \makeatother
-% ==========================================================
+% ===============================================
 
-% ==========================================================
-% ------------------------sumário---------------------------
-% ==========================================================
+% ===============================================
+% -------------sumário---------------------------
+% ===============================================
 \makechapterstyle{SumarioStyle}{
   \setlength{\beforechapskip}{-73pt}  % ajuste fino da altura
   \setlength{\afterchapskip}{1\onelineskip}
@@ -587,7 +580,7 @@
     \end{center}%
   }
 }
-% ==========================================================
+% ===============================================
 
 
 \newcommand{\Sumario}{
@@ -597,95 +590,30 @@
    \tableofcontents*
    \cleardoublepage
    \aliaspagestyle{chapter}{plain}
-   \chapterstyle{CapitulosNumerado}  % volta ao normal
 }
 
-% ==========================================================
+% ===============================================
 % Recuo no Sumário
-% ----------------------------------------------------------
+% -----------------------------------------------
 \cftsetindents{chapter}{0pt}{2cm}
 \cftsetindents{section}{0pt}{2cm}
 \cftsetindents{subsection}{0pt}{2cm}
-% ==========================================================
-% ===============================================================================
+% ===============================================
+% ===============================================
 
 
 
 
-% ----------------------------------------------------------
+% -----------------------------------------------
 % Títulos de \part ficam em versalete
-% ----------------------------------------------------------
+% -----------------------------------------------
 \renewcommand{\parttitlefont}{\scshape}
-% ----------------------------------------------------------
+% -----------------------------------------------
 
 
 
 
-% ==========================================================
-% ------------ESTILOS DE CAPÍTULO (MODULARES)---------------
-% ==========================================================
-\makechapterstyle{CapitulosNumerado}{%
-    \setlength{\beforechapskip}{0.46cm} % Descer estilo de capítulo
-    \renewcommand{\printchaptername}{}
-    \renewcommand{\chapternamenum}{}
-    \renewcommand{\afterchapternum}{}
-    \setlength{\midchapskip}{1.3cm} 
-    \renewcommand{\afterchapternum}{\par\nobreak\vskip \midchapskip}
-    \renewcommand{\printchapternum}{%
-        \noindent
-        \begin{tikzpicture}[remember picture, overlay]
-            \def\numsize{61} % Tamanho do número          
-            \def\barwidth{0.8pt} % Espessura da linha      
-            \def\leftoffset{2.3cm} % Reta horizontal esquerda
-            
-            \node[inner sep=0pt, anchor=south west, opacity=0] (num) at (\leftoffset, 0)
-             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
-             
-            \node[inner sep=0pt, anchor=south west] at (\leftoffset, -1pt)
-             {\fontsize{\numsize}{\numsize}\selectfont\rmfamily\thechapter};
-            
-            \node[inner sep=0pt, anchor=south west, font=\large\rmfamily] (chaptext)
-                 at (0pt, -4pt) {\chaptername};
-            
-            % --- ALTURA FIXA PARA O RETÂNGULO ---
-            \def\boxheight{41pt}   % ajuste aqui até ficar perfeito
-            
-            % --- PONTO ESQUERDO DO L ---
-            \coordinate (Lbase) at (0.5*\barwidth,15pt);         % base fixa
-            \coordinate (Ltop)  at (0.5*\barwidth,\boxheight);   % topo fixo
-            
-            % --- DESENHA O L FIXO ---
-            % --- AJUSTE: distância horizontal entre o L e o número ---
-            \def\Lgap{0.2cm} % ajuste aqui até ficar visualmente perfeito
-            
-            % --- DESENHO DO L FIXO ---
-            \draw[line width=\barwidth]
-                (Lbase) -- (Ltop)
-                -- ++(\leftoffset - 0.5*\barwidth - \Lgap,0);
-
-            % --- PONTOS DO RETÂNGULO FIXO ---
-            \coordinate (NumRightBase) at ($(num.south east)+(0.2cm,0)$);
-            \coordinate (NumRightTop)  at ($(NumRightBase)+(0,\boxheight)$);
-            
-            \coordinate (RightTop)     at (\linewidth,\boxheight);
-            \coordinate (RightBase)    at (\linewidth,0);
-            
-            % --- CAIXA FIXA ---
-            \draw[line width=\barwidth]
-                (NumRightTop) -- (RightTop)
-                              -- (RightBase)
-                              -- (NumRightBase);
-        \end{tikzpicture}%
-    }
-    \renewcommand{\printchaptertitle}[1]{%
-        \raggedright\LARGE\bfseries\scshape  ##1
-    }
-}
-
-
-
-
-% ==========================================================
+% ===============================================
 \makechapterstyle{estiloNaoNumerado}{%
   \setlength{\beforechapskip}{-73pt}%
   \setlength{\afterchapskip}{2\onelineskip}%
@@ -696,20 +624,18 @@
     \vspace*{2\onelineskip}%
     \begin{center}
       \LARGE\bfseries\scshape ##1\par
-      \vspace{-1.5\onelineskip}%
-      \rule{\textwidth}{0.4pt}%
     \end{center}%
   }%
 }
-% ==========================================================
+% ===============================================
 
 
 
 
 
-% ==========================================================
-% ---------------CABEÇALHOS E NUMERAÇÃO---------------------
-% ==========================================================
+% ===============================================
+% -------CABEÇALHOS E NUMERAÇÃO------------------
+% ===============================================
 \makepagestyle{meuestilo}
 \makeevenhead{meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
 \makeoddhead {meuestilo}{\footnotesize\textit{\leftmark}}{}{\footnotesize\thepage}
@@ -728,9 +654,9 @@
 
 
 
-% ==========================================================
-% -------------FRONT / MAIN / BACK MATTER-------------------
-% ==========================================================
+% ===============================================
+% -------FRONT / MAIN / BACK MATTER--------------
+% ===============================================
 \makeatletter
 \newcommand{\pretextual}{%
   \cleardoublepage
@@ -741,12 +667,10 @@
 \newcommand{\textual}{%
   \cleardoublepage
   \pagestyle{meuestilo}%
-  \chapterstyle{\defaultchapterstyle}%
 }
 \newcommand{\postextual}{%
   \cleardoublepage
   \pagestyle{meuestilo}%
-  \chapterstyle{\defaultchapterstyle}%
 }
 \makeatother
 

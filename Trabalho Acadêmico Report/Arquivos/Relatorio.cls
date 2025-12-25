@@ -750,19 +750,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 %=====================================================
 % Comandos de dados
 %=====================================================
@@ -834,12 +821,12 @@
     \begin{titlingpage}%
         \begin{center}
             \vspace*{-2cm}
-            \includegraphics[width=0.17\textwidth]{LogoUFT.pdf} \\
+            \includegraphics[width=0.17\textwidth]{Arquivos/LogoUFT.pdf} \\
             {\linespread{1.1}\selectfont\scshape\large\imprimirinstituicaocapa\par}%
             \vfill\vspace*{-2em}
             {\bfseries\large\imprimirautor\par}
             \vfill
-            %\includegraphics[width=0.5\textwidth]{LogoUABC.pdf} \\
+            %\includegraphics[width=0.5\textwidth]{Arquivos/LogoUABC.pdf} \\
             {\bfseries\scshape\LARGE\imprimirtitulo\par}
             \vfill\vfill\vfill\vfill
             \large\imprimirlocal\\
